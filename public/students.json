@@ -1,0 +1,236 @@
+{
+  "student_details": [
+    {
+      "name": "John Doe",
+      "image": "https://example.com/images/johndoe.jpg",
+      "bio": "A passionate learner pursuing a degree in computer science.",
+      "email": "johndoe@example.com",
+      "address": "123 Main Street, City, Country",
+      "phone_number": "+1234567890",
+      "institute": "XYZ University",
+      "enrolled_courses": [
+        {
+          "course_name": "Introduction to Programming",
+          "course_id": "CS101",
+          "enrollment_date": "2025-02-01"
+        }
+      ],
+      "wishlist": [
+        {
+          "course_name": "Web Development with MERN Stack",
+          "course_id": "CS201"
+        }
+      ],
+      "enrolled_date": "2025-02-01"
+    },
+    {
+      "name": "Jane Smith",
+      "image": "https://example.com/images/janesmith.jpg",
+      "bio": "Aspiring data scientist with a love for problem-solving.",
+      "email": "janesmith@example.com",
+      "address": "456 Oak Road, City, Country",
+      "phone_number": "+1987654321",
+      "institute": "ABC Institute",
+      "enrolled_courses": [
+        {
+          "course_name": "Data Structures and Algorithms",
+          "course_id": "CS102",
+          "enrollment_date": "2025-02-02"
+        }
+      ],
+      "wishlist": [
+        {
+          "course_name": "Machine Learning Basics",
+          "course_id": "CS301"
+        }
+      ],
+      "enrolled_date": "2025-02-02"
+    },
+    {
+      "name": "Emily Johnson",
+      "image": "https://example.com/images/emilyjohnson.jpg",
+      "bio": "Web developer with a passion for building responsive sites.",
+      "email": "emilyjohnson@example.com",
+      "address": "789 Pine Lane, City, Country",
+      "phone_number": "+1122334455",
+      "institute": "Tech Academy",
+      "enrolled_courses": [
+        {
+          "course_name": "Web Development with MERN Stack",
+          "course_id": "CS201",
+          "enrollment_date": "2025-02-03"
+        }
+      ],
+      "wishlist": [
+        {
+          "course_name": "Advanced JavaScript",
+          "course_id": "CS402"
+        }
+      ],
+      "enrolled_date": "2025-02-03"
+    },
+    {
+      "name": "Michael Brown",
+      "image": "https://example.com/images/michaelbrown.jpg",
+      "bio": "Software engineer focused on backend development.",
+      "email": "michaelbrown@example.com",
+      "address": "321 Birch Street, City, Country",
+      "phone_number": "+1230984567",
+      "institute": "Tech University",
+      "enrolled_courses": [
+        {
+          "course_name": "Algorithms and Complexity",
+          "course_id": "CS203",
+          "enrollment_date": "2025-02-04"
+        }
+      ],
+      "wishlist": [
+        {
+          "course_name": "Cloud Computing Essentials",
+          "course_id": "CS501"
+        }
+      ],
+      "enrolled_date": "2025-02-04"
+    },
+    {
+      "name": "Sophia Lee",
+      "image": "https://example.com/images/sophialee.jpg",
+      "bio": "Data analyst specializing in data visualization and storytelling.",
+      "email": "sophialee@example.com",
+      "address": "654 Maple Avenue, City, Country",
+      "phone_number": "+1234432110",
+      "institute": "Data Science Institute",
+      "enrolled_courses": [
+        {
+          "course_name": "Machine Learning Basics",
+          "course_id": "CS301",
+          "enrollment_date": "2025-02-05"
+        }
+      ],
+      "wishlist": [
+        {
+          "course_name": "Deep Learning with TensorFlow",
+          "course_id": "CS502"
+        }
+      ],
+      "enrolled_date": "2025-02-05"
+    },
+    {
+      "name": "David Wilson",
+      "image": "https://example.com/images/davidwilson.jpg",
+      "bio": "Full-stack developer with a passion for modern web technologies.",
+      "email": "davidwilson@example.com",
+      "address": "101 Cedar Drive, City, Country",
+      "phone_number": "+1237778888",
+      "institute": "Web Dev Institute",
+      "enrolled_courses": [
+        {
+          "course_name": "Full-Stack Development",
+          "course_id": "CS402",
+          "enrollment_date": "2025-02-06"
+        }
+      ],
+      "wishlist": [
+        {
+          "course_name": "Advanced React",
+          "course_id": "CS505"
+        }
+      ],
+      "enrolled_date": "2025-02-06"
+    },
+    {
+      "name": "Olivia Moore",
+      "image": "https://example.com/images/oliviamoore.jpg",
+      "bio": "UI/UX designer focused on creating intuitive user experiences.",
+      "email": "oliviamoore@example.com",
+      "address": "567 Elm Road, City, Country",
+      "phone_number": "+1245789876",
+      "institute": "Design Academy",
+      "enrolled_courses": [
+        {
+          "course_name": "UI/UX Design Principles",
+          "course_id": "DS101",
+          "enrollment_date": "2025-02-07"
+        }
+      ],
+      "wishlist": [
+        {
+          "course_name": "Advanced Prototyping",
+          "course_id": "DS202"
+        }
+      ],
+      "enrolled_date": "2025-02-07"
+    },
+    {
+      "name": "William Harris",
+      "image": "https://example.com/images/williamharris.jpg",
+      "bio": "Cybersecurity expert dedicated to securing digital environments.",
+      "email": "williamharris@example.com",
+      "address": "908 Oak Lane, City, Country",
+      "phone_number": "+1234567899",
+      "institute": "Cyber Academy",
+      "enrolled_courses": [
+        {
+          "course_name": "Introduction to Cybersecurity",
+          "course_id": "CS601",
+          "enrollment_date": "2025-02-08"
+        }
+      ],
+      "wishlist": [
+        {
+          "course_name": "Ethical Hacking",
+          "course_id": "CS602"
+        }
+      ],
+      "enrolled_date": "2025-02-08"
+    },
+    {
+      "name": "Isabella Clark",
+      "image": "https://example.com/images/isabellaclark.jpg",
+      "bio": "Cloud solutions architect focusing on AWS and Azure.",
+      "email": "isabellaclark@example.com",
+      "address": "234 Pine Road, City, Country",
+      "phone_number": "+1238877665",
+      "institute": "Cloud Tech University",
+      "enrolled_courses": [
+        {
+          "course_name": "Cloud Computing Essentials",
+          "course_id": "CS502",
+          "enrollment_date": "2025-02-09"
+        }
+      ],
+      "wishlist": [
+        {
+          "course_name": "Advanced Cloud Security",
+          "course_id": "CS603"
+        }
+      ],
+      "enrolled_date": "2025-02-09"
+    },
+    {
+      "name": "Ethan Martinez",
+      "image": "https://example.com/images/ethanmartinez.jpg",
+      "bio": "Game developer with a focus on Unity and Unreal Engine.",
+      "email": "ethanmartinez@example.com",
+      "address": "345 Oak Drive, City, Country",
+      "phone_number": "+1234321998",
+      "institute": "Game Development Academy",
+      "enrolled_courses": [
+        {
+          "course_name": "Game Development with Unity",
+          "course_id": "GD101",
+          "enrollment_date": "2025-02-10"
+        }
+      ],
+      "wishlist": [
+        {
+          "course_name": "Advanced Unreal Engine",
+          "course_id": "GD202"
+        }
+      ],
+      "enrolled_date": "2025-02-10"
+    }
+  ]
+}
+
+
