@@ -1,13 +1,16 @@
-import useEduCourseContexts from "../../Hooks/UseEduCourseContexts";
-
+import Categories from "../../Components/Home/Categories";
+import Counter from "../../Components/Home/Counter";
+import Hero from "../../Components/Home/Hero";
+import PopularCourse from "../../Components/Home/PopularCourse";
 
 const Home = () => {
-const {name} = useEduCourseContexts()
     return (
-        <div className="border text-5xl text-red-500">
-            <h1>Home Page</h1>
-            <p>Name: {name}</p>
-        </div>
+        <>
+            <Hero></Hero>
+            <Counter></Counter>
+            <Categories></Categories>
+            <PopularCourse></PopularCourse>
+        </>
     );
 };
 
