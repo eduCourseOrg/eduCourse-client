@@ -1,5 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
 import logo from '/images/Navbar/Logo.png';
+import { FaFacebook, FaTwitter, FaInstagram, FaEnvelope, FaClock } from "react-icons/fa";
 
 const Header = () => {
   return (
@@ -8,18 +9,18 @@ const Header = () => {
         <div className="container mx-auto flex justify-between items-center">
             <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-2">
-                    <i className="fas fa-envelope"></i>
+                    <FaEnvelope></FaEnvelope>
                     <span>xyz@gmail.com</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                    <i className="fas fa-clock"></i>
+                    <FaClock></FaClock>
                     <span>Mon- Fri: 9.00am - 6.00pm</span>
                 </div>
             </div>
             <div className="flex items-center space-x-4">
-                <a href="#" className="text-white"><i className="fab fa-facebook-f"></i></a>
-                <a href="#" className="text-white"><i className="fab fa-twitter"></i></a>
-                <a href="#" className="text-white"><i className="fab fa-instagram"></i></a>
+                <a href="#" className="text-black"><FaFacebook></FaFacebook></a>
+                <a href="#" className="text-black"><FaTwitter></FaTwitter></a>
+                <a href="#" className="text-black"><FaInstagram></FaInstagram></a>
             </div>
         </div>
       </div>
