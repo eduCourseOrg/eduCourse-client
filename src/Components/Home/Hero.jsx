@@ -1,5 +1,5 @@
 import { FaSearch } from 'react-icons/fa';
-import banner1 from '/images/compressed-banner/banner-8.jpg'
+import banner9 from '/images/compressed-banner/banner-9.jpg'
 import { useEffect, useState } from 'react';
 
 const Hero = () => {
@@ -22,7 +22,7 @@ const Hero = () => {
                     {/* this div is for overlay manage */}
                     <div className='w-full h-full bg-linear-to-r from-primary from-10% to-transparent opacity-70 absolute top-0 left-0'></div>
                     {/* Image section */}
-                    <img src={banner1} alt="banner1" className='w-full h-full' />
+                    <img src={banner9} alt="banner1" className='w-full h-full' />
                     {/* Text and Input field Section */}
                     <div className='w-[50%] h-full flex flex-col gap-5 justify-center items-start pl-24 absolute top-0 left-0'>
                         <h1 className='text-5xl text-secondary font-bold'>2727+ Online <br /> Courses from the <br /> Best Tutors</h1>
@@ -40,7 +40,7 @@ const Hero = () => {
                     {/* this div is for overlay manage */}
                     <div className='w-full h-full bg-linear-to-r from-primary from-10% to-transparent opacity-70 absolute top-0 left-0'></div>
                     {/* Image section */}
-                    <img src={banner1} alt="banner1" className='w-full h-full' />
+                    <img src={banner9} alt="banner1" className='w-full h-full' />
                     {/* Text and Input field Section */}
                     <div className='w-[50%] h-full flex flex-col gap-5 justify-center items-start pl-24 absolute top-0 left-0'>
                         <h1 className='text-5xl text-secondary font-bold'>2727+ Online <br /> Courses from the <br /> Best </h1>
@@ -58,7 +58,7 @@ const Hero = () => {
                     {/* this div is for overlay manage */}
                     <div className='w-full h-full bg-linear-to-r from-primary from-10% to-transparent opacity-70 absolute top-0 left-0'></div>
                     {/* Image section */}
-                    <img src={banner1} alt="banner1" className='w-full h-full' />
+                    <img src={banner9} alt="banner1" className='w-full h-full' />
                     {/* Text and Input field Section */}
                     <div className='w-[50%] h-full flex flex-col gap-5 justify-center items-start pl-24 absolute top-0 left-0'>
                         <h1 className='text-5xl text-secondary font-bold'>2727+ Online <br /> Courses from the <br /> Best Tutors</h1>
@@ -73,9 +73,9 @@ const Hero = () => {
             </div>
             {/* Slide Manager */}
             <div className='slide-manager w-[35%] h-[20%] flex justify-between absolute bottom-0 right-0 '>
-                <img src={banner1} alt="Banner Image" className='w-[32%] h-full'/>
-                <img src={banner1} alt="Banner Image" className='w-[32%] h-full'/>
-                <img src={banner1} alt="Banner Image" className='w-[32%] h-full'/>
+                <img src={banner9} alt="Banner Image" className='w-[32%] h-full'/>
+                <img src={banner9} alt="Banner Image" className='w-[32%] h-full'/>
+                <img src={banner9} alt="Banner Image" className='w-[32%] h-full'/>
             </div>
         </div>
     );
