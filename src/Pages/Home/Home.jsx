@@ -1,13 +1,10 @@
-import useEduCourseContexts from "../../Hooks/UseEduCourseContexts";
-
+import Hero from "../../Components/Home/Hero";
 
 const Home = () => {
-const {name} = useEduCourseContexts()
     return (
-        <div className="border text-5xl text-red-500">
-            <h1>Home Page</h1>
-            <p>Name: {name}</p>
-        </div>
+        <>
+            <Hero></Hero>
+        </>
     );
 };
 
