@@ -4,7 +4,7 @@ import Footer from "../../Shared/Footer/Footer";
 
 const Main = () => {
     return (
-        <div className="p-4 flex flex-col gap-12">
+        <div className="max-w-[1400px] mx-auto p-4 flex flex-col gap-12">
             <Header></Header>
             <Outlet></Outlet>
             <Footer></Footer>
