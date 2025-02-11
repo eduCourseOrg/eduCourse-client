@@ -5,7 +5,7 @@ import { FaFacebook, FaTwitter, FaInstagram, FaEnvelope, FaClock } from "react-i
 const Header = () => {
   return (
     <header>
-    <div className="py-2 bg-linear-[45deg,var(--color-primary)_50%,var(--color-secondary)_50%] text-black">
+    <div className="py-2 bg-linear-[45deg,var(--color-primary)_50%,var(--color-secondary)_50%] text-secondary">
         <div className="container mx-auto flex justify-between items-center">
             <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-2">
@@ -18,9 +18,9 @@ const Header = () => {
                 </div>
             </div>
             <div className="flex items-center space-x-4">
-                <a href="#" className="text-black"><FaFacebook></FaFacebook></a>
-                <a href="#" className="text-black"><FaTwitter></FaTwitter></a>
-                <a href="#" className="text-black"><FaInstagram></FaInstagram></a>
+                <a href="#" className="text-primary"><FaFacebook></FaFacebook></a>
+                <a href="#" className="text-primary"><FaTwitter></FaTwitter></a>
+                <a href="#" className="text-primary"><FaInstagram></FaInstagram></a>
             </div>
         </div>
       </div>
@@ -28,7 +28,7 @@ const Header = () => {
         <div className="container mx-auto flex justify-between items-center">
           {/* <a href="#" className="bg-white text-black px-4 py-2 rounded">Company Logo</a> */}
           <img src={logo} alt="Logo" className='w-[13%]' />
-            <div className="flex space-x-8">
+            <div className="flex space-x-8 text-secondary">
                 <NavLink to='/' className={({ isActive}) => `${isActive && 'border-b border-secondary'} hover:border-b border-secondary`}>Home</NavLink>
                 <NavLink to='/about' className={({ isActive}) => `${isActive && 'border-b border-secondary'} hover:border-b border-secondary`}>About</NavLink>
                 <NavLink to='/courses' className={({ isActive}) => `${isActive && 'border-b border-secondary'} hover:border-b border-secondary`}>Courses</NavLink>
