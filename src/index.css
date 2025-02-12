@@ -1,27 +1,54 @@
 @import 'tailwindcss';
-
-@theme {
-  --color-primary: #53937b;
-  --color-secondary: #ebf1f4;
-  --color-acent: #FCE6E5;
-  --color-acent2: #F8FCFF;
-
-}
-
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
+@plugin "daisyui";
 @layer base {
+  :root {
+      --color-primary: #184e3a;
+      --color-secondary: #ebf1f4;
+      --color-acent: #FCE6E5;
+      --color-acent2: #F8FCFF;
+    }
   *,
   ::after,
   ::before,
   ::backdrop,
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
+  }
+    .bg-primary {
+      background-color: var(--color-primary);
+    }
+  
+    .text-primary {
+      color: var(--color-primary);
+    }
+  
+    .bg-secondary {
+      background-color: var(--color-secondary);
+    }
+  
+    .text-secondary {
+      color: var(--color-secondary);
+    }
+  
+    .bg-acent {
+      background-color: var(--color-acent);
+    }
+  
+    .text-acent {
+      color: var(--color-acent);
+    }
+  
+    .bg-acent2 {
+      background-color: var(--color-acent2);
+    }
+  
+    .text-acent2 {
+      color: var(--color-acent2);
+    }
+}
+
+@layer utilities {
+  .bg-gradient-custom {
+    background: linear-gradient(to right, var(--color-acent), var(--color-acent2));
   }
 }
