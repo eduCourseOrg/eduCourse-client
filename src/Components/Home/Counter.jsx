@@ -4,7 +4,7 @@ import { RiGlobalFill } from "react-icons/ri";
 
 const Counter = () => {
     return (
-        <div className="py-8 w-full bg-linear-to-r from-acent to-acent2">
+        <div className="py-8 w-full bg-gradient-custom">
             <div className="p-6 w-10/12 mx-auto bg-secondary rounded-2xl grid grid-cols-3 gap-4">
                 <div className=" flex items-center justify-center gap-4">
                     <div className=""><FaUserGraduate className="text-5xl text-secondary bg-primary rounded-xl p-2"/></div>
