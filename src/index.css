@@ -4,8 +4,8 @@
   :root {
       --color-primary: #184e3a;
       --color-secondary: #ebf1f4;
-      --color-acent: #FCE6E5;
-      --color-acent2: #F8FCFF;
+      --color-accent: #FCE6E5;
+      --color-accent2: #F8FCFF;
     }
   *,
   ::after,
@@ -14,11 +14,11 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
-    .bg-primary {
+    /* .bg-primary {
       background-color: var(--color-primary);
-    }
+    } */
   
-    .text-primary {
+    /* .text-primary {
       color: var(--color-primary);
     }
   
@@ -44,7 +44,7 @@
   
     .text-acent2 {
       color: var(--color-acent2);
-    }
+    } */
 }
 
 @layer utilities {
