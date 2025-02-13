@@ -38,6 +38,15 @@ const Review = () => {
                 <SwiperSlide className='p-6 bg-yellow-500 '>
                     
                 </SwiperSlide>
+                <SwiperSlide className='p-6 bg-green-500 '>
+                    
+                </SwiperSlide>
+                <SwiperSlide className='p-6 bg-red-500 '>
+                    
+                </SwiperSlide>
+                <SwiperSlide className='p-6 bg-blue-500 '>
+                    
+                </SwiperSlide>
                 
             </Swiper>
             {/* <div className='w-full h-full border-1 flex p-4 relative items-center justify-center'>
