@@ -1,13 +1,16 @@
 import { FaClock, FaStar } from "react-icons/fa";
 import { PiCellSignalFullBold } from "react-icons/pi";
 import { TbWorld } from "react-icons/tb";
+import courseBanner7 from '/images/course-banner/course-banner-7.jpg';
 
- <div className="w-full h-[86%] flex gap-4">
+const CourseCart = () => {
+    return (
+        <div className="w-full h-[86%] flex gap-4">
                 {/* Card One start form here */}
                 <div className="w-full h-full bg-white">
                     {/* Card Image Section */}
                     <div className="w-full h-[45%] mb-3">
-                        <img src={courseBanner1} alt="" className="w-full h-full" />
+                        <img src={courseBanner7} alt="" className="w-full h-full" />
                     </div>
                     {/* Card Content Section */}
                     <div className="w-full h-[55%] px-3 flex flex-col gap-1">
@@ -39,13 +42,13 @@ import { TbWorld } from "react-icons/tb";
                 <div className="w-full h-full bg-white">
                     {/* Card Image Section */}
                     <div className="w-full h-[45%] mb-3">
-                        <img src={courseBanner1} alt="" className="w-full h-full" />
+                        <img src={courseBanner7} alt="" className="w-full h-full" />
                     </div>
                     {/* Card Content Section */}
                     <div className="w-full h-[55%] px-3 flex flex-col gap-1">
                         <h1 className="text-2xl font-bold">The complete Digital Marketing Bootcamp</h1>
                         <div className="flex items-center justify-between">
-                            <span className="text-sm font-semibold">By: Md. Foysal Uddin</span>
+                            <span className="text-sm font-semibold">By: Md. Raihan Uddin</span>
                             <h2 className="text-xl font-bold">$99</h2>
                         </div>
                         <div>
@@ -71,13 +74,13 @@ import { TbWorld } from "react-icons/tb";
                 <div className="w-full h-full bg-white">
                     {/* Card Image Section */}
                     <div className="w-full h-[45%] mb-3">
-                        <img src={courseBanner1} alt="" className="w-full h-full" />
+                        <img src={courseBanner7} alt="" className="w-full h-full" />
                     </div>
                     {/* Card Content Section */}
                     <div className="w-full h-[55%] px-3 flex flex-col gap-1">
                         <h1 className="text-2xl font-bold">The complete Digital Marketing Bootcamp</h1>
                         <div className="flex items-center justify-between">
-                            <span className="text-sm font-semibold">By: Md. Foysal Uddin</span>
+                            <span className="text-sm font-semibold">By: Md. Ariful Islam</span>
                             <h2 className="text-xl font-bold">$99</h2>
                         </div>
                         <div>
@@ -94,9 +97,13 @@ import { TbWorld } from "react-icons/tb";
                         <hr className="bg-primary h-[2px] mt-5"/>
                         <div className="mt-2 flex items-center justify-between font-semibold">
                             <span className="flex items-center gap-1"><FaClock></FaClock> 3 Days</span>
-                            <span className="flex items-center gap-1"><PiCellSignalFullBold></PiCellSignalFullBold> Beginner</span>
+                            <span className="flex items-center gap-1"><PiCellSignalFullBold></PiCellSignalFullBold> Intermediate</span>
                             <span className="flex items-center gap-1"><TbWorld></TbWorld> English</span>
                         </div>
                 </div>
                 </div>
             </div>
+    );
+};
+
+export default CourseCart;
