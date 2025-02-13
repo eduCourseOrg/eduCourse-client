@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@plugin "daisyui";
+/* @plugin "daisyui"; */
 @layer base {
   :root {
       --color-primary: #184e3a;
@@ -49,6 +49,6 @@
 
 @layer utilities {
   .bg-gradient-custom {
-    background: linear-gradient(to right, var(--color-acent), var(--color-acent2));
+    background: linear-gradient(to right, var(--color-accent), var(--color-accent2));
   }
 }
