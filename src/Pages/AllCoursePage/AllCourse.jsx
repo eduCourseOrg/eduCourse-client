@@ -206,13 +206,38 @@ const AllCourse = () => {
       </section>
 
       {/* This is for Right side section */}
-      <section className="grid-cols-1 md:grid-cols-2 lg:gird-cols-3 gap-2">
-        {courseData.map((singleCourse) => (
-          <CourseCart
-            key={singleCourse.id}
-            singleCourse={singleCourse}
-          ></CourseCart>
-        ))}
+      <section className="grid-cols-1 md:grid-cols-2 gap-2">
+        {/*
+ right-side select option bar
+*/}
+
+        <div className="block w-full">
+          <label
+            htmlFor="countries"
+            className="block mb-2 text-sm font-medium text-gray-600 w-full"
+          >
+            Course Category
+          </label>
+          <select
+            id="countries"
+            className="h-12 border border-gray-300 text-gray-600 text-base rounded-lg block w-full py-2.5 px-4 focus:outline-none"
+          >
+            <option selected>Latest</option>
+            <option value="web-development">Web Development</option>
+            <option value="digital-marketing">Digital Marketing</option>
+            <option value="video-editing">video Editing</option>
+          </select>
+        </div>
+        <div className="grid-cols-1 md:grid-cols-2 lg:gird-cols-3 gap-2">
+          {" "}
+          {courseData &&
+            courseData.map((singleCourse) => (
+              <CourseCart
+                key={singleCourse.id}
+                singleCourse={singleCourse}
+              ></CourseCart>
+            ))}
+        </div>
       </section>
     </div>
   );
