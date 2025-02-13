@@ -11,7 +11,7 @@ const Categories = () => {
             </div>
             
             <div className="w-10/12 mx-auto grid grid-cols-4 gap-8">
-                <div className="bg-acent flex flex-col items-center justify-center mx-auto py-4 px-12 rounded-xl w-full">
+                <div className="bg-accent flex flex-col items-center justify-center mx-auto py-4 px-12 rounded-xl w-full">
                     <div className="bg-white rounded-2xl p-2 mb-4">
                         <SiDatabricks className="text-5xl text-primary mx-auto"/>
                     </div>
@@ -21,7 +21,7 @@ const Categories = () => {
                     </div>
                     
                 </div>
-                <div className="bg-acent flex flex-col items-center justify-center mx-auto py-4 px-12 rounded-xl w-full">
+                <div className="bg-accent flex flex-col items-center justify-center mx-auto py-4 px-12 rounded-xl w-full">
                     <div className="bg-white rounded-2xl p-2 mb-4">
                         <FaComputer className="text-5xl text-primary mx-auto"/>
                     </div>
@@ -31,7 +31,7 @@ const Categories = () => {
                     </div>
                     
                 </div>
-                <div className="bg-acent flex flex-col items-center justify-center mx-auto py-4 px-12 rounded-xl w-full">
+                <div className="bg-accent flex flex-col items-center justify-center mx-auto py-4 px-12 rounded-xl w-full">
                     <div className="bg-white rounded-2xl p-2 mb-4">
                         <MdEngineering className="text-5xl text-primary mx-auto"/>
                     </div>
@@ -41,7 +41,7 @@ const Categories = () => {
                     </div>
                     
                 </div>
-                <div className="bg-acent flex flex-col items-center justify-center mx-auto py-4 px-12 rounded-xl w-full">
+                <div className="bg-accent flex flex-col items-center justify-center mx-auto py-4 px-12 rounded-xl w-full">
                     <div className="bg-white rounded-2xl p-2 mb-4">
                         <LuMonitorCog className="text-5xl text-primary mx-auto"/>
                     </div>
