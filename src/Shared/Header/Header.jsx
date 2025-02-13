@@ -34,6 +34,7 @@ const Header = () => {
                 <NavLink to='/courses' className={({ isActive}) => `${isActive && 'border-b border-secondary'} hover:border-b border-secondary`}>Courses</NavLink>
                 <NavLink to='/blog' className={({ isActive}) => `${isActive && 'border-b border-secondary'} hover:border-b border-secondary`}>Blog</NavLink>
                 <NavLink to='/contact' className={({ isActive}) => `${isActive && 'border-b border-secondary'} hover:border-b border-secondary`}>Contact</NavLink>
+                <NavLink to='/register' className={({ isActive}) => `${isActive && 'border-b border-secondary'} hover:border-b border-secondary`}>Register</NavLink>
             </div>
             <Link to='/meeting' className="bg-white text-black px-4 py-2 rounded">Book A Meeting</Link>
         </div>
