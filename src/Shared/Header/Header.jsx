@@ -36,7 +36,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <nav className="py-2 bg-primary">
+      <nav className="py-2 bg-[var(--color-primary)]">
         <div className="container mx-auto flex justify-between items-center">
           {/* <a href="#" className="bg-white text-black px-4 py-2 rounded">Company Logo</a> */}
           <img src={logo} alt="Logo" className="w-[13%]" />
