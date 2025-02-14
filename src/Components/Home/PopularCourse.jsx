@@ -48,7 +48,8 @@ const PopularCourse = () => {
                     grabCursor={true}
                     spaceBetween={30}
                     pagination={{
-                        clickable: true
+                        clickable: true,
+                        dynamicBullets: true,
                     }}
                     className="mySwiper"
                 >
