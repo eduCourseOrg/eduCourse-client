@@ -21,7 +21,7 @@ const AllCourse = () => {
         return response.json();
       })
       .then((data) => {
-        setCourseData(data);
+        setCourseData(data.courses);
         console.log("data", data.courses);
       })
       .catch((error) =>
