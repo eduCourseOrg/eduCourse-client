@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { IoGrid } from "react-icons/io5";
+import { LiaBarsSolid } from "react-icons/lia";
 import CourseCart from "../../Components/AllCourse/CourseCart";
 const AllCourse = () => {
   const [courseData, setCourseData] = useState("");
@@ -39,37 +40,49 @@ const AllCourse = () => {
 
   return (
     <section>
-      <section className="all-filter-section mb-6 grid grid-cols-1 md:grid-cols-4 gap-2" >
+      <section className="all-filter-section mb-6 grid grid-cols-1 md:grid-cols-4 gap-2">
         {/* section for search input */}
-        <div className="search-bar relative w-full justify-between items-center flex mb-2">
+        <div className="search-bar relative w-full justify-between items-center h-8 flex mb-2">
           <input
             type="text"
-            value={searchQuery}r
+            value={searchQuery}
+            r
             onChange={handleInputChange}
             placeholder="Search..."
-            className=" rounded-sm w-full border-slate-200 border-[2px] search-input "
+            className=" rounded-sm w-full h-10 border-slate-200 border-[2px] search-input "
           />
           <FaSearch className="absolute right-5 top-2 font-light text-slate-600" />{" "}
           {/* Search Icon */}
           <button className="search-btn" onClick={() => handleSearch}></button>
         </div>
-        {/* section for */}
+        {/* section for grid change */}
         <div className="layout-btn col-span-2">
-          <button>
-            <IoGrid />
-          </button>
+          <div className="flex justify-start gap-3 items-center">
+            <div className="flex gap-1 justify-start items-center">
+              <button>
+                <IoGrid className="text-xl" />
+              </button>
+              <button>
+                <LiaBarsSolid className="text-2xl font-bold" />
+              </button>
+            </div>
+            <div>
+             
+              <h4 className="m-1">
+                We found
+                <span className="font-bold text-2xl text-primary">
+                  {courseData?.length}
+                </span>
+                Courses Available for you
+              </h4>
+            </div>
+          </div>
         </div>
         {/*  select option bar */}
-        <div className="grid-cols-1 block h-12">
-          <label
-            htmlFor="course-filte"
-            className="mb-2 text-sm font-medium text-gray-600 w-full"
-          >
-            Course Category
-          </label>
+        <div className="grid-cols-1 block h-8">
           <select
             id="countries"
-            className="h-12 border border-gray-300 text-gray-600 text-base rounded-lg block w-full py-1 px-4 focus:outline-none"
+            className="h-10 rounded-sm w-full border-slate-200 border-[2px] text-gray-600 text-base block py-1 px-4 focus:outline-none"
           >
             <option selected>Latest</option>
             <option value="web-development">Web Development</option>
@@ -234,12 +247,12 @@ const AllCourse = () => {
         {/* Left side section ended */}
 
         {/* This is for Right side section */}
-        <section>
+        <section className="lg:col-span-3  gap-2">
           {/*
 
 */}
 
-          <div className="grid-cols-1 md:grid-cols-2 lg:gird-cols-3 gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-2">
             {" "}
             {courseData &&
               courseData.map((singleCourse) => (
