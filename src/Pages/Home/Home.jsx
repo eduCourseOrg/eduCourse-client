@@ -1,5 +1,6 @@
 import Categories from "../../Components/Home/Categories";
 import Counter from "../../Components/Home/Counter";
+import Faq from "../../Components/Home/Faq";
 import Hero from "../../Components/Home/Hero";
 import OurProcess from "../../Components/Home/OurProcess";
 import PopularCourse from "../../Components/Home/PopularCourse";
@@ -16,6 +17,7 @@ const Home = () => {
             <Review></Review>
             <TestSlide></TestSlide>
             <OurProcess></OurProcess>
+            <Faq></Faq>
         </>
     );
 };
