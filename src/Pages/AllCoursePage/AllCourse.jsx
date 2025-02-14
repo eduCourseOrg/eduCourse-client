@@ -79,6 +79,9 @@ const handleSearch=()=>{
   </div>
 </fieldset>
 <hr className='border-slate-300 border-2 mt-2 w-full'/>
+<fieldset className='h-16'><legent className="text-lg font-medium text-gray-900 mt-2">Tags</legent></fieldset>
+
+<hr className='border-slate-300 border-2 mt-2 w-full'/>
 
 <fieldset >
   <legend className="text-lg font-medium text-gray-900 mt-2">Levels</legend>
