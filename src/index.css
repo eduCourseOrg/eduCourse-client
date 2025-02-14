@@ -6,6 +6,7 @@
       --color-secondary: #ebf1f4;
       --color-accent: #FCE6E5;
       --color-accent2: #F8FCFF;
+      --animate-review: review 1s ease-in-out;
     }
   *,
   ::after,
@@ -52,3 +53,38 @@
     background: linear-gradient(to right, var(--color-accent), var(--color-accent2));
   }
 }
+
+/* -translate-x-[50%] -scale-[85%] */
+
+  @keyframes reviewPlus {
+    0% {
+      z-index: 10;
+      transform: translateX(0) scale(1);
+    }
+    100% {
+      z-index: 0;
+      transform: translateX(-50%) scale(0.8);
+    }
+  }
+
+  @keyframes reviewZ {
+    0%{
+      z-index: 10;
+      transform: translateX(50%) scale(0.8);
+    }
+    100%{
+      z-index: 20;
+      transform: translateX(0) scale(1);
+    }
+  }
+
+  @keyframes reviewBefore {
+    0%{
+      z-index: 0;
+      transform: translateX(0) scale(0);
+    }
+    100%{
+      z-index: 5;
+      transform: translateX(50%) scale(0.8);
+    }
+  }

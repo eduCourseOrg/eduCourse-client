@@ -8,7 +8,6 @@ import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import './PopularCourse';
 import { useState } from "react";
 
 const PopularCourse = () => {
@@ -49,9 +48,9 @@ const PopularCourse = () => {
                     grabCursor={true}
                     spaceBetween={30}
                     pagination={{
-                        clickable: true,
-                        containerClass: 'pagination-container'
+                        clickable: true
                     }}
+                    className="mySwiper"
                 >
                     {
                         (courses.filter(course => {
@@ -72,7 +71,7 @@ const PopularCourse = () => {
                         <img src={courseBanner1} alt="" className="w-full h-full" />
                     </div>
                     {/* Card Content Section */}
-                    <div className="w-full h-[55%] px-3 flex flex-col gap-1">
+                    <div className="w-full h-[52%] px-3 flex flex-col gap-1">
                         <h1 className="text-2xl font-bold">{course.name}</h1>
                         <div className="flex items-center justify-between">
                             <span className="text-sm font-semibold">By: Md. Foysal Uddin</span>
@@ -90,7 +89,7 @@ const PopularCourse = () => {
                         </div>
                         <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, modi.</h3>
                         <hr className="bg-primary h-[2px] mt-5"/>
-                        <div className="mt-2 flex items-center justify-between font-semibold">
+                        <div className="flex items-center justify-between font-semibold grow ">
                             <span className="flex items-center gap-1"><FaClock></FaClock> 3 Days</span>
                             <span className="flex items-center gap-1"><PiCellSignalFullBold></PiCellSignalFullBold> Beginner</span>
                             <span className="flex items-center gap-1"><TbWorld></TbWorld> English</span>
