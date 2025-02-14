@@ -28,10 +28,15 @@
         "fileUrl": "https://example.com/js_basics.pdf"
       }
     ],
-"quizzes": [
+    "quizzes": [
       {
         "question": "What is Python primarily used for?",
-        "options": ["Web Development", "Data Science", "Cybersecurity", "Networking"],
+        "options": [
+          "Web Development",
+          "Data Science",
+          "Cybersecurity",
+          "Networking"
+        ],
         "answer": "Data Science"
       },
       {
@@ -85,7 +90,7 @@
     ],
     "enrolledCount": 1,
     "createdDateTime": "2025-02-05T10:30:00Z",
-    "banner": "https://example.com/banner.jpg",
+    "banner": "https://i.ibb.co.com/yFLZRw9c/course-banner-7.jpg",
     "courseLevel": "Beginner"
   },
   {
@@ -120,10 +125,15 @@
         "date": "2025-02-10"
       }
     ],
-"quizzes": [
+    "quizzes": [
       {
         "question": "What is Python primarily used for?",
-        "options": ["Web Development", "Data Science", "Cybersecurity", "Networking"],
+        "options": [
+          "Web Development",
+          "Data Science",
+          "Cybersecurity",
+          "Networking"
+        ],
         "answer": "Data Science"
       },
       {
@@ -169,7 +179,7 @@
     ],
     "enrolledCount": 1,
     "createdDateTime": "2025-02-10T09:30:00Z",
-    "banner": "https://example.com/python_banner.jpg",
+    "banner": "https://i.ibb.co.com/KxQF1tJ3/course-banner-9.jpg",
     "courseLevel": "Beginner"
   },
   {
@@ -196,10 +206,15 @@
         "fileUrl": "https://example.com/cybersecurity.pdf"
       }
     ],
-"quizzes": [
+    "quizzes": [
       {
         "question": "What is Python primarily used for?",
-        "options": ["Web Development", "Data Science", "Cybersecurity", "Networking"],
+        "options": [
+          "Web Development",
+          "Data Science",
+          "Cybersecurity",
+          "Networking"
+        ],
         "answer": "Data Science"
       },
       {
@@ -253,7 +268,7 @@
     ],
     "enrolledCount": 1,
     "createdDateTime": "2025-02-12T09:00:00Z",
-    "banner": "https://example.com/cybersecurity_banner.jpg",
+    "banner": "https://i.ibb.co.com/sv2r5c3g/course-banner-2.jpg",
     "courseLevel": "Intermediate"
   },
   {
@@ -280,10 +295,15 @@
         "fileUrl": "https://example.com/design_guide.pdf"
       }
     ],
-"quizzes": [
+    "quizzes": [
       {
         "question": "What is Python primarily used for?",
-        "options": ["Web Development", "Data Science", "Cybersecurity", "Networking"],
+        "options": [
+          "Web Development",
+          "Data Science",
+          "Cybersecurity",
+          "Networking"
+        ],
         "answer": "Data Science"
       },
       {
@@ -337,7 +357,7 @@
     ],
     "enrolledCount": 1,
     "createdDateTime": "2025-02-14T11:00:00Z",
-    "banner": "https://example.com/design_banner.jpg",
+    "banner": "https://i.ibb.co.com/99WdpzNg/course-banner-3.jpg",
     "courseLevel": "Beginner"
   },
   {
@@ -364,10 +384,15 @@
         "fileUrl": "https://example.com/ml_guide.pdf"
       }
     ],
-"quizzes": [
+    "quizzes": [
       {
         "question": "What is Python primarily used for?",
-        "options": ["Web Development", "Data Science", "Cybersecurity", "Networking"],
+        "options": [
+          "Web Development",
+          "Data Science",
+          "Cybersecurity",
+          "Networking"
+        ],
         "answer": "Data Science"
       },
       {
@@ -421,7 +446,7 @@
     ],
     "enrolledCount": 1,
     "createdDateTime": "2025-02-16T12:00:00Z",
-    "banner": "https://example.com/ml_banner.jpg",
+    "banner": "https://i.ibb.co.com/sv2r5c3g/course-banner-2.jpg",
     "courseLevel": "Advanced"
   }
 ]
