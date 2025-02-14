@@ -21,8 +21,8 @@ const AllCourse = () => {
         return response.json();
       })
       .then((data) => {
-        console.log("data", courseData);
         setCourseData(data);
+        console.log("data", data.courses);
       })
       .catch((error) =>
         console.error(
@@ -110,7 +110,7 @@ const AllCourse = () => {
             className="h-10 rounded-sm w-full border-slate-200 border-[2px] text-gray-600 text-base block py-1 px-4 focus:outline-none"
           >
             {courseData &&
-              courseData.map((courseInfo) => (
+              courseData?.map((courseInfo) => (
                 <option key={courseInfo.id} value={courseInfo.category}>
                   {courseInfo.category}
                 </option>
