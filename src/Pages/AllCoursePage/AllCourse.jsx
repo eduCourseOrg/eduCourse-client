@@ -4,6 +4,11 @@ import { IoGrid } from "react-icons/io5";
 import { LiaBarsSolid } from "react-icons/lia";
 import CourseCart from "../../Components/AllCourse/CourseCart";
 const AllCourse = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  // const [filteredData, setFilteredData] = useState(data);
   const [courseData, setCourseData] = useState("");
 
   useEffect(() => {
@@ -27,14 +32,33 @@ const AllCourse = () => {
       );
   }, []);
 
-  const [searchQuery, setSearchQuery] = useState("");
+  // Handle search input change
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
 
-  const handleInputChange = (e) => {
-    setSearchQuery(e.target.value);
+  // Handle category select change
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
+  };
+
+  // Handle checkbox selection
+  const handleOptionChange = (e) => {
+    const value = e.target.value;
+    setSelectedOptions((prev) =>
+      prev.includes(value)
+        ? prev.filter((option) => option !== value)
+        : [...prev, value]
+    );
+  };
+
+  // Handle page change
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
   };
 
   const handleSearch = () => {
-    console.log("Searching for:", searchQuery);
+    console.log("Searching for:", searchTerm);
     // Implement search logic here
   };
 
@@ -45,15 +69,15 @@ const AllCourse = () => {
         <div className="search-bar relative w-full justify-between items-center h-8 flex mb-2">
           <input
             type="text"
-            value={searchQuery}
+            value={searchTerm}
             r
-            onChange={handleInputChange}
+            onChange={handleSearchChange}
             placeholder="Search..."
             className=" rounded-sm w-full h-10 border-slate-200 border-[2px] search-input "
           />
           <FaSearch className="absolute right-5 top-2 font-light text-slate-600" />{" "}
           {/* Search Icon */}
-          <button className="search-btn" onClick={() => handleSearch}></button>
+          <button className="search-btn" onClick={handleSearch}></button>
         </div>
         {/* section for grid change */}
         <div className="layout-btn col-span-2">
@@ -67,10 +91,9 @@ const AllCourse = () => {
               </button>
             </div>
             <div>
-             
               <h4 className="m-1">
                 We found
-                <span className="font-bold text-2xl text-primary">
+                <span className="font-bold text-2xl mx-2 text-primary">
                   {courseData?.length}
                 </span>
                 Courses Available for you
@@ -81,13 +104,17 @@ const AllCourse = () => {
         {/*  select option bar */}
         <div className="grid-cols-1 block h-8">
           <select
-            id="countries"
+            id="course-select"
+            value={selectedCategory}
+            onChange={handleCategoryChange}
             className="h-10 rounded-sm w-full border-slate-200 border-[2px] text-gray-600 text-base block py-1 px-4 focus:outline-none"
           >
-            <option selected>Latest</option>
-            <option value="web-development">Web Development</option>
-            <option value="digital-marketing">Digital Marketing</option>
-            <option value="video-editing">video Editing</option>
+            {courseData &&
+              courseData.map((courseInfo) => (
+                <option key={courseInfo.id} value={courseInfo.category}>
+                  {courseInfo.category}
+                </option>
+              ))}
           </select>
         </div>
       </section>
@@ -169,6 +196,16 @@ const AllCourse = () => {
                 </label>
               </div>
             </fieldset>
+            <hr className="border-slate-300 border-2 mt-2 w-full" />
+            <div className="h-40">
+              {" "}
+              <fieldset>
+                <legend className="text-lg font-medium text-gray-900 mt-2">
+                  Tags
+                </legend>
+              </fieldset>
+            </div>
+
             <hr className="border-slate-300 border-2 mt-2 w-full" />
 
             <fieldset>
