@@ -8,6 +8,7 @@ import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import './PopularCourse';
 import { useState } from "react";
 
 const PopularCourse = () => {
@@ -47,7 +48,10 @@ const PopularCourse = () => {
                     slidesPerView={3}
                     grabCursor={true}
                     spaceBetween={30}
-                    pagination={{clickable: true}} 
+                    pagination={{
+                        clickable: true,
+                        containerClass: 'pagination-container'
+                    }}
                 >
                     {
                         (courses.filter(course => {

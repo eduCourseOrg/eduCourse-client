@@ -14,11 +14,11 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
-    /* .bg-primary {
+    .bg-primary {
       background-color: var(--color-primary);
-    } */
+    }
   
-    /* .text-primary {
+    .text-primary {
       color: var(--color-primary);
     }
   
@@ -30,21 +30,21 @@
       color: var(--color-secondary);
     }
   
-    .bg-acent {
-      background-color: var(--color-acent);
+    .bg-accent {
+      background-color: var(--color-accent);
     }
   
-    .text-acent {
-      color: var(--color-acent);
+    .text-accent {
+      color: var(--color-accent);
     }
   
-    .bg-acent2 {
-      background-color: var(--color-acent2);
+    .bg-accent2 {
+      background-color: var(--color-accent2);
     }
   
-    .text-acent2 {
-      color: var(--color-acent2);
-    } */
+    .text-accent2 {
+      color: var(--color-accent2);
+    }
 }
 
 @layer utilities {
