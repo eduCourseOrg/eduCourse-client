@@ -6,6 +6,7 @@
       --color-secondary: #ebf1f4;
       --color-accent: #FCE6E5;
       --color-accent2: #F8FCFF;
+      --animate-review: review 1s ease-in-out;
     }
   *,
   ::after,
@@ -14,11 +15,11 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
-    /* .bg-primary {
+    .bg-primary {
       background-color: var(--color-primary);
-    } */
+    }
   
-    /* .text-primary {
+    .text-primary {
       color: var(--color-primary);
     }
   
@@ -30,21 +31,21 @@
       color: var(--color-secondary);
     }
   
-    .bg-acent {
-      background-color: var(--color-acent);
+    .bg-accent {
+      background-color: var(--color-accent);
     }
   
-    .text-acent {
-      color: var(--color-acent);
+    .text-accent {
+      color: var(--color-accent);
     }
   
-    .bg-acent2 {
-      background-color: var(--color-acent2);
+    .bg-accent2 {
+      background-color: var(--color-accent2);
     }
   
-    .text-acent2 {
-      color: var(--color-acent2);
-    } */
+    .text-accent2 {
+      color: var(--color-accent2);
+    }
 }
 
 @layer utilities {
@@ -52,3 +53,38 @@
     background: linear-gradient(to right, var(--color-accent), var(--color-accent2));
   }
 }
+
+/* -translate-x-[50%] -scale-[85%] */
+
+  @keyframes reviewPlus {
+    0% {
+      z-index: 10;
+      transform: translateX(0) scale(1);
+    }
+    100% {
+      z-index: 0;
+      transform: translateX(-50%) scale(0.8);
+    }
+  }
+
+  @keyframes reviewZ {
+    0%{
+      z-index: 10;
+      transform: translateX(50%) scale(0.8);
+    }
+    100%{
+      z-index: 20;
+      transform: translateX(0) scale(1);
+    }
+  }
+
+  @keyframes reviewBefore {
+    0%{
+      z-index: 0;
+      transform: translateX(0) scale(0);
+    }
+    100%{
+      z-index: 5;
+      transform: translateX(50%) scale(0.8);
+    }
+  }
