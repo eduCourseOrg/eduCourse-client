@@ -1,59 +1,136 @@
-import { useRef, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/pagination';
-
-import { Autoplay, EffectCoverflow, Pagination } from 'swiper/modules';
+import { useEffect, useState } from "react";
+import { FaStar } from "react-icons/fa";
+import { PiQuotesFill } from "react-icons/pi";
+import { FaCircleUser } from "react-icons/fa6";
 
 const Review = () => {
+    const [id, setId] = useState(0)
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            if (id === 4) {
+                setId(0)
+            } else {
+                setId(prevCount => prevCount + 1); 
+            }
+        }, 4000);
+        return () => {
+            clearInterval(intervalId);
+        };
+    }, [id]); 
     return (
-        <div className="w-full h-[80vh] p-10 flex relative items-center justify-center border-1 border-red-500">
-            <Swiper
-                effect={'coverflow'}
-                grabCursor={true}
-                centeredSlides={true}
-                slidesPerView={3}
-                coverflowEffect={{
-                    rotate: 50,
-                    stretch: 0,
-                    depth: 100,
-                    modifier: 1,
-                    slideShadows: true,
-                }}
-                autoplay={{
-                    delay: 4000,
-                }}
-                pagination={true}
-                modules={[EffectCoverflow, Pagination, Autoplay]}
-                className="w-full h-full"
-            >
-                <SwiperSlide className='p-6 bg-red-500'>
-                    
-                </SwiperSlide>
-                <SwiperSlide className='p-6 bg-green-500 '>
-                    
-                </SwiperSlide>
-                <SwiperSlide className='p-6 bg-yellow-500 '>
-                    
-                </SwiperSlide>
-                <SwiperSlide className='p-6 bg-green-500 '>
-                    
-                </SwiperSlide>
-                <SwiperSlide className='p-6 bg-red-500 '>
-                    
-                </SwiperSlide>
-                <SwiperSlide className='p-6 bg-blue-500 '>
-                    
-                </SwiperSlide>
-                
-            </Swiper>
-            {/* <div className='w-full h-full border-1 flex p-4 relative items-center justify-center'>
-                <div className='w-[50%] h-full border-1 border-yellow-300 absolute translate-x-[-40%] scale-75 bg-yellow-500'>hello1</div>
-                <div className='w-[50%] h-full border-3 border-green-300 absolute bg-red-500 z-10 shadow-xl shadow-gray-600'>hello2</div>
-                <div className='w-[50%] h-full border-1 border-green-300 absolute translate-x-[40%] bg-green-500 scale-75'>hello3</div>
-            </div> */}
+        <div className="w-full lg:h-[80vh] h-[60vh] flex items-center justify-center bg-secondary">
+            <div className="w-[90%] h-[80%] flex items-center justify-center relative">
+                <div id="0" className={`${id == 0 ? 'animate-[reviewZ_1s_forwards] shadow-2xl shadow-gray-500' : (id == 0 + 1) ? ' animate-[reviewPlus_1s_forwards]' : (id == 0 - 1) ? 'animate-[reviewBefore_1s_forwards]' : '-scale-0'} w-[35%] h-full bg-white  absolute p-4 flex flex-col gap-6 rounded-lg`}>
+                <h1 className="text-6xl font-bold text-primary"><PiQuotesFill ></PiQuotesFill></h1>
+                <h2 className="font-semibold">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt repellat amet quas reiciendis, sapiente suscipit distinctio! Repellendus fugit similique error impedit iste, deserunt dolores. Ea provident laborum vero pariatur ab?</h2>
+                <div className="flex items-center">
+                    <FaStar className="text-yellow-400"></FaStar>
+                    <FaStar className="text-yellow-400"></FaStar> 
+                    <FaStar className="text-yellow-400"></FaStar> 
+                    <FaStar className="text-yellow-400"></FaStar> 
+                    <FaStar className="text-yellow-400"></FaStar> 
+                    <h2 className="ml-2"> 4.5 ratings</h2>
+                </div>
+                <hr />
+                <div className="grow flex items-center gap-2">
+                    {/* <img src="" alt="avatar image" className="w-[60px] h-[60px] rounded-[100%]"/> */}
+                    <FaCircleUser className="w-[50px] h-[50px] rounded-[100%]"></FaCircleUser>
+                    <h1 className="flex flex-col gap-0 items-start">
+                        <span className="font-bold text-lg">Some text</span>
+                        <span className="text-sm">Some text 2</span>
+                    </h1>
+                </div>
+            </div>
+            
+           <div id="1" className={`${id == 1 ? 'animate-[reviewZ_1s_forwards] shadow-2xl shadow-gray-500' : (id == 1 + 1) ? ' animate-[reviewPlus_1s_forwards]' : (id == 1 - 1) ? 'animate-[reviewBefore_1s_forwards]' : '-scale-0'} w-[35%] h-full bg-white  absolute p-4 flex flex-col gap-6 rounded-lg`}>
+                <h1 className="text-6xl font-bold text-primary"><PiQuotesFill ></PiQuotesFill></h1>
+                <h2 className="font-semibold">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt repellat amet quas reiciendis, sapiente suscipit distinctio! Repellendus fugit similique error impedit iste, deserunt dolores. Ea provident laborum vero pariatur ab?</h2>
+                <div className="flex items-center">
+                    <FaStar className="text-yellow-400"></FaStar>
+                    <FaStar className="text-yellow-400"></FaStar> 
+                    <FaStar className="text-yellow-400"></FaStar> 
+                    <FaStar className="text-yellow-400"></FaStar> 
+                    <FaStar className="text-yellow-400"></FaStar> 
+                    <h2 className="ml-2"> 4.5 ratings</h2>
+                </div>
+                <hr />
+                <div className="grow flex items-center gap-2">
+                    {/* <img src="" alt="avatar image" className="w-[60px] h-[60px] rounded-[100%]"/> */}
+                    <FaCircleUser className="w-[50px] h-[50px] rounded-[100%]"></FaCircleUser>
+                    <h1 className="flex flex-col gap-0 items-start">
+                        <span className="font-bold text-lg">Some text</span>
+                        <span className="text-sm">Some text 2</span>
+                    </h1>
+                </div>
+            </div>
+            
+           <div id="2" className={`${id == 2 ? 'animate-[reviewZ_1s_forwards] shadow-2xl shadow-gray-500' : (id == 2 + 1) ? ' animate-[reviewPlus_1s_forwards]' : (id == 2 - 1) ? 'animate-[reviewBefore_1s_forwards]' : '-scale-0'} w-[35%] h-full bg-white  absolute p-4 flex flex-col gap-6 rounded-lg`}>
+                <h1 className="text-6xl font-bold text-primary"><PiQuotesFill ></PiQuotesFill></h1>
+                <h2 className="font-semibold">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt repellat amet quas reiciendis, sapiente suscipit distinctio! Repellendus fugit similique error impedit iste, deserunt dolores. Ea provident laborum vero pariatur ab?</h2>
+                <div className="flex items-center">
+                    <FaStar className="text-yellow-400"></FaStar>
+                    <FaStar className="text-yellow-400"></FaStar> 
+                    <FaStar className="text-yellow-400"></FaStar> 
+                    <FaStar className="text-yellow-400"></FaStar> 
+                    <FaStar className="text-yellow-400"></FaStar> 
+                    <h2 className="ml-2"> 4.5 ratings</h2>
+                </div>
+                <hr />
+                <div className="grow flex items-center gap-2">
+                    {/* <img src="" alt="avatar image" className="w-[60px] h-[60px] rounded-[100%]"/> */}
+                    <FaCircleUser className="w-[50px] h-[50px] rounded-[100%]"></FaCircleUser>
+                    <h1 className="flex flex-col gap-0 items-start">
+                        <span className="font-bold text-lg">Some text</span>
+                        <span className="text-sm">Some text 2</span>
+                    </h1>
+                </div>
+            </div>
+            
+           <div id="3" className={`${id == 3 ? 'animate-[reviewZ_1s_forwards] shadow-2xl shadow-gray-500' : (id == 3 + 1) ? ' animate-[reviewPlus_1s_forwards]' : (id == 3 - 1) ? 'animate-[reviewBefore_1s_forwards]' : '-scale-0'} w-[35%] h-full bg-white  absolute p-4 flex flex-col gap-6 rounded-lg`}>
+                <h1 className="text-6xl font-bold text-primary"><PiQuotesFill ></PiQuotesFill></h1>
+                <h2 className="font-semibold">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt repellat amet quas reiciendis, sapiente suscipit distinctio! Repellendus fugit similique error impedit iste, deserunt dolores. Ea provident laborum vero pariatur ab?</h2>
+                <div className="flex items-center">
+                    <FaStar className="text-yellow-400"></FaStar>
+                    <FaStar className="text-yellow-400"></FaStar> 
+                    <FaStar className="text-yellow-400"></FaStar> 
+                    <FaStar className="text-yellow-400"></FaStar> 
+                    <FaStar className="text-yellow-400"></FaStar> 
+                    <h2 className="ml-2"> 4.5 ratings</h2>
+                </div>
+                <hr />
+                <div className="grow flex items-center gap-2">
+                    {/* <img src="" alt="avatar image" className="w-[60px] h-[60px] rounded-[100%]"/> */}
+                    <FaCircleUser className="w-[50px] h-[50px] rounded-[100%]"></FaCircleUser>
+                    <h1 className="flex flex-col gap-0 items-start">
+                        <span className="font-bold text-lg">Some text</span>
+                        <span className="text-sm">Some text 2</span>
+                    </h1>
+                </div>
+            </div>
+            
+           <div id="4" className={`${id == 4 ? 'animate-[reviewZ_1s_forwards] shadow-2xl shadow-gray-500' : (id == 4 + 1) ? ' animate-[reviewPlus_1s_forwards]' : (id == 4 - 1) ? 'animate-[reviewBefore_1s_forwards]' : '-scale-0'} w-[35%] h-full bg-white  absolute p-4 flex flex-col gap-6 rounded-lg`}>
+                <h1 className="text-6xl font-bold text-primary"><PiQuotesFill ></PiQuotesFill></h1>
+                <h2 className="font-semibold">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt repellat amet quas reiciendis, sapiente suscipit distinctio! Repellendus fugit similique error impedit iste, deserunt dolores. Ea provident laborum vero pariatur ab?</h2>
+                <div className="flex items-center">
+                    <FaStar className="text-yellow-400"></FaStar>
+                    <FaStar className="text-yellow-400"></FaStar> 
+                    <FaStar className="text-yellow-400"></FaStar> 
+                    <FaStar className="text-yellow-400"></FaStar> 
+                    <FaStar className="text-yellow-400"></FaStar> 
+                    <h2 className="ml-2"> 4.5 ratings</h2>
+                </div>
+                <hr />
+                <div className="grow flex items-center gap-2">
+                    {/* <img src="" alt="avatar image" className="w-[60px] h-[60px] rounded-[100%]"/> */}
+                    <FaCircleUser className="w-[50px] h-[50px] rounded-[100%]"></FaCircleUser>
+                    <h1 className="flex flex-col gap-0 items-start">
+                        <span className="font-bold text-lg">Some text</span>
+                        <span className="text-sm">Some text 2</span>
+                    </h1>
+                </div>
+            </div>
+             </div>
         </div>
     );
 };

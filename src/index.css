@@ -6,7 +6,7 @@
       --color-secondary: #ebf1f4;
       --color-accent: #FCE6E5;
       --color-accent2: #F8FCFF;
-      --animate-review: review 1s ease-in-out;
+      /* --animate-review: review 1s ease-in-out; */
     }
   *,
   ::after,
