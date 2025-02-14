@@ -95,6 +95,288 @@
       "courseLevel": "Beginner"
     },
     {
+      "name": "Introduction to JavaScript",
+      "category": "Web Development",
+      "description": "Learn JavaScript from scratch, covering basics to advanced concepts.",
+      "instructorId": "101",
+      "ratings": 4.8,
+      "courseContent": [
+        {
+          "section": "Introduction",
+          "lessons": [
+            {
+              "title": "What is JavaScript?",
+              "duration": "10 min",
+              "videoUrl": "https://example.com/lesson1"
+            },
+            {
+              "title": "Setting up your environment",
+              "duration": "15 min",
+              "videoUrl": "https://example.com/lesson2"
+            }
+          ]
+        }
+      ],
+      "pdf": [
+        {
+          "title": "JavaScript Basics Guide",
+          "fileUrl": "https://example.com/js_basics.pdf"
+        }
+      ],
+      "quizzes": [
+        {
+          "question": "What is Python primarily used for?",
+          "options": [
+            "Web Development",
+            "Data Science",
+            "Cybersecurity",
+            "Networking"
+          ],
+          "answer": "Data Science"
+        },
+        {
+          "question": "Which library is used for data manipulation in Python?",
+          "options": ["NumPy", "Pandas", "TensorFlow", "Matplotlib"],
+          "answer": "Pandas"
+        },
+        {
+          "question": "What keyword is used to define a function in Python?",
+          "options": ["def", "function", "define", "func"],
+          "answer": "def"
+        },
+        {
+          "question": "Which of the following is a Python machine learning library?",
+          "options": ["Scikit-learn", "Django", "Flask", "React"],
+          "answer": "Scikit-learn"
+        },
+        {
+          "question": "What is the output of print(2 ** 3) in Python?",
+          "options": ["5", "6", "8", "10"],
+          "answer": "8"
+        }
+      ],
+
+      "reviews": [
+        {
+          "studentId": "201",
+          "rating": 5,
+          "comment": "Great course! Very informative.",
+          "date": "2025-02-05"
+        }
+      ],
+      "FAQ": [
+        {
+          "question": "Do I need prior coding knowledge?",
+          "answer": "No, this course is beginner-friendly."
+        }
+      ],
+      "comments": [
+        {
+          "studentId": "203",
+          "comment": "Looking forward to this course!",
+          "date": "2025-02-05"
+        }
+      ],
+      "enrolledStudents": [
+        {
+          "studentId": "201",
+          "enrollmentDate": "2025-02-05"
+        }
+      ],
+      "enrolledCount": 1,
+      "createdDateTime": "2025-02-05T10:30:00Z",
+      "banner": "https://example.com/banner.jpg",
+      "courseLevel": "Beginner"
+    },
+    {
+      "name": "Introduction to JavaScript",
+      "category": "Web Development",
+      "description": "Learn JavaScript from scratch, covering basics to advanced concepts.",
+      "instructorId": "101",
+      "ratings": 4.8,
+      "courseContent": [
+        {
+          "section": "Introduction",
+          "lessons": [
+            {
+              "title": "What is JavaScript?",
+              "duration": "10 min",
+              "videoUrl": "https://example.com/lesson1"
+            },
+            {
+              "title": "Setting up your environment",
+              "duration": "15 min",
+              "videoUrl": "https://example.com/lesson2"
+            }
+          ]
+        }
+      ],
+      "pdf": [
+        {
+          "title": "JavaScript Basics Guide",
+          "fileUrl": "https://example.com/js_basics.pdf"
+        }
+      ],
+      "quizzes": [
+        {
+          "question": "What is Python primarily used for?",
+          "options": [
+            "Web Development",
+            "Data Science",
+            "Cybersecurity",
+            "Networking"
+          ],
+          "answer": "Data Science"
+        },
+        {
+          "question": "Which library is used for data manipulation in Python?",
+          "options": ["NumPy", "Pandas", "TensorFlow", "Matplotlib"],
+          "answer": "Pandas"
+        },
+        {
+          "question": "What keyword is used to define a function in Python?",
+          "options": ["def", "function", "define", "func"],
+          "answer": "def"
+        },
+        {
+          "question": "Which of the following is a Python machine learning library?",
+          "options": ["Scikit-learn", "Django", "Flask", "React"],
+          "answer": "Scikit-learn"
+        },
+        {
+          "question": "What is the output of print(2 ** 3) in Python?",
+          "options": ["5", "6", "8", "10"],
+          "answer": "8"
+        }
+      ],
+
+      "reviews": [
+        {
+          "studentId": "201",
+          "rating": 5,
+          "comment": "Great course! Very informative.",
+          "date": "2025-02-05"
+        }
+      ],
+      "FAQ": [
+        {
+          "question": "Do I need prior coding knowledge?",
+          "answer": "No, this course is beginner-friendly."
+        }
+      ],
+      "comments": [
+        {
+          "studentId": "203",
+          "comment": "Looking forward to this course!",
+          "date": "2025-02-05"
+        }
+      ],
+      "enrolledStudents": [
+        {
+          "studentId": "201",
+          "enrollmentDate": "2025-02-05"
+        }
+      ],
+      "enrolledCount": 1,
+      "createdDateTime": "2025-02-05T10:30:00Z",
+      "banner": "https://example.com/banner.jpg",
+      "courseLevel": "Beginner"
+    },
+    {
+      "name": "Introduction to JavaScript",
+      "category": "Web Development",
+      "description": "Learn JavaScript from scratch, covering basics to advanced concepts.",
+      "instructorId": "101",
+      "ratings": 4.8,
+      "courseContent": [
+        {
+          "section": "Introduction",
+          "lessons": [
+            {
+              "title": "What is JavaScript?",
+              "duration": "10 min",
+              "videoUrl": "https://example.com/lesson1"
+            },
+            {
+              "title": "Setting up your environment",
+              "duration": "15 min",
+              "videoUrl": "https://example.com/lesson2"
+            }
+          ]
+        }
+      ],
+      "pdf": [
+        {
+          "title": "JavaScript Basics Guide",
+          "fileUrl": "https://example.com/js_basics.pdf"
+        }
+      ],
+      "quizzes": [
+        {
+          "question": "What is Python primarily used for?",
+          "options": [
+            "Web Development",
+            "Data Science",
+            "Cybersecurity",
+            "Networking"
+          ],
+          "answer": "Data Science"
+        },
+        {
+          "question": "Which library is used for data manipulation in Python?",
+          "options": ["NumPy", "Pandas", "TensorFlow", "Matplotlib"],
+          "answer": "Pandas"
+        },
+        {
+          "question": "What keyword is used to define a function in Python?",
+          "options": ["def", "function", "define", "func"],
+          "answer": "def"
+        },
+        {
+          "question": "Which of the following is a Python machine learning library?",
+          "options": ["Scikit-learn", "Django", "Flask", "React"],
+          "answer": "Scikit-learn"
+        },
+        {
+          "question": "What is the output of print(2 ** 3) in Python?",
+          "options": ["5", "6", "8", "10"],
+          "answer": "8"
+        }
+      ],
+
+      "reviews": [
+        {
+          "studentId": "201",
+          "rating": 5,
+          "comment": "Great course! Very informative.",
+          "date": "2025-02-05"
+        }
+      ],
+      "FAQ": [
+        {
+          "question": "Do I need prior coding knowledge?",
+          "answer": "No, this course is beginner-friendly."
+        }
+      ],
+      "comments": [
+        {
+          "studentId": "203",
+          "comment": "Looking forward to this course!",
+          "date": "2025-02-05"
+        }
+      ],
+      "enrolledStudents": [
+        {
+          "studentId": "201",
+          "enrollmentDate": "2025-02-05"
+        }
+      ],
+      "enrolledCount": 1,
+      "createdDateTime": "2025-02-05T10:30:00Z",
+      "banner": "https://example.com/banner.jpg",
+      "courseLevel": "Beginner"
+    },
+    {
       "name": "Python for Data Science",
       "category": "Data Science",
       "description": "Learn Python programming with a focus on data analysis and machine learning.",

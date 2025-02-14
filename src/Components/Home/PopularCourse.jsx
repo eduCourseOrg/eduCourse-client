@@ -8,8 +8,10 @@ import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { useState } from "react";
 
 const PopularCourse = () => {
+    const [select, setSelect] = useState('All')
     const {data: courses = [], isLoading } = useQuery({
         queryKey: ['course'],
         queryFn: async() => {
@@ -31,11 +33,11 @@ const PopularCourse = () => {
                     <h2 className="text-3xl font-bold">Popular Courses</h2>
                 </div>
                 <div className="flex gap-7 bg-white">
-                    <NavLink className="px-4 py-2 bg-primary">All</NavLink>
-                    <NavLink className="p-2">Business</NavLink>
-                    <NavLink className="p-2">Design</NavLink>
-                    <NavLink className="p-2">Development</NavLink>
-                    <NavLink className="p-2">Marketing</NavLink>
+                    <NavLink onClick={()=> setSelect('All')} className={`px-4 py-2 ${select == "All" && 'bg-primary'}`}>All</NavLink>
+                    <NavLink onClick={()=> setSelect('Data Science')} className={`px-4 py-2 ${select == 'Data Science' && 'bg-primary'}`}>Data Science</NavLink>
+                    <NavLink onClick={()=> setSelect('Cyber Security')} className={`px-4 py-2 ${select == 'Cyber Security' && 'bg-primary'}`}>Cyber Security</NavLink>
+                    <NavLink onClick={()=> setSelect('Development')} className={`px-4 py-2 ${select == 'Development' && 'bg-primary'}`}>Development</NavLink>
+                    <NavLink onClick={()=> setSelect('Graphic Design')} className={`px-4 py-2 ${select == 'Graphic Design' && 'bg-primary'}`}>Graphic Design</NavLink>
                 </div>
             </div>
 
@@ -48,7 +50,19 @@ const PopularCourse = () => {
                     pagination={{clickable: true}} 
                 >
                     {
-                    courses.map((course, idx) => <SwiperSlide key={idx} className="w-full h-full bg-white">
+                        (courses.filter(course => {
+                            if (select == "All") {
+                                return true
+                            } else if (select == "Development") {
+                                return course.category == "Web Development"
+                            } else if (select == "Data Science") {
+                                return course.category == "Data Science"
+                            } else if (select == "Cyber Security") {
+                               return  course.category == "Cyber Security"
+                            } else if (select == "Graphic Design") {
+                                return course.category == "Graphic Design"
+                            }
+                    })).map((course, idx) => <SwiperSlide key={idx} className="w-full h-full bg-white">
                     {/* Card Image Section */}
                     <div className="w-full h-[45%] mb-3">
                         <img src={courseBanner1} alt="" className="w-full h-full" />
