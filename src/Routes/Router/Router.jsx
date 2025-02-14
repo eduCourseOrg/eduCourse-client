@@ -6,7 +6,7 @@ import Home from "../../Pages/Home/Home";
 import Error from "../../Pages/Error/Error";
 import StudentRegister from "../../Pages/Register/StudentRegister";
 import CourseDetails from "../../Pages/CourseDetails/CourseDetails";
-
+import InstructorRegistration from "../../Pages/Register/InstructorRegistration";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -24,6 +24,10 @@ export const router = createBrowserRouter([
         {
           path: '/courseDetails',
           element: <CourseDetails></CourseDetails>
+        },
+        {
+          path:'/instructorReg',
+          element:<InstructorRegistration></InstructorRegistration>
         }
     ]
   },
