@@ -1,32 +1,32 @@
-import { useContext } from 'react';
-import { EduCourseContexts } from "../../Contexts/AuthProvider";
+import { useState } from 'react';
+import LoginForm from './LoginForm';
+import SignUpForm from './SignUpForm';
 
 
 const StudentRegister = () => {
-    const {createAccount} = useContext(EduCourseContexts);
-    const handleRegister = e =>{
-        e.preventDefault();
-        const form = e.target;
-        const name = form.name.value;
-        const email = form.email.value;
-        const password = form.password.value;
-  
-        // const photoURL = form.photoURL.value;
-        // const role = 'student';
-        const stdUser = {email, password, name};
-        console.log(stdUser);
-        createAccount(email,password)
-        .then((res)=>{
-          const user = res.user;
-          console.log(user);
-        })
-        .catch((error) => {console.log(error);
-    })
-  }
+  const [isLogin,setIsLogin]= useState(true);
+    
     return (
-        <div>
-          <h1 className="text-5xl font-bold">Register now!</h1>
-          <form onSubmit={handleRegister} className="card-body">
+        <div className="h-screen flex justify-center items-center">
+          <div className=" container my-16 lg:max-w-2/5 max-w-full  shadow-2xl rounded-2xl w-full p-12">
+            <button className={isLogin? "btn  w-1/2 p-2 cursor-pointer rounded-t-lg font-bold text-[20px] text-[var(--color-secondary)] bg-[var(--color-primary)]":"btn  w-1/2 p-2 cursor-pointer rounded-t-lg  font-bold text-[20px] text-[var(--color-primary)] bg-[var(--color-secondary)]"} onClick={()=>setIsLogin(true)}>LogIn</button>
+            <button className={!isLogin? "btn  w-1/2 p-2 cursor-pointer rounded-t-lg font-bold text-[20px] text-[var(--color-secondary)]  bg-[var(--color-primary)]":"btn  w-1/2 p-2 cursor-pointer rounded-t-lg font-bold text-[20px] text-[var(--color-primary)]  bg-[var(--color-secondary)]"} onClick={()=>setIsLogin(false)}>Sign Up</button>
+            
+            {
+              isLogin?           
+              <LoginForm setIsLogin={setIsLogin}></LoginForm>
+              :
+              <SignUpForm setIsLogin={setIsLogin}></SignUpForm>
+            }
+            
+          </div>
+
+
+
+
+
+          {/* <h1 className="text-5xl font-bold">Register now!</h1>
+          <form onSubmit={handleRegister} className="card-body bg-">
 
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-3">
@@ -82,7 +82,7 @@ const StudentRegister = () => {
            bg-amber-800">Register</button>
         
         
-      </form>
+      </form> */}
 
       
         </div>

@@ -1,8 +1,8 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
-import { createContext,useState  } from "react";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { createContext, useEffect, useState } from "react";
 import app from "../Firebase/firebase.config";
-import { getAuth,createUserWithEmailAndPassword  } from "firebase/auth";
 
 export const EduCourseContexts = createContext()
 const eduAuth = getAuth(app);
@@ -16,9 +16,22 @@ const AuthProvider = ({children}) => {
         setLoading(true);
         return createUserWithEmailAndPassword(eduAuth,email,password)
     }
+     const logIn = (email, password) => {
+        setLoading(true);
+        return signInWithEmailAndPassword(eduAuth, email, password);
+    }
 
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(eduAuth, currentUser => {
+            setUser(currentUser);
+            setLoading(false);
+        });
+        return () => {
+            return unsubscribe();
+        }
+    }, [])
     
-    const providerInfo = {createAccount,name: 'Raihan'}
+    const providerInfo = {createAccount,logIn,user,loading}
    
     return (
         <EduCourseContexts.Provider value={providerInfo}>
