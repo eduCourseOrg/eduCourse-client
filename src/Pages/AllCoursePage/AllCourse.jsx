@@ -1,18 +1,22 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { IoGrid } from "react-icons/io5";
 import { LiaBarsSolid } from "react-icons/lia";
 import CourseCart from "../../Components/AllCourse/CourseCart";
 const AllCourse = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedOptions, setSelectedOptions] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  // const [filteredData, setFilteredData] = useState(data);
-  const [courseData, setCourseData] = useState("");
+  const [searchTriggered, setSearchTriggered] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState([]);
+  const [filteredCourses, setFilteredCourses] = useState([]);
+  const [courseData, setCourseData] = useState([]);
+
+  // Extract unique categories for the dropdown
+  const categories = [
+    "All Categories",
+    ...new Set(courseData && courseData.map((course) => course.category)),
+  ];
 
   useEffect(() => {
-    // If you're using Create React App and the file is in the public folder
     fetch("/courses.json")
       .then((response) => {
         if (!response.ok) {
@@ -22,7 +26,6 @@ const AllCourse = () => {
       })
       .then((data) => {
         setCourseData(data.courses);
-        console.log("data", data.courses);
       })
       .catch((error) =>
         console.error(
@@ -32,35 +35,37 @@ const AllCourse = () => {
       );
   }, []);
 
-  // Handle search input change
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
+  const filteredCourse = useCallback(() => {
+    console.log(categories);
+    console.log("data", courseData);
+    return (
+      courseData &&
+      courseData.filter((course) => {
+        const matchedSearch = searchTerm
+          ? Object.values(course).some((value) =>
+              String(value).toLowerCase().includes(searchTerm.toLowerCase())
+            )
+          : true;
 
-  // Handle category select change
-  const handleCategoryChange = (e) => {
-    setSelectedCategory(e.target.value);
-  };
+        const matchesCategory =
+          selectedCategory === "All Categories" ||
+          course.category === selectedCategory;
 
-  // Handle checkbox selection
-  const handleOptionChange = (e) => {
-    const value = e.target.value;
-    setSelectedOptions((prev) =>
-      prev.includes(value)
-        ? prev.filter((option) => option !== value)
-        : [...prev, value]
+        return matchedSearch && matchesCategory;
+      })
     );
-  };
+  }, [searchTerm, courseData]);
 
-  // Handle page change
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
+  const displayCourses = useMemo(
+    () => filteredCourse(),
+    [filteredCourse, searchTriggered]
+  );
 
-  const handleSearch = () => {
-    console.log("Searching for:", searchTerm);
-    // Implement search logic here
-  };
+  const searchByClick = () => setSearchTriggered((prev) => !prev);
+
+  useEffect(() => {
+    setFilteredCourses(displayCourses);
+  }, [displayCourses]);
 
   return (
     <section>
@@ -70,19 +75,21 @@ const AllCourse = () => {
           <input
             type="text"
             value={searchTerm}
-            r
-            onChange={handleSearchChange}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setSearchTriggered(false);
+            }}
             placeholder="Search..."
             className=" rounded-sm w-full h-10 border-slate-200 border-[2px] search-input "
           />
           <FaSearch className="absolute right-5 top-2 font-light text-slate-600" />{" "}
           {/* Search Icon */}
-          <button className="search-btn" onClick={handleSearch}></button>
+          <button className="search-btn" onClick={searchByClick}></button>
         </div>
         {/* section for grid change */}
         <div className="layout-btn col-span-2">
-          <div className="flex justify-start gap-3 items-center">
-            <div className="flex gap-1 justify-start items-center">
+          <div className="flex justify-start gap-3 h-full items-center">
+            <div className="flex gap-1 justify-start  items-center">
               <button>
                 <IoGrid className="text-xl" />
               </button>
@@ -91,7 +98,7 @@ const AllCourse = () => {
               </button>
             </div>
             <div>
-              <h4 className="m-1">
+              <h4 className="p-1">
                 We found
                 <span className="font-bold text-2xl mx-2 text-primary">
                   {courseData?.length}
@@ -106,13 +113,13 @@ const AllCourse = () => {
           <select
             id="course-select"
             value={selectedCategory}
-            onChange={handleCategoryChange}
+            onChange={(e) => setSelectedCategory(e.target.value)}
             className="h-10 rounded-sm w-full border-slate-200 border-[2px] text-gray-600 text-base block py-1 px-4 focus:outline-none"
           >
-            {courseData &&
-              courseData?.map((courseInfo) => (
-                <option key={courseInfo.id} value={courseInfo.category}>
-                  {courseInfo.category}
+            {categories &&
+              categories?.map((category, index) => (
+                <option key={index} value={category}>
+                  {category}
                 </option>
               ))}
           </select>
@@ -140,6 +147,7 @@ const AllCourse = () => {
                     {/* Category 01 */}
                     <input
                       type="checkbox"
+                      value="Option1"
                       className="size-4 rounded-sm border-gray-300"
                       id="Option1"
                     />
@@ -291,8 +299,8 @@ const AllCourse = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-2">
             {" "}
-            {courseData &&
-              courseData.map((singleCourse) => (
+            {filteredCourses &&
+              filteredCourses.map((singleCourse) => (
                 <CourseCart
                   key={singleCourse.id}
                   singleCourse={singleCourse}
