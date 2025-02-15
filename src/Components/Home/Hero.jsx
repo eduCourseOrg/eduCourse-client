@@ -97,7 +97,7 @@ const Hero = () => {
           <div className={`w-full h-full`}>
             <div className="slide-1 w-full h-full bg-linear-to-r from-primary to-transparent relative">
               {/* this div is for overlay manage */}
-              <div className="w-full h-full bg-linear-to-r from-primary from-10% to-transparent opacity-70 absolute top-0 left-0"></div>
+              <div className="w-full h-full bg-linear-to-r from-[var(--color-primary)] from-10% to-transparent opacity-70 absolute top-0 left-0"></div>
               {/* Image section */}
               <img src={banner9} alt="banner1" className="w-full h-full" />
               {/* Text and Input field Section */}

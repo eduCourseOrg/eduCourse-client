@@ -2,11 +2,13 @@ import {
   createBrowserRouter
 } from "react-router-dom";
 import Main from "../../Layout/Main/Main";
-import Home from "../../Pages/Home/Home";
-import Error from "../../Pages/Error/Error";
-import StudentRegister from "../../Pages/Register/StudentRegister";
+import AllCourse from "../../Pages/AllCoursePage/AllCourse";
 import CourseDetails from "../../Pages/CourseDetails/CourseDetails";
+import Error from "../../Pages/Error/Error";
+import Home from "../../Pages/Home/Home";
 import InstructorRegistration from "../../Pages/Register/InstructorRegistration";
+import StudentRegister from "../../Pages/Register/StudentRegister";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -28,6 +30,11 @@ export const router = createBrowserRouter([
         {
           path:'/instructorReg',
           element:<InstructorRegistration></InstructorRegistration>
+          
+        },
+        {
+          path: '/courses',
+          element: <AllCourse></AllCourse>
         }
     ]
   },

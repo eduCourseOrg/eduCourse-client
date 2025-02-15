@@ -1,27 +1,39 @@
-import { Link, NavLink } from 'react-router-dom';
-import logo from '/images/Navbar/Logo.png';
-import { FaFacebook, FaTwitter, FaInstagram, FaEnvelope, FaClock } from "react-icons/fa";
+import {
+  FaClock,
+  FaEnvelope,
+  FaFacebook,
+  FaInstagram,
+  FaTwitter,
+} from "react-icons/fa";
+import { Link, NavLink } from "react-router-dom";
+import logo from "/images/Navbar/Logo.png";
 
 const Header = () => {
   return (
     <header>
-    <div className="py-2 bg-linear-[45deg,var(--color-primary)_50%,var(--color-secondary)_50%] text-secondary">
+      <div className="py-2 bg-linear-[45deg,var(--color-primary)_50%,var(--color-secondary)_50%] text-secondary">
         <div className="container mx-auto flex justify-between items-center">
-            <div className="flex items-center space-x-4">
-                <div className="flex items-center space-x-2">
-                    <FaEnvelope></FaEnvelope>
-                    <span>xyz@gmail.com</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                    <FaClock></FaClock>
-                    <span>Mon- Fri: 9.00am - 6.00pm</span>
-                </div>
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2">
+              <FaEnvelope></FaEnvelope>
+              <span>xyz@gmail.com</span>
             </div>
-            <div className="flex items-center space-x-4">
-                <a href="#" className="text-primary"><FaFacebook></FaFacebook></a>
-                <a href="#" className="text-primary"><FaTwitter></FaTwitter></a>
-                <a href="#" className="text-primary"><FaInstagram></FaInstagram></a>
+            <div className="flex items-center space-x-2">
+              <FaClock></FaClock>
+              <span>Mon- Fri: 9.00am - 6.00pm</span>
             </div>
+          </div>
+          <div className="flex items-center space-x-4">
+            <a href="#" className="text-primary">
+              <FaFacebook></FaFacebook>
+            </a>
+            <a href="#" className="text-primary">
+              <FaTwitter></FaTwitter>
+            </a>
+            <a href="#" className="text-primary">
+              <FaInstagram></FaInstagram>
+            </a>
+          </div>
         </div>
       </div>
       <nav className="py-2 bg-[var(--color-primary)]">
@@ -37,8 +49,10 @@ const Header = () => {
                 <NavLink to='/register' className={({ isActive}) => `${isActive && 'border-b border-secondary'} hover:border-b border-secondary`}>Register</NavLink>
             </div>
             <Link to='/instructorReg' className="bg-white text-black px-4 py-2 rounded">Become an Instructor</Link>
+          
+          
         </div>
-    </nav>
+      </nav>
     </header>
   );
 };
