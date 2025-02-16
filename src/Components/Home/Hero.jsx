@@ -37,6 +37,7 @@ const Hero = () => {
           waitForTransition: true,
         }}
         onSlideChange={handleSlideChange}
+        // disableOnInteraction={true}
         className="w-full h-full"
       >
         <SwiperSlide>
