@@ -1,0 +1,12 @@
+const FbButton = () => {
+    return (
+        <button type="button" className="mt-3 m-auto w-2/3 py-2 px-4   flex justify-center items-center bg-white-600 border-2 border-teal-700  hover:shadow-lg focus:ring-white-500 focus:ring-offset-blue-200 text-teal-800  transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
+  <svg width="20" height="20" fill="currentColor" className="mr-2" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"></path>
+  </svg>
+  Continue with Facebook
+</button>
+    );
+};
+
+export default FbButton;

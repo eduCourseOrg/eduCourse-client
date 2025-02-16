@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import toast from 'react-hot-toast';
 import {
   FaClock,
   FaEnvelope,
@@ -6,9 +8,20 @@ import {
   FaTwitter,
 } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
+import { EduCourseContexts } from "../../Contexts/AuthProvider";
 import logo from "/images/Navbar/Logo.png";
 
 const Header = () => {
+  const {user,logOut} =useContext(EduCourseContexts);
+  const handleLogOut=()=>{
+    logOut()
+    .then(()=>{
+      toast.success('Successfully created!');
+    })
+    .catch((error)=>{
+      console.error(error);
+    })
+  }
   return (
     <header>
       <div className="py-2 bg-linear-[45deg,var(--color-primary)_50%,var(--color-secondary)_50%] text-secondary">
@@ -39,62 +52,29 @@ const Header = () => {
       <nav className="py-2 bg-[var(--color-primary)]">
         <div className="container mx-auto flex justify-between items-center">
           {/* <a href="#" className="bg-white text-black px-4 py-2 rounded">Company Logo</a> */}
-          <img src={logo} alt="Logo" className="w-[13%]" />
-          <div className="flex space-x-8 text-secondary">
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                `${
-                  isActive && "border-b border-secondary"
-                } hover:border-b border-secondary`
+          <img src={logo} alt="Logo" className='w-[13%]' />
+            <div className="flex space-x-8 text-secondary">
+                <NavLink to='/' className={({ isActive}) => `${isActive && 'border-b border-secondary'} hover:border-b border-secondary`}>Home</NavLink>
+                <NavLink to='/about' className={({ isActive}) => `${isActive && 'border-b border-secondary'} hover:border-b border-secondary`}>About</NavLink>
+                <NavLink to='/courses' className={({ isActive}) => `${isActive && 'border-b border-secondary'} hover:border-b border-secondary`}>Courses</NavLink>
+                <NavLink to='/blog' className={({ isActive}) => `${isActive && 'border-b border-secondary'} hover:border-b border-secondary`}>Blog</NavLink>
+                <NavLink to='/contact' className={({ isActive}) => `${isActive && 'border-b border-secondary'} hover:border-b border-secondary`}>Contact</NavLink>
+
+                {
+                user? 
+                <>
+                <NavLink onClick={handleLogOut} className={({ isActive}) => `${isActive && 'border-b border-secondary'} hover:border-b border-secondary`}>Log Out</NavLink>
+              <p>{user?.email}</p>
+                </>
+                :
+                <>
+                <NavLink to='/register' className={({ isActive}) => `${isActive && 'border-b border-secondary'} hover:border-b border-secondary`}>Register</NavLink>
+                </>
               }
-            >
-              Home
-            </NavLink>
-            <NavLink
-              to="/about"
-              className={({ isActive }) =>
-                `${
-                  isActive && "border-b border-secondary"
-                } hover:border-b border-secondary`
-              }
-            >
-              About
-            </NavLink>
-            <NavLink
-              to="/courses"
-              className={({ isActive }) =>
-                `${
-                  isActive && "border-b border-secondary"
-                } hover:border-b border-secondary`
-              }
-            >
-              Courses
-            </NavLink>
-            <NavLink
-              to="/blog"
-              className={({ isActive }) =>
-                `${
-                  isActive && "border-b border-secondary"
-                } hover:border-b border-secondary`
-              }
-            >
-              Blog
-            </NavLink>
-            <NavLink
-              to="/contact"
-              className={({ isActive }) =>
-                `${
-                  isActive && "border-b border-secondary"
-                } hover:border-b border-secondary`
-              }
-            >
-              Contact
-            </NavLink>
-          </div>
-          <Link to="/meeting" className="bg-white text-black px-4 py-2 rounded">
-            Book A Meeting
-          </Link>
+            </div>
+            <Link to='/instructorReg' className="bg-white text-black px-4 py-2 rounded">Become an Instructor</Link>
+          
+          
         </div>
       </nav>
     </header>

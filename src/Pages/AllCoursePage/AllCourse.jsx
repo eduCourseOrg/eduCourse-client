@@ -1,18 +1,21 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { IoGrid } from "react-icons/io5";
 import { LiaBarsSolid } from "react-icons/lia";
 import CourseCart from "../../Components/AllCourse/CourseCart";
+
 const AllCourse = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedOptions, setSelectedOptions] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  // const [filteredData, setFilteredData] = useState(data);
-  const [courseData, setCourseData] = useState("");
+  const [searchTriggered, setSearchTriggered] = useState(false); //this state will be used when we use search button instead of search input
+  const [selectedCategory, setSelectedCategory] = useState([]);
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
+  const [selectedLevelCheckboxes, setSelectedLevelCheckboxes] = useState([]);
+  const [filteredCourses, setFilteredCourses] = useState([]);
+  const [courseData, setCourseData] = useState([]);
+
+  // Extract unique categories for the dropdown
 
   useEffect(() => {
-    // If you're using Create React App and the file is in the public folder
     fetch("/courses.json")
       .then((response) => {
         if (!response.ok) {
@@ -22,7 +25,6 @@ const AllCourse = () => {
       })
       .then((data) => {
         setCourseData(data.courses);
-        console.log("data", data.courses);
       })
       .catch((error) =>
         console.error(
@@ -32,35 +34,94 @@ const AllCourse = () => {
       );
   }, []);
 
-  // Handle search input change
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
+  const categories = useMemo(
+    () => [
+      "All Categories",
+      ...new Set(courseData && courseData.map((course) => course.category)),
+    ],
+    [courseData]
+  );
 
-  // Handle category select change
-  const handleCategoryChange = (e) => {
-    setSelectedCategory(e.target.value);
-  };
+  const levels = useMemo(
+    () => [
+      ...new Set(courseData && courseData.map((course) => course.courseLevel)),
+    ],
+    [courseData]
+  );
 
-  // Handle checkbox selection
-  const handleOptionChange = (e) => {
-    const value = e.target.value;
-    setSelectedOptions((prev) =>
-      prev.includes(value)
-        ? prev.filter((option) => option !== value)
-        : [...prev, value]
+  console.log("level", levels);
+
+  const filteredCourse = useCallback(() => {
+    console.log(categories);
+    console.log("data", courseData);
+    return (
+      courseData &&
+      courseData.filter((course) => {
+        // Search term filter
+
+        const matchedSearch =
+          searchTerm.length === 0 ||
+          Object.values(course).some((value) =>
+            String(value).toLowerCase().includes(searchTerm.toLowerCase())
+          );
+        // Dropdown category filter (single category)
+        const matchesCategory =
+          !selectedCategory || // Allow filtering without selecting a category
+          selectedCategory === "All Categories" ||
+          course.category === selectedCategory;
+        console.log("matched-cat", course.category);
+
+        // Checkbox category filter (multiple categories)
+        const matchesCheckboxes =
+          selectedCheckboxes.length === 0 ||
+          selectedCheckboxes.includes(course.category);
+
+        // Level Checkbox filter
+        const matchesLevelCheckboxes =
+          selectedLevelCheckboxes.length === 0 || // Ensure it’s always an array
+          selectedLevelCheckboxes.includes(course.courseLevel);
+
+        return (
+          matchedSearch &&
+          matchesCategory &&
+          matchesCheckboxes &&
+          matchesLevelCheckboxes
+        );
+      })
+    );
+  }, [
+    searchTerm,
+    selectedCategory,
+    selectedLevelCheckboxes,
+    selectedCheckboxes,
+    categories,
+    courseData,
+  ]);
+
+  const displayCourses = useMemo(() => filteredCourse(), [filteredCourse]);
+
+  const searchByClick = () => setSearchTriggered((prev) => !prev);
+
+  // Function to handle Category checkbox selection
+  const handleCheckboxChange = (category) => {
+    setSelectedCheckboxes(
+      (prev) =>
+        prev.includes(category)
+          ? prev.filter((c) => c !== category) // Remove if already selected
+          : [...prev, category] // Add if not selected
+    );
+  };
+  // Function to handle Level checkbox selection
+
+  const handleLevelCheckboxChange = (level) => {
+    setSelectedLevelCheckboxes((prev = []) =>
+      prev.includes(level) ? prev.filter((l) => l !== level) : [...prev, level]
     );
   };
 
-  // Handle page change
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
-
-  const handleSearch = () => {
-    console.log("Searching for:", searchTerm);
-    // Implement search logic here
-  };
+  useEffect(() => {
+    setFilteredCourses(displayCourses);
+  }, [displayCourses]);
 
   return (
     <section>
@@ -70,19 +131,21 @@ const AllCourse = () => {
           <input
             type="text"
             value={searchTerm}
-            r
-            onChange={handleSearchChange}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setSearchTriggered(false);
+            }}
             placeholder="Search..."
             className=" rounded-sm w-full h-10 border-slate-200 border-[2px] search-input "
           />
           <FaSearch className="absolute right-5 top-2 font-light text-slate-600" />{" "}
           {/* Search Icon */}
-          <button className="search-btn" onClick={handleSearch}></button>
+          <button className="search-btn" onClick={searchByClick}></button>
         </div>
         {/* section for grid change */}
         <div className="layout-btn col-span-2">
-          <div className="flex justify-start gap-3 items-center">
-            <div className="flex gap-1 justify-start items-center">
+          <div className="flex justify-start gap-3 h-full items-center">
+            <div className="flex gap-1 justify-start  items-center">
               <button>
                 <IoGrid className="text-xl" />
               </button>
@@ -91,10 +154,12 @@ const AllCourse = () => {
               </button>
             </div>
             <div>
-              <h4 className="m-1">
+              <h4 className="p-1">
                 We found
                 <span className="font-bold text-2xl mx-2 text-primary">
-                  {courseData?.length}
+                  {filteredCourses && filteredCourses.length > 0
+                    ? filteredCourses.length
+                    : courseData.length}
                 </span>
                 Courses Available for you
               </h4>
@@ -106,13 +171,13 @@ const AllCourse = () => {
           <select
             id="course-select"
             value={selectedCategory}
-            onChange={handleCategoryChange}
+            onChange={(e) => setSelectedCategory(e.target.value)}
             className="h-10 rounded-sm w-full border-slate-200 border-[2px] text-gray-600 text-base block py-1 px-4 focus:outline-none"
           >
-            {courseData &&
-              courseData?.map((courseInfo) => (
-                <option key={courseInfo.id} value={courseInfo.category}>
-                  {courseInfo.category}
+            {categories &&
+              categories?.map((category, index) => (
+                <option key={index} value={category}>
+                  {category}
                 </option>
               ))}
           </select>
@@ -132,68 +197,24 @@ const AllCourse = () => {
               </legend>
 
               <div className="mt-4 space-y-2">
-                <label
-                  htmlFor="Option1"
-                  className="flex cursor-pointer items-start gap-4"
-                >
-                  <div className="flex items-center">
-                    {/* Category 01 */}
-                    <input
-                      type="checkbox"
-                      className="size-4 rounded-sm border-gray-300"
-                      id="Option1"
-                    />
-                  </div>
-
-                  <div>
-                    <strong className="font-medium text-gray-900">
-                      {" "}
-                      Desgin & Development{" "}
-                    </strong>
-                  </div>
-                </label>
-
-                <label
-                  htmlFor="Option2"
-                  className="flex cursor-pointer items-start gap-4"
-                >
-                  <div className="flex items-center">
-                    {/* Category 02 */}
-                    <input
-                      type="checkbox"
-                      className="size-4 rounded-sm border-gray-300"
-                      id="Option2"
-                    />
-                  </div>
-
-                  <div>
-                    <strong className="font-medium text-gray-900">
-                      {" "}
-                      Digital Marketing{" "}
-                    </strong>
-                  </div>
-                </label>
-
-                <label
-                  htmlFor="Option3"
-                  className="flex cursor-pointer items-start gap-4"
-                >
-                  <div className="flex items-center">
-                    {/* Category 03 */}
-                    <input
-                      type="checkbox"
-                      className="size-4 rounded-sm border-gray-300"
-                      id="Option3"
-                    />
-                  </div>
-
-                  <div>
-                    <strong className="font-medium text-gray-900">
-                      {" "}
-                      Video Editing{" "}
-                    </strong>
-                  </div>
-                </label>
+                {categories
+                  .filter((category) => category !== "All Categories")
+                  .map((category, index) => (
+                    <label
+                      htmlFor="Option1"
+                      className="flex cursor-pointer items-start gap-4"
+                      key={index}
+                    >
+                      <input
+                        type="checkbox"
+                        value={category}
+                        checked={selectedCheckboxes.includes(category)}
+                        onChange={() => handleCheckboxChange(category)}
+                        className="size-4 rounded-sm border-gray-300"
+                      />
+                      {category}
+                    </label>
+                  ))}
               </div>
             </fieldset>
             <hr className="border-slate-300 border-2 mt-2 w-full" />
@@ -212,70 +233,23 @@ const AllCourse = () => {
               <legend className="text-lg font-medium text-gray-900 mt-2">
                 Levels
               </legend>
-
               <div className="mt-4 space-y-2">
-                <label
-                  htmlFor="Option1"
-                  className="flex cursor-pointer items-start gap-4"
-                >
-                  <div className="flex items-center">
-                    {/* Category 01 */}
+                {levels.map((level, index) => (
+                  <label
+                    htmlFor={level}
+                    className="flex font-semibold cursor-pointer items-start gap-4"
+                    key={index}
+                  >
                     <input
                       type="checkbox"
+                      value={level}
                       className="size-4 rounded-sm border-gray-300"
-                      id="Option1"
+                      checked={selectedLevelCheckboxes.includes(level)}
+                      onChange={() => handleLevelCheckboxChange(level)}
                     />
-                  </div>
-
-                  <div>
-                    <strong className="font-medium text-gray-900">
-                      {" "}
-                      All Levels{" "}
-                    </strong>
-                  </div>
-                </label>
-
-                <label
-                  htmlFor="Option2"
-                  className="flex cursor-pointer items-start gap-4"
-                >
-                  <div className="flex items-center">
-                    {/* Category 02 */}
-                    <input
-                      type="checkbox"
-                      className="size-4 rounded-sm border-gray-300"
-                      id="Option2"
-                    />
-                  </div>
-
-                  <div>
-                    <strong className="font-medium text-gray-900">
-                      {" "}
-                      Beginer{" "}
-                    </strong>
-                  </div>
-                </label>
-
-                <label
-                  htmlFor="Option3"
-                  className="flex cursor-pointer items-start gap-4"
-                >
-                  <div className="flex items-center">
-                    {/* Category 03 */}
-                    <input
-                      type="checkbox"
-                      className="size-4 rounded-sm border-gray-300"
-                      id="Option3"
-                    />
-                  </div>
-
-                  <div>
-                    <strong className="font-medium text-gray-900">
-                      {" "}
-                      Intermediate{" "}
-                    </strong>
-                  </div>
-                </label>
+                    {level}
+                  </label>
+                ))}
               </div>
             </fieldset>
           </div>
@@ -291,13 +265,19 @@ const AllCourse = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-2">
             {" "}
-            {courseData &&
-              courseData.map((singleCourse) => (
-                <CourseCart
-                  key={singleCourse.id}
-                  singleCourse={singleCourse}
-                ></CourseCart>
-              ))}
+            {filteredCourses.length > 0
+              ? filteredCourses.map((singleCourse, index) => (
+                  <CourseCart
+                    key={index}
+                    singleCourse={singleCourse}
+                  ></CourseCart>
+                ))
+              : courseData.map((singleCourse, index) => (
+                  <CourseCart
+                    key={index}
+                    singleCourse={singleCourse}
+                  ></CourseCart>
+                ))}
           </div>
         </section>
       </section>
