@@ -1,13 +1,14 @@
 import { useState } from 'react';
+
 import LoginForm from './LoginForm';
+
 import SignUpForm from './SignUpForm';
-
-
 const StudentRegister = () => {
   const [isLogin,setIsLogin]= useState(true);
     
     return (
         <div className="h-screen flex justify-center items-center">
+          
           <div className=" container my-16 lg:max-w-2/5 max-w-full  shadow-2xl rounded-2xl w-full p-12">
             <button className={isLogin? "btn  w-1/2 p-2 cursor-pointer rounded-t-lg font-bold text-[20px] text-[var(--color-secondary)] bg-[var(--color-primary)]":"btn  w-1/2 p-2 cursor-pointer rounded-t-lg  font-bold text-[20px] text-[var(--color-primary)] bg-[var(--color-secondary)]"} onClick={()=>setIsLogin(true)}>LogIn</button>
             <button className={!isLogin? "btn  w-1/2 p-2 cursor-pointer rounded-t-lg font-bold text-[20px] text-[var(--color-secondary)]  bg-[var(--color-primary)]":"btn  w-1/2 p-2 cursor-pointer rounded-t-lg font-bold text-[20px] text-[var(--color-primary)]  bg-[var(--color-secondary)]"} onClick={()=>setIsLogin(false)}>Sign Up</button>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
-import { PiQuotesFill } from "react-icons/pi";
 import { FaCircleUser } from "react-icons/fa6";
+import { PiQuotesFill } from "react-icons/pi";
 
 const Review = () => {
     const [id, setId] = useState(0)
@@ -19,7 +19,7 @@ const Review = () => {
         };
     }, [id]); 
     return (
-        <div className="w-full lg:h-[80vh] h-[60vh] flex items-center justify-center bg-secondary">
+        <div className="w-full lg:h-[70vh] h-[60vh] flex items-center justify-center bg-secondary">
             <div className="w-[90%] h-[80%] flex items-center justify-center relative">
                 <div id="0" className={`${id == 0 ? 'animate-[reviewZ_1s_forwards] shadow-2xl shadow-gray-500' : (id == 0 + 1) ? ' animate-[reviewPlus_1s_forwards]' : (id == 0 - 1) ? 'animate-[reviewBefore_1s_forwards]' : '-scale-0'} w-[35%] h-full bg-white  absolute p-4 flex flex-col gap-6 rounded-lg`}>
                 <h1 className="text-6xl font-bold text-primary"><PiQuotesFill ></PiQuotesFill></h1>

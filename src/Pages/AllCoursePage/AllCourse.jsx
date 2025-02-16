@@ -70,7 +70,7 @@ const AllCourse = () => {
           <input
             type="text"
             value={searchTerm}
-            r
+            
             onChange={handleSearchChange}
             placeholder="Search..."
             className=" rounded-sm w-full h-10 border-slate-200 border-[2px] search-input "
