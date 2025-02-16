@@ -8,8 +8,8 @@ const AllCourse = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchTriggered, setSearchTriggered] = useState(false); //this state will be used when we use search button instead of search input
   const [selectedCategory, setSelectedCategory] = useState([]);
-  const [selectedLevelCheckboxes, setSelectedLevelCheckboxes] = useState([]);
   const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
+  const [selectedLevelCheckboxes, setSelectedLevelCheckboxes] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [courseData, setCourseData] = useState([]);
 
@@ -49,19 +49,24 @@ const AllCourse = () => {
     [courseData]
   );
 
+  console.log("level", levels);
+
   const filteredCourse = useCallback(() => {
     console.log(categories);
     console.log("data", courseData);
     return (
       courseData &&
       courseData.filter((course) => {
+        // Search term filter
+
         const matchedSearch =
           searchTerm.length === 0 ||
           Object.values(course).some((value) =>
             String(value).toLowerCase().includes(searchTerm.toLowerCase())
           );
-
+        // Dropdown category filter (single category)
         const matchesCategory =
+          !selectedCategory || // Allow filtering without selecting a category
           selectedCategory === "All Categories" ||
           course.category === selectedCategory;
         console.log("matched-cat", course.category);
@@ -73,7 +78,7 @@ const AllCourse = () => {
 
         // Level Checkbox filter
         const matchesLevelCheckboxes =
-          (selectedLevelCheckboxes?.length ?? 0) === 0 || // Ensure it’s always an array
+          selectedLevelCheckboxes.length === 0 || // Ensure it’s always an array
           selectedLevelCheckboxes.includes(course.courseLevel);
 
         return (
@@ -107,13 +112,10 @@ const AllCourse = () => {
     );
   };
   // Function to handle Level checkbox selection
+
   const handleLevelCheckboxChange = (level) => {
-    setSelectedLevelCheckboxes(
-      setSelectedLevelCheckboxes((prev = []) =>
-        prev.includes(level)
-          ? prev.filter((l) => l !== level)
-          : [...prev, level]
-      )
+    setSelectedLevelCheckboxes((prev = []) =>
+      prev.includes(level) ? prev.filter((l) => l !== level) : [...prev, level]
     );
   };
 
@@ -240,10 +242,9 @@ const AllCourse = () => {
                   >
                     <input
                       type="checkbox"
-                      id={level}
                       value={level}
                       className="size-4 rounded-sm border-gray-300"
-                      checked={selectedLevelCheckboxes?.includes(level)}
+                      checked={selectedLevelCheckboxes.includes(level)}
                       onChange={() => handleLevelCheckboxChange(level)}
                     />
                     {level}
