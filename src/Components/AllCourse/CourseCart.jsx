@@ -16,12 +16,12 @@ const CourseCart = ({ singleCourse }) => {
     banner,
     courseLevel,
   } = singleCourse;
-  console.log(category, description,name)
+  // console.log(category, description,name)
 
   return (
     <div className="w-full border-1 p-2 rounded-md border-gray-300   h-full">
       {/* Card One start form here */}
-      
+
       <div className="w-full h-full bg-white">
         {/* Card Image Section */}
         <div className="w-full h-[45%] mb-3">
@@ -29,9 +29,7 @@ const CourseCart = ({ singleCourse }) => {
         </div>
         {/* Card Content Section */}
         <div className="w-full h-[55%] px-3 flex flex-col gap-1">
-          <h1 className="text-2xl font-bold">
-            {name}
-          </h1>
+          <h1 className="text-2xl font-bold">{name}</h1>
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold">By: Md. Foysal Uddin</span>
             <h2 className="text-xl font-bold">$99</h2>
@@ -64,7 +62,6 @@ const CourseCart = ({ singleCourse }) => {
           </div>
         </div>
       </div>
-    
     </div>
   );
 };
