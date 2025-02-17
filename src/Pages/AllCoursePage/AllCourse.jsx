@@ -12,8 +12,7 @@ const AllCourse = () => {
   const [selectedLevelCheckboxes, setSelectedLevelCheckboxes] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [courseData, setCourseData] = useState([]);
-
-  // Extract unique categories for the dropdown
+  const [selectedTags, setSelectedTags] = useState([]);
 
   useEffect(() => {
     fetch("/courses.json")

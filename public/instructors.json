@@ -2,7 +2,7 @@
   {
     "instructorId": "101",
     "name": "John Doe",
-    "image": "https://example.com/john_doe.jpg",
+    "image": "https://i.ibb.co.com/3yVDfwkM/114089.jpg",
     "bio": {
       "education": "MSc in Computer Science, MIT",
       "profession": "Senior Web Developer",
@@ -26,7 +26,7 @@
   {
     "instructorId": "102",
     "name": "Jane Smith",
-    "image": "https://example.com/jane_smith.jpg",
+    "image": "https://i.ibb.co.com/fdB92Knr/instructor2.jpg",
     "bio": {
       "education": "PhD in Data Science, Stanford University",
       "profession": "Data Scientist & AI Researcher",
@@ -50,7 +50,7 @@
   {
     "instructorId": "103",
     "name": "Emily Johnson",
-    "image": "https://example.com/emily_johnson.jpg",
+    "image": "https://i.ibb.co.com/qYg3kNzW/instructor4.jpg",
     "bio": {
       "education": "BSc in Software Engineering, Harvard",
       "profession": "Full-Stack Developer",
@@ -73,7 +73,7 @@
   {
     "instructorId": "104",
     "name": "Michael Brown",
-    "image": "https://example.com/michael_brown.jpg",
+    "image": "https://i.ibb.co.com/xqmcz6v7/instructor5.jpg",
     "bio": {
       "education": "MSc in Cybersecurity, Oxford",
       "profession": "Cybersecurity Specialist",
@@ -96,7 +96,7 @@
   {
     "instructorId": "105",
     "name": "Sarah Lee",
-    "image": "https://example.com/sarah_lee.jpg",
+    "image": "https://i.ibb.co.com/b5PD0VhC/instructor6.jpg",
     "bio": {
       "education": "MBA in Digital Marketing, NYU",
       "profession": "Marketing Consultant",
@@ -119,7 +119,7 @@
   {
     "instructorId": "106",
     "name": "David Wilson",
-    "image": "https://example.com/david_wilson.jpg",
+    "image": "https://i.ibb.co.com/21mtQhWS/instructor7.jpg",
     "bio": {
       "education": "PhD in AI & ML, Cambridge",
       "profession": "AI Researcher",
@@ -142,7 +142,7 @@
   {
     "instructorId": "107",
     "name": "Olivia Martinez",
-    "image": "https://example.com/olivia_martinez.jpg",
+    "image": "https://i.ibb.co.com/LznsJS4M/instructor8.jpg",
     "bio": {
       "education": "BSc in Graphic Design, UCLA",
       "profession": "UI/UX Designer",
@@ -164,7 +164,7 @@
   {
     "instructorId": "108",
     "name": "James Anderson",
-    "image": "https://example.com/james_anderson.jpg",
+    "image": "https://i.ibb.co.com/d0Qx25bw/instructor9.jpg",
     "bio": {
       "education": "BSc in Finance, London School of Economics",
       "profession": "Finance Analyst",
