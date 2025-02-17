@@ -1,8 +1,10 @@
+import InstructorCard from "../../Components/AllInstructor/InstructorCard";
 
 const AllInstructors = () => {
     return (
         <div>
-            <h1>All Instructors Are Here</h1>
+            <InstructorCard></InstructorCard>
+           
         </div>
     );
 };

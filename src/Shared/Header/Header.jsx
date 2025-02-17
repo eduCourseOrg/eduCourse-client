@@ -57,6 +57,7 @@ const Header = () => {
                 <NavLink to='/' className={({ isActive}) => `${isActive && 'border-b border-secondary'} hover:border-b border-secondary`}>Home</NavLink>
                 <NavLink to='/about' className={({ isActive}) => `${isActive && 'border-b border-secondary'} hover:border-b border-secondary`}>About</NavLink>
                 <NavLink to='/courses' className={({ isActive}) => `${isActive && 'border-b border-secondary'} hover:border-b border-secondary`}>Courses</NavLink>
+                <NavLink to='/instructors' className={({ isActive}) => `${isActive && 'border-b border-secondary'} hover:border-b border-secondary`}>Instructors</NavLink>
                 <NavLink to='/blog' className={({ isActive}) => `${isActive && 'border-b border-secondary'} hover:border-b border-secondary`}>Blog</NavLink>
                 <NavLink to='/contact' className={({ isActive}) => `${isActive && 'border-b border-secondary'} hover:border-b border-secondary`}>Contact</NavLink>
 

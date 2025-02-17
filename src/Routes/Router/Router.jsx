@@ -3,6 +3,7 @@ import {
 } from "react-router-dom";
 import Main from "../../Layout/Main/Main";
 import AllCourse from "../../Pages/AllCoursePage/AllCourse";
+import AllInstructors from "../../Pages/AllInstructors/AllInstructors";
 import CourseDetails from "../../Pages/CourseDetails/CourseDetails";
 import Error from "../../Pages/Error/Error";
 import Home from "../../Pages/Home/Home";
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
         {
           path: '/courses',
           element: <AllCourse></AllCourse>
+        },
+        {
+          path: '/instructors',
+          element: <AllInstructors></AllInstructors>
         }
     ]
   },
