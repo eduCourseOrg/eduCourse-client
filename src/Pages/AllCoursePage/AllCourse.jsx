@@ -12,6 +12,7 @@ const AllCourse = () => {
   const [selectedLevelCheckboxes, setSelectedLevelCheckboxes] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [courseData, setCourseData] = useState([]);
+  const [selectedTags, setSelectedTags] = useState([]);
 
   // Extract unique categories for the dropdown
 
