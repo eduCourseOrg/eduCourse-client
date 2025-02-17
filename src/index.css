@@ -57,7 +57,6 @@
   }
 }
 
-/* -translate-x-[50%] -scale-[85%] */
 
 @keyframes reviewPlus {
   0% {
@@ -81,6 +80,17 @@
     z-index: 20;
     transform: translateX(0) scale(1);
   }
+<<<<<<< HEAD
+
+  @keyframes progressAnimation {
+    0%{
+      width: 0%;
+    }
+    100%{
+      width: 50%;
+    }
+  }
+=======
 }
 
 @keyframes reviewBefore {
@@ -101,3 +111,4 @@
   width: 100% !important;
   /* override the default width */
 }
+>>>>>>> 2dfba028671ea28bcd09df4793efbdd0633332e1
