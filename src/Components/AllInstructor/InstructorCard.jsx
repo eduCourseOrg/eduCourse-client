@@ -1,7 +1,10 @@
 import React from "react";
 import { FaFacebookF, FaInstagram, FaLinkedin, FaStar, FaTwitter } from "react-icons/fa";
 
-const InstructorCard = () => {
+const InstructorCard = ({instructor}) => {
+
+    const {name}=instructor
+    console.log(name)
   return (
     <div className="relative flex flex-col md:flex-row w-full my-6 bg-secondary shadow-sm border border-slate-200 rounded-lg">
       <div className="relative p-2.5 md:w-2/5 shrink-0 overflow-hidden">

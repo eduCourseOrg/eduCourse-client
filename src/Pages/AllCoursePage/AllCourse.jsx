@@ -13,7 +13,6 @@ const AllCourse = () => {
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [courseData, setCourseData] = useState([]);
 
-  // Extract unique categories for the dropdown
 
   useEffect(() => {
     fetch("/courses.json")
