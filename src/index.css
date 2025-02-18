@@ -3,8 +3,8 @@
 /* @plugin "daisyui"; */
 @layer base {
   :root {
-    --color-primary: #184e3a;
-    --color-secondary: #ebf1f4;
+    --color-primary: #006A4E;
+    --color-secondary: #EEEDED;
     --color-accent: #FCE6E5;
     --color-accent2: #F8FCFF;
     /* --animate-review: review 1s ease-in-out; */
@@ -49,6 +49,9 @@
   .text-accent2 {
     color: var(--color-accent2);
   }
+    .animate-gradient {
+      animation: rotateGradient 4s linear infinite;
+    }
 }
 
 @layer utilities {
@@ -80,7 +83,7 @@
     z-index: 20;
     transform: translateX(0) scale(1);
   }
-<<<<<<< HEAD
+}
 
   @keyframes progressAnimation {
     0%{
@@ -90,8 +93,7 @@
       width: 50%;
     }
   }
-=======
-}
+
 
 @keyframes reviewBefore {
   0% {
@@ -105,10 +107,21 @@
   }
 }
 
+@keyframes rotateGradient {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+
 
 /* css to override the default styles of 'react-phone-input-2' package */
 .react-tel-input .form-control {
   width: 100% !important;
   /* override the default width */
 }
->>>>>>> 2dfba028671ea28bcd09df4793efbdd0633332e1

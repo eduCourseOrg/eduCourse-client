@@ -6,6 +6,7 @@ import { FaCircleMinus, FaCirclePlus } from "react-icons/fa6";
 import { FaCirclePlay } from "react-icons/fa6";
 import { useState } from "react";
 import Faq from "../../Components/Home/Faq";
+import NewButton from "../../Components/Buttons/NewButton";
 
 const CourseDetails = () => {
   const [activeTab, setActiveTab] = useState("Overview");
@@ -117,6 +118,7 @@ const CourseDetails = () => {
           </div>
             <div>
               {renderContent()}
+              <NewButton></NewButton>
             </div>
           </div>
         </div>
