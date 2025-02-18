@@ -122,7 +122,7 @@ const Hero = () => {
           </div>
         </SwiperSlide>
       </Swiper>
-      <div className="slide-manager w-[35%] h-[20%] flex items-center gap-2 absolute bottom-2 right-4 z-50">
+      <div className="slide-manager w-[35%] h-[20%] flex items-center gap-2 absolute bottom-2 right-4 z-40">
         <div
           onClick={() => handleSlideClick(0)}
           className={`w-full h-full ${
