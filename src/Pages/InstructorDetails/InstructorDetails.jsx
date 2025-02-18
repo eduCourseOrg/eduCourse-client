@@ -101,7 +101,7 @@ const InstructorProfile = () => {
                               <span>50%</span>
                           </h3>
                           <div className="h-1 w-full bg-[var(--color-secondary)]">
-                              <div className="h-1 animate-[progressAnimation_2s_ease-in-out_forwards] bg-red-600"></div>
+                              <div className="h-1 w-[50%] bg-red-600"></div>
                           </div>
                       </div>
                   </div>

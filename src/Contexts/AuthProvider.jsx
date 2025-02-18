@@ -15,6 +15,7 @@ import app from "../Firebase/firebase.config";
 export const EduCourseContexts = createContext();
 const eduAuth = getAuth(app);
 const GoogleProvider = new GoogleAuthProvider();
+<<<<<<< HEAD
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -35,6 +36,12 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signOut(eduAuth);
   };
+=======
+const AuthProvider = ({children}) => {
+    
+    const [user,setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+>>>>>>> 477ce91a3f6f09c4576bfea226eb1600dbe432ef
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(eduAuth, (currentUser) => {
