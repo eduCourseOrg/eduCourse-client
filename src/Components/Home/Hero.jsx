@@ -22,7 +22,7 @@ const Hero = () => {
   };
 
   return (
-    <div className="w-full h-[80vh] relative ">
+    <div className="w-full h-[50vh] md:h-[70vh] lg:h-[80vh] relative ">
       <Swiper
         ref={swiperRef}
         slidesPerView={1}
@@ -42,26 +42,26 @@ const Hero = () => {
       >
         <SwiperSlide>
           <div className={`w-full h-full`}>
-            <div className="slide-1 w-full h-full bg-linear-to-r from-primary to-transparent relative">
+            <div className="slide-1 w-full h-full bg-linear-to-r from-[var(--color-primary)] to-transparent relative">
               {/* this div is for overlay manage */}
               <div className="w-full h-full bg-linear-to-r from-primary from-10% to-transparent opacity-70 absolute top-0 left-0"></div>
               {/* Image section */}
               <img src={banner9} alt="banner1" className="w-full h-full" />
               {/* Text and Input field Section */}
-              <div className="w-[50%] h-full flex flex-col gap-5 justify-center items-start pl-24 absolute top-0 left-0">
-                <h1 className="text-5xl text-secondary font-bold">
+              <div className="w-full lg:w-[50%] h-full flex flex-col items-start gap-5 justify-center px-10 lg:pl-24 absolute top-0 left-0">
+                <h1 className="text-3xl lg:text-5xl text-secondary font-bold">
                   2727+ Online <br /> Courses from the <br /> Best Tutors three
                 </h1>
                 {/* Input Box and serch icon */}
-                <div className="w-full relative">
+                <div className="w-[90%] lg:w-full relative">
                   <input
                     type="text"
                     name="courseName"
                     placeholder="What do you want to learn"
                     id=""
-                    className=" p-3 w-full text-secondary text-lg bg-primary"
+                    className="p-1 lg:p-3 w-full text-secondary text-lg bg-primary"
                   />
-                  <FaSearch className="absolute right-4 top-5"></FaSearch>
+                  <FaSearch className="absolute  right-2 lg:right-4 top-3 lg:top-5"></FaSearch>
                 </div>
               </div>
             </div>
@@ -69,26 +69,26 @@ const Hero = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className={`w-full h-full`}>
-            <div className="slide-1 w-full h-full bg-linear-to-r from-primary to-transparent relative">
+            <div className="slide-1 w-full h-full bg-linear-to-r from-[var(--color-primary)] to-transparent relative">
               {/* this div is for overlay manage */}
               <div className="w-full h-full bg-linear-to-r from-primary from-10% to-transparent opacity-70 absolute top-0 left-0"></div>
               {/* Image section */}
               <img src={banner9} alt="banner1" className="w-full h-full" />
               {/* Text and Input field Section */}
-              <div className="w-[50%] h-full flex flex-col gap-5 justify-center items-start pl-24 absolute top-0 left-0">
-                <h1 className="text-5xl text-secondary font-bold">
+              <div className="w-full lg:w-[50%] h-full flex flex-col items-start gap-5 justify-center px-10 lg:pl-24 absolute top-0 left-0">
+                <h1 className="text-3xl lg:text-5xl text-secondary font-bold">
                   2727+ Online <br /> Courses from the <br /> Best Tutors three
                 </h1>
                 {/* Input Box and serch icon */}
-                <div className="w-full relative">
+                <div className="w-[90%] lg:w-full relative">
                   <input
                     type="text"
                     name="courseName"
                     placeholder="What do you want to learn"
                     id=""
-                    className=" p-3 w-full text-secondary text-lg bg-primary"
+                    className="p-1 lg:p-3 w-full text-secondary text-lg bg-primary"
                   />
-                  <FaSearch className="absolute right-4 top-5"></FaSearch>
+                  <FaSearch className="absolute  right-2 lg:right-4 top-3 lg:top-5"></FaSearch>
                 </div>
               </div>
             </div>
@@ -96,33 +96,33 @@ const Hero = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div className={`w-full h-full`}>
-            <div className="slide-1 w-full h-full bg-linear-to-r from-primary to-transparent relative">
+            <div className="slide-1 w-full h-full bg-linear-to-r from-[var(--color-primary)] to-transparent relative">
               {/* this div is for overlay manage */}
-              <div className="w-full h-full bg-linear-to-r from-[var(--color-primary)] from-10% to-transparent opacity-70 absolute top-0 left-0"></div>
+              <div className="w-full h-full bg-linear-to-r from-primary from-10% to-transparent opacity-70 absolute top-0 left-0"></div>
               {/* Image section */}
               <img src={banner9} alt="banner1" className="w-full h-full" />
               {/* Text and Input field Section */}
-              <div className="w-[50%] h-full flex flex-col gap-5 justify-center items-start pl-24 absolute top-0 left-0">
-                <h1 className="text-5xl text-secondary font-bold">
+              <div className="w-full lg:w-[50%] h-full flex flex-col items-start gap-5 justify-center px-10 lg:pl-24 absolute top-0 left-0">
+                <h1 className="text-3xl lg:text-5xl text-secondary font-bold">
                   2727+ Online <br /> Courses from the <br /> Best Tutors three
                 </h1>
                 {/* Input Box and serch icon */}
-                <div className="w-full relative">
+                <div className="w-[90%] lg:w-full relative">
                   <input
                     type="text"
                     name="courseName"
                     placeholder="What do you want to learn"
                     id=""
-                    className=" p-3 w-full text-secondary text-lg bg-primary"
+                    className="p-1 lg:p-3 w-full text-secondary text-lg bg-primary"
                   />
-                  <FaSearch className="absolute right-4 top-5"></FaSearch>
+                  <FaSearch className="absolute  right-2 lg:right-4 top-3 lg:top-5"></FaSearch>
                 </div>
               </div>
             </div>
           </div>
         </SwiperSlide>
       </Swiper>
-      <div className="slide-manager w-[35%] h-[20%] flex items-center gap-2 absolute bottom-2 right-4 z-40">
+      <div className="slide-manager w-[50%] sm:w-[40%] md:w-[35%] h-[10%] sm:h-[25%] md:h-[25%] flex items-center gap-2 absolute bottom-2 right-4 z-40">
         <div
           onClick={() => handleSlideClick(0)}
           className={`w-full h-full ${
