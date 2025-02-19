@@ -50,7 +50,7 @@ const FormTeest = () => {
             }`}
           >
             <div className="step">
-              {i + 1 < currentStep || complete ? <TiTick size={24} /> : i + 1}
+              {i + 1 < currentStep  ? <TiTick size={24} /> : i + 1}
             </div>
             <p className="text-gray-500">{step}</p>
           </div>
@@ -64,8 +64,15 @@ const FormTeest = () => {
       <div className="flex justify-between mt-4">
         <button
           className="btn prev-btn"
-          onClick={() => setCurrentStep((prev) => Math.max(prev - 1, 1))}
-          disabled={currentStep === 1}
+          onClick={
+            () => {
+              
+            setCurrentStep((prev) => Math.max(prev - 1, 1))
+          
+          }
+            
+          }
+          disabled={currentStep === 1 ||  complete}
         >
           Previous
         </button>
@@ -81,7 +88,7 @@ const FormTeest = () => {
             }
           }}
         >
-          {currentStep === steps.length ? "Finish" : "Next"}
+          {currentStep === steps.length ? "Submit" : "Next"}
         </button>
       </div>
     </>
