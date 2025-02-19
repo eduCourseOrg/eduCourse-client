@@ -30,6 +30,12 @@ const AuthProvider = ({children}) => {
         setLoading(true);
         return signOut(eduAuth);
     }
+    // const signInPhone =(phone)=>{
+    //     setLoading(true);
+    //     const recaptcha = new RecaptchaVerifier(eduAuth, 'recaptcha-container', {});
+    //     return signInWithPhoneNumber(eduAuth, phone, recaptcha)
+         
+    // }
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(eduAuth, currentUser => {
@@ -41,7 +47,7 @@ const AuthProvider = ({children}) => {
         }
     }, [])
     
-    const providerInfo = {createAccount,logIn,user,loading,googleLogin,logOut}
+    const providerInfo = {createAccount,logIn,user,loading,googleLogin,logOut,eduAuth}
    
     return (
         <EduCourseContexts.Provider value={providerInfo}>
