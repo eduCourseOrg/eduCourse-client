@@ -7,7 +7,7 @@ import {
   FaInstagram,
   FaTwitter,
 } from "react-icons/fa";
-import { RiMenuUnfoldFill,RiMenuFoldFill  } from "react-icons/ri";
+import { RiMenuFoldFill, RiMenuUnfoldFill } from "react-icons/ri";
 import { Link, NavLink } from "react-router-dom";
 import { EduCourseContexts } from "../../Contexts/AuthProvider";
 import logo from "/images/Navbar/Logo.png";
@@ -87,7 +87,7 @@ const Header = () => {
           {
             isOpen ? <RiMenuFoldFill onClick={()=>setIsOpen(!isOpen)}></RiMenuFoldFill>: <RiMenuUnfoldFill onClick={()=>setIsOpen(!isOpen)}></RiMenuUnfoldFill>
           }
-          <div className={`absolute left-0 bottom-0 translate-y-full bg-white w-full h-auto text-[var(--color-primary)] p-3 ${isOpen? 'animate-menuToRight':'animate-menuToLeft'} z-50 `}>
+          <div className={`absolute left-0 bottom-0 translate-y-full bg-white w-full h-auto text-[var(--color-primary)] p-3 ${isOpen? 'animate-[var(--animate-menuToRight)]':'animate-[var(--animate-menuToLeft)]'} z-50 `}>
             <div className="flex flex-col space-y-2" onClick={()=>setIsOpen(false)}>
                 <NavLink to='/' className={({ isActive}) => `${isActive && 'border-b border-secondary'} hover:border-b border-secondary`}>Home</NavLink>
                 <NavLink to='/about' className={({ isActive}) => `${isActive && 'border-b border-secondary'} hover:border-b border-secondary`}>About</NavLink>

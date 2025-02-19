@@ -1,8 +1,11 @@
+import PhoneVarification from "./PhoneVarification";
 
 
 const InstructorRegistration = () => {
     return (
-        <div>
+     <div className=" flex justify-center items-center">
+         <div className="container my-16 lg:max-w-1/2 max-w-full  shadow-2xl rounded-2xl w-full p-12">
+          <PhoneVarification></PhoneVarification>
              <form>
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
@@ -44,10 +47,10 @@ const InstructorRegistration = () => {
             </div>
 
             <div className="col-span-full">
-              <label htmlFor="photo" className="block text-sm/6 font-medium text-gray-900">
+              {/* <label htmlFor="photo" className="block text-sm/6 font-medium text-gray-900">
                 Photo
-              </label>
-              <div className="mt-2 flex items-center gap-x-3">
+              </label> */}
+              {/* <div className="mt-2 flex items-center gap-x-3">
                
                 <button
                   type="button"
@@ -55,12 +58,12 @@ const InstructorRegistration = () => {
                 >
                   Change
                 </button>
-              </div>
+              </div> */}
             </div>
 
             <div className="col-span-full">
               <label htmlFor="cover-photo" className="block text-sm/6 font-medium text-gray-900">
-                Cover photo
+                Photo
               </label>
               <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                 <div className="text-center">
@@ -229,6 +232,7 @@ const InstructorRegistration = () => {
       </div>
     </form>
         </div>
+     </div>
     );
 };
 
