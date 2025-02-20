@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { TiTick } from "react-icons/ti";
 import "../../customCSS/multiStepForm.css";
-import CustomerInfoForm from './Form/CustomerInfoForm';
 import FinalStepForm from './Form/FinalStepForm';
 import PaymentForm from './Form/PaymentForm ';
+import PersonalInfo from './Form/PersonalInfo';
 import ShippingInfoForm from './Form/ShippingInfoForm';
 
 const FormTeest = () => {
- const steps = ["Customer Info", "Shipping Info", "Payment", "Step 4"];
+ const steps = ["Personal Info", "Shipping Info", "Payment", "Step 4"];
   const [currentStep, setCurrentStep] = useState(1);
   const [complete, setComplete] = useState(false);
 
@@ -32,7 +32,7 @@ const FormTeest = () => {
 
   // Form Components for Each Step
   const stepForms = [
-    <CustomerInfoForm key="1" formData={formData} handleChange={handleChange} />,
+    <PersonalInfo key="1" formData={formData} handleChange={handleChange} />,
     <ShippingInfoForm key="2" formData={formData} handleChange={handleChange} />,
     <PaymentForm key="3" formData={formData} handleChange={handleChange} />,
     <FinalStepForm key="4" formData={formData} />,
@@ -41,7 +41,7 @@ const FormTeest = () => {
   return (
     <>
       {/* Step Indicators */}
-      <div className="flex justify-between">
+      <div className="flex justify-between ">
         {steps.map((step, i) => (
           <div
             key={i}
@@ -58,12 +58,12 @@ const FormTeest = () => {
       </div>
 
       {/* Step Forms */}
-      <div className="form-container">{stepForms[currentStep - 1]}</div>
+      <div className="w-5/6 md:w-1/2 ">{stepForms[currentStep - 1]}</div>
 
       {/* Navigation Buttons */}
       <div className="flex justify-between mt-4">
         <button
-          className="btn prev-btn"
+          className="cusBtn prev-btn"
           onClick={
             () => {
               
@@ -78,7 +78,7 @@ const FormTeest = () => {
         </button>
 
         <button
-          className="btn next-btn"
+          className="cusBtn next-btn"
           onClick={() => {
             if (currentStep === steps.length) {
               setComplete(true);

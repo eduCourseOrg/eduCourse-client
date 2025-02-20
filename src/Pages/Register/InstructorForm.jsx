@@ -15,7 +15,7 @@ const InstructorForm = () => {
       {/* <PhnFirebaseUi></PhnFirebaseUi> */}
       <form onSubmit={handleSubmit(onSubmit)} className="max-w-3xl mx-auto p-4 space-y-4 bg-white rounded-lg shadow-lg shadow-teal-800 ">
         
-        <div>
+        {/* <div>
           <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">First name</label>
           <input 
             id="firstName"
@@ -61,7 +61,7 @@ const InstructorForm = () => {
             className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
           {errors["Mobile number"] && <span className="text-red-500 text-sm">Mobile number is required</span>}
-        </div>
+        </div> */}
 
         <div>
           <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title</label>
@@ -98,7 +98,7 @@ const InstructorForm = () => {
           {errors.Developer && <span className="text-red-500 text-sm">Developer selection is required</span>}
         </div>
 
-        <div>
+        {/* <div>
           <label htmlFor="dob" className="block text-sm font-medium text-gray-700">Date of Birth</label>
           <input 
             id="dob"
@@ -107,9 +107,9 @@ const InstructorForm = () => {
             className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
           {errors["Date of Birth"] && <span className="text-red-500 text-sm">Date of birth is required</span>}
-        </div>
+        </div> */}
 
-        <div>
+        {/* <div>
           <label htmlFor="gender" className="block text-sm font-medium text-gray-700">Gender</label>
           <select 
             id="gender"
@@ -121,7 +121,7 @@ const InstructorForm = () => {
             <option value="Other">Other</option>
           </select>
           {errors.Gender && <span className="text-red-500 text-sm">Gender is required</span>}
-        </div>
+        </div> */}
 
         <div>
           <label htmlFor="expertise" className="block text-sm font-medium text-gray-700">Expertise/Subject</label>
