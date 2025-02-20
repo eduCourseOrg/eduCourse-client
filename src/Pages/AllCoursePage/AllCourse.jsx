@@ -12,7 +12,7 @@ const AllCourse = () => {
   const [selectedLevelCheckboxes, setSelectedLevelCheckboxes] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [courseData, setCourseData] = useState([]);
-  const [selectedTags, setSelectedTags] = useState([]);
+  // const [selectedTags, setSelectedTags] = useState([]);
 
   useEffect(() => {
     fetch("/courses.json")
