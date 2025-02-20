@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 
-const ProfessionalInfo = () => {
+const Skills = () => {
   const {
     register,
     handleSubmit,
@@ -116,4 +116,4 @@ const ProfessionalInfo = () => {
   );
 };
 
-export default ProfessionalInfo;
+export default Skills;

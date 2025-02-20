@@ -4,7 +4,7 @@ import "../../customCSS/multiStepForm.css";
 import Confirmation from "./Form/Confirmation";
 import EducationalInfo from "./Form/EducationalInfo";
 import PersonalInfo from "./Form/PersonalInfo";
-import ProfessionalInfo from "./Form/ProfessionalInfo";
+import Skills from "./Form/Skills";
 
 const FormTeest = () => {
   const steps = ["Personal Info", "Education", "Skills", "Confirmation"];
@@ -34,7 +34,7 @@ const FormTeest = () => {
   const stepForms = [
     <PersonalInfo key="1" formData={formData} handleChange={handleChange} />,
     <EducationalInfo key="2" formData={formData} handleChange={handleChange} />,
-    <ProfessionalInfo
+    <Skills
       key="3"
       formData={formData}
       handleChange={handleChange}
