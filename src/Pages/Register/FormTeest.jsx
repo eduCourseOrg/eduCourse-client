@@ -1,13 +1,13 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { TiTick } from "react-icons/ti";
 import "../../customCSS/multiStepForm.css";
-import FinalStepForm from './Form/FinalStepForm';
-import PaymentForm from './Form/PaymentForm ';
-import PersonalInfo from './Form/PersonalInfo';
-import ShippingInfoForm from './Form/ShippingInfoForm';
+import Confirmation from "./Form/Confirmation";
+import EducationalInfo from "./Form/EducationalInfo";
+import PersonalInfo from "./Form/PersonalInfo";
+import ProfessionalInfo from "./Form/ProfessionalInfo";
 
 const FormTeest = () => {
- const steps = ["Personal Info", "Shipping Info", "Payment", "Step 4"];
+  const steps = ["Personal Info", "Education", "Skills", "Confirmation"];
   const [currentStep, setCurrentStep] = useState(1);
   const [complete, setComplete] = useState(false);
 
@@ -33,24 +33,28 @@ const FormTeest = () => {
   // Form Components for Each Step
   const stepForms = [
     <PersonalInfo key="1" formData={formData} handleChange={handleChange} />,
-    <ShippingInfoForm key="2" formData={formData} handleChange={handleChange} />,
-    <PaymentForm key="3" formData={formData} handleChange={handleChange} />,
-    <FinalStepForm key="4" formData={formData} />,
+    <EducationalInfo key="2" formData={formData} handleChange={handleChange} />,
+    <ProfessionalInfo
+      key="3"
+      formData={formData}
+      handleChange={handleChange}
+    />,
+    <Confirmation key="4" formData={formData} />,
   ];
 
   return (
     <>
       {/* Step Indicators */}
-      <div className="flex justify-between ">
+      <div className="flex justify-between  ">
         {steps.map((step, i) => (
           <div
             key={i}
             className={`step-item ${currentStep === i + 1 ? "active" : ""} ${
-              (i + 1 < currentStep || complete) ? "complete" : ""
+              i + 1 < currentStep || complete ? "complete" : ""
             }`}
           >
             <div className="step">
-              {i + 1 < currentStep  ? <TiTick size={24} /> : i + 1}
+              {i + 1 < currentStep ? <TiTick size={24} /> : i + 1}
             </div>
             <p className="text-gray-500">{step}</p>
           </div>
@@ -64,15 +68,10 @@ const FormTeest = () => {
       <div className="flex justify-between mt-4">
         <button
           className="cusBtn prev-btn"
-          onClick={
-            () => {
-              
-            setCurrentStep((prev) => Math.max(prev - 1, 1))
-          
-          }
-            
-          }
-          disabled={currentStep === 1 ||  complete}
+          onClick={() => {
+            setCurrentStep((prev) => Math.max(prev - 1, 1));
+          }}
+          disabled={currentStep === 1 || complete}
         >
           Previous
         </button>

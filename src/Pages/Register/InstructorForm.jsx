@@ -123,7 +123,7 @@ const InstructorForm = () => {
           {errors.Gender && <span className="text-red-500 text-sm">Gender is required</span>}
         </div> */}
 
-        <div>
+        {/* <div>
           <label htmlFor="expertise" className="block text-sm font-medium text-gray-700">Expertise/Subject</label>
           <input 
             id="expertise"
@@ -133,29 +133,29 @@ const InstructorForm = () => {
             className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
           {errors.Expertise && <span className="text-red-500 text-sm">Expertise is required</span>}
-        </div>
+        </div> */}
 
         {/* Other form fields... */}
 <div>
-  <label className="block">Years of Experience</label>
+  {/* <label className="block">Years of Experience</label>
   <input 
     type="number" 
     placeholder="Years of Experience" 
     {...register("Experience", { required: true, min: 0 })}
     className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
   />
-  {errors.Experience && <span className="text-red-500 text-sm">Experience is required</span>}
+  {errors.Experience && <span className="text-red-500 text-sm">Experience is required</span>} */}
 </div>
 
 <div>
-  <label className="block">Education Qualification</label>
+  {/* <label className="block">Education Qualification</label>
   <input 
     type="text" 
     placeholder="Education Qualification" 
     {...register("Education", { required: true })}
     className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
   />
-  {errors.Education && <span className="text-red-500 text-sm">Education qualification is required</span>}
+  {errors.Education && <span className="text-red-500 text-sm">Education qualification is required</span>} */}
 </div>
 
 <div>
@@ -188,7 +188,7 @@ const InstructorForm = () => {
 </div>
 
 <div>
-  <label className="block">Preferred Teaching Mode</label>
+  {/* <label className="block">Preferred Teaching Mode</label>
   <select 
     {...register("Preferred Teaching Mode", { required: true })}
     className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -196,10 +196,10 @@ const InstructorForm = () => {
     <option value="Online">Online</option>
     <option value="Offline">Offline</option>
     <option value="Both">Both</option>
-  </select>
+  </select> */}
 </div>
 
-<div className="space-y-2">
+{/* <div className="space-y-2">
   <label className="block">Availability:</label>
   <div className="flex space-x-4">
     <label className="flex items-center">
@@ -231,36 +231,36 @@ const InstructorForm = () => {
       /> Weekends
     </label>
   </div>
-</div>
+</div> */}
 
 <div>
-  <label className="block">About yourself</label>
+  {/* <label className="block">About yourself</label>
   <textarea 
     placeholder="About yourself" 
     {...register("About yourself", { required: true })}
     className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
   ></textarea>
-  {errors["About yourself"] && <span className="text-red-500 text-sm">About yourself is required</span>}
+  {errors["About yourself"] && <span className="text-red-500 text-sm">About yourself is required</span>} */}
 </div>
 
 <div>
-  <label className="block">Resume</label>
+  {/* <label className="block">Resume</label>
   <input 
     type="file" 
     {...register("Resume")}
     className="w-full p-2 border border-gray-300 rounded-md"
-  />
+  /> */}
 </div>
 
 <div>
-  <label className="block">Password</label>
+  {/* <label className="block">Password</label>
   <input 
     type="password" 
     placeholder="Password" 
     {...register("Password", { required: true, minLength: 6 })}
     className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
   />
-  {errors.Password && <span className="text-red-500 text-sm">Password is required</span>}
+  {errors.Password && <span className="text-red-500 text-sm">Password is required</span>} */}
 </div>
 
 <div>

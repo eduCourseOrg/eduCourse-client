@@ -5,9 +5,9 @@ const PersonalInfo = () => {
     return (
         <div className="w-full">
           <form onSubmit={handleSubmit(onSubmit)} className=" p-4  bg-white rounded-lg shadow-lg shadow-teal-800 ">
-            <div className="flex flex-row justify-between gap-4">
+            <div className="flex flex-row justify-between gap-4 mt-5">
               <div className="w-1/2">
-                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">First name</label>
+                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">Full name</label>
                 <input 
                     id="name"
                     type="text" 
@@ -21,19 +21,21 @@ const PersonalInfo = () => {
         
 
                 <div className="w-1/2">
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-                <input 
-                    id="email"
-                    type="email" 
-                    placeholder="Email" 
-                    {...register("Email", { required: true, pattern: /^\S+@\S+$/i })}
-                    className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-                />
-                {errors.Email && <span className="text-red-500 text-sm">Invalid email</span>}
+                 <label htmlFor="gender" className="block text-sm font-medium text-gray-700">Gender</label>
+          <select 
+            id="gender"
+            {...register("Gender", { required: true })}
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          >
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+          {errors.Gender && <span className="text-red-500 text-sm">Gender is required</span>}
                 </div>
             </div>
-        <div>
-          <div>
+        <div className="flex flex-row justify-between gap-4  mt-5">
+          <div className="w-1/2">
           <label htmlFor="dob" className="block text-sm font-medium text-gray-700">Date of Birth</label>
           <input 
             id="dob"
@@ -42,9 +44,9 @@ const PersonalInfo = () => {
             className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
           {errors["Date of Birth"] && <span className="text-red-500 text-sm">Date of birth is required</span>}
-        </div>
+            </div>
 
-        <div>
+            <div className="w-1/2">
           <label htmlFor="mobile" className="block text-sm font-medium text-gray-700">Mobile number</label>
           <input 
             id="mobile"
@@ -54,8 +56,9 @@ const PersonalInfo = () => {
             className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
           {errors["Mobile number"] && <span className="text-red-500 text-sm">Mobile number is required</span>}
-        </div>    
-            </div>    
+          </div>    
+        </div>   
+          
             
         </form>  
         </div>
