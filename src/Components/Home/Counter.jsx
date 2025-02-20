@@ -4,31 +4,29 @@ import { RiGlobalFill } from "react-icons/ri";
 
 const Counter = () => {
     return (
-        <div className="py-8 w-full bg-gradient-custom">
-            <div className="p-6 w-10/12 mx-auto bg-secondary rounded-2xl grid grid-cols-3 gap-4">
-                <div className=" flex items-center justify-center gap-4">
-                    <div className=""><FaUserGraduate className="text-5xl text-secondary bg-primary rounded-xl p-2"/></div>
-                    <div className="">
-                        <h1>22010</h1>
-                        <h5>Enrolled Students</h5>
+            <div className="w-full px-6 py-5 grid grid-cols-3 gap-4 shadow-xl rounded-md bg-white">
+                <div className="w-full flex items-center gap-3 md:gap-4">
+                    <div className="p-3 bg-[var(--color-primary)] text-[var(--color-secondary)] flex items-center justify-center text-2xl md:text-5xl rounded-lg"><FaUserGraduate/></div>
+                    <div className="h-full w-full flex flex-col justify-center gap-1">
+                        <h1 className="text-lg md:text-3xl font-bold">22010+</h1>
+                        <h5 className="md:text-lg">Students</h5>
                     </div>
                 </div>
-                <div className=" flex items-center justify-center gap-4">
-                    <div><GiBookmarklet className="text-5xl text-secondary bg-primary rounded-xl p-2"/></div>
-                    <div>
-                        <h1>50</h1>
-                        <h5>Total Courses</h5>
+                <div className="w-full flex items-center gap-3 md:gap-4">
+                    <div className="p-3 bg-[var(--color-primary)] text-[var(--color-secondary)] flex items-center justify-center text-2xl md:text-5xl rounded-lg"><GiBookmarklet/></div>
+                    <div className="h-full w-full flex flex-col justify-center gap-1">
+                        <h1 className="text-lg md:text-3xl font-bold">1024+</h1>
+                        <h5 className="md:text-lg">Courses</h5>
                     </div>
                 </div>
-                <div className="flex items-center justify-center gap-4">
-                    <div><RiGlobalFill className="text-5xl text-secondary bg-primary rounded-xl p-2"/></div>
-                    <div>
-                        <h1>25</h1>
-                        <h5>Countries</h5>
+                <div className="w-full flex items-center gap-3 md:gap-4">
+                    <div className="p-3 bg-[var(--color-primary)] text-[var(--color-secondary)] flex items-center justify-center text-2xl md:text-5xl rounded-lg"><RiGlobalFill/></div>
+                    <div className="h-full w-full flex flex-col justify-center gap-1">
+                        <h1 className="text-lg md:text-3xl font-bold">110</h1>
+                        <h5 className="md:text-lg">Countries</h5>
                     </div>
                 </div>
             </div>
-        </div>
     );
 };
 
