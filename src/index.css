@@ -1,5 +1,31 @@
 @import 'tailwindcss';
 
+@theme {
+    /* sm (≥640px) → Green
+    md (≥768px) → tablet
+    lg (≥1024px) → Red
+    xl (≥1280px) → laptop */
+  --animate-menuToLeft: menuLeft 1s forwards;
+  --animate-menuToRight: menuRight 1s forwards;
+
+  @keyframes menuLeft {
+    0%{
+      transform: translateX(0)
+    }
+    100%{
+      transform: translateX(-120%)
+    }
+  }
+  @keyframes menuRight {
+    0%{
+      transform: translateX(-120%)
+    }
+    100%{
+      transform: translateX(0)
+    }
+  }
+}
+
 /* @plugin "daisyui"; */
 @layer base {
   :root {
@@ -7,7 +33,6 @@
     --color-secondary: #EEEDED;
     --color-accent: #FCE6E5;
     --color-accent2: #F8FCFF;
-    /* --animate-review: review 1s ease-in-out; */
   }
 
   *,

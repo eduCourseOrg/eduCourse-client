@@ -9,6 +9,8 @@ import Faq from "../../Components/Home/Faq";
 import NewButton from "../../Components/Buttons/NewButton";
 
 const CourseDetails = () => {
+
+  // const [video, setVideo] = useState(video[0])
   const [activeTab, setActiveTab] = useState("Overview");
 
   const renderContent = () =>{
@@ -60,9 +62,15 @@ const CourseDetails = () => {
   }
   return (
     <div className="w-10/12 mx-auto">
-      <h1 className="text-3xl font-bold text-primary text-center mb-4">
-        Video Section
-      </h1>
+      <div className="video-container h-[400px]">
+        <iframe
+        className="w-full h-full"
+        src="https://www.youtube.com/embed/56JJHL-ynB0?si=IVhEuQWSfSBd5ETZ"
+        title="YouTube video player"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen></iframe>
+      </div>
       <div className="grid grid-cols-3 gap-8">
         <div className="col-span-2 border-0">
           <h1 className="text-3xl font-semibold mb-2">Course Name</h1>
