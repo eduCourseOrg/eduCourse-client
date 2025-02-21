@@ -68,7 +68,7 @@ const SignUpForm = ({setIsLogin}) => {
         <div>
           <form onSubmit={handleSubmit(onSubmit)} className="">
 
-          <div className="mt-10">
+          <div className="">
             <div className="">
              <label htmlFor="name" className="block text-sm/6 font-medium text-gray-900">
                 Full name
