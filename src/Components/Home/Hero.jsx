@@ -126,7 +126,7 @@ const Hero = () => {
         <div
           onClick={() => handleSlideClick(0)}
           className={`w-full h-full ${
-            currentSlide === 0 && "border-5 border-secondary"
+            currentSlide === 0 && "border-5 border-[var(--color-secondary)]"
           }`}
         >
           <img src={banner9} alt="Banner Image" className={`w-full h-full `} />
@@ -134,7 +134,7 @@ const Hero = () => {
         <div
           onClick={() => handleSlideClick(1)}
           className={`w-full h-full ${
-            currentSlide === 1 && "border-5 border-secondary"
+            currentSlide === 1 && "border-5 border-[var(--color-secondary)]"
           }`}
         >
           <img src={banner9} alt="Banner Image" className={`w-full h-full `} />
@@ -142,7 +142,7 @@ const Hero = () => {
         <div
           onClick={() => handleSlideClick(2)}
           className={`w-full h-full ${
-            currentSlide === 2 && "border-5 border-secondary"
+            currentSlide === 2 && "border-5 border-[var(--color-secondary)]"
           }`}
         >
           <img src={banner9} alt="Banner Image" className={`w-full h-full `} />
