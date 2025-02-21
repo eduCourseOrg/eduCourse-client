@@ -42,19 +42,10 @@ const AllInstructors = () => {
     ],
     [instructorData]
   );
+
   console.log("All skills", skills);
 
-  // const ratings = useMemo(
-  //   () => [
-  //     "All Rating",
-  //     ...new Set(
-  //       instructorData && instructorData.map((instructor) => instructor.ratings)
-  //     ),
-  //   ],
-  //   [instructorData]
-  // );
-
-  const sortByRating = useCallback((order, data) => {
+  const sortByRating = useCallback((data, order) => {
     return [...data].sort((a, b) => {
       if (order === "Ascending") return a.ratings - b.ratings;
       if (order === "Descending") return b.ratings - a.ratings;
@@ -93,9 +84,11 @@ const AllInstructors = () => {
   //   });
   // }, [searchTerm, sortBy, instructorData, selectedSkills]);
   const filteredData = useMemo(() => {
-    if (!instructorData) return [];
+    if (!instructorData || instructorData.length === 0) return [];
 
     let filtered = [...instructorData];
+
+    console.log("filtered", instructorData);
 
     // 🔎 1️⃣ Search Filter
     if (searchTerm.trim().length > 0) {
@@ -121,8 +114,10 @@ const AllInstructors = () => {
 
   const searchByClick = () => setSearchTriggered((prev) => !prev);
   useEffect(() => {
-    setfilteredInstructorData(filteredData);
-  }, [filteredData]);
+    filteredInstructorData.length === 0
+      ? setfilteredInstructorData(instructorData)
+      : setfilteredInstructorData(filteredData);
+  }, [filteredData, instructorData]);
 
   console.log("filterd Data", filteredInstructorData);
 
@@ -177,20 +172,13 @@ const AllInstructors = () => {
       </section>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {filteredInstructorData
-          ? filteredInstructorData.map((instructor, index) => (
-              <InstructorCard
-                key={index}
-                instructor={instructor}
-              ></InstructorCard>
-            ))
-          : instructorData &&
-            instructorData?.map((instructor, index) => (
-              <InstructorCard
-                key={index}
-                instructor={instructor}
-              ></InstructorCard>
-            ))}
+        {filteredInstructorData &&
+          filteredInstructorData.map((instructor, index) => (
+            <InstructorCard
+              key={index}
+              instructor={instructor}
+            ></InstructorCard>
+          ))}
       </div>
     </section>
   );

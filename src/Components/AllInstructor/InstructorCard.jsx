@@ -8,8 +8,10 @@ import {
 } from "react-icons/fa";
 
 const InstructorCard = ({ instructor }) => {
-  const { name } = instructor;
-  console.log(name);
+  const { name, ratings, bio } = instructor;
+
+  const skillSet = bio.skills;
+
   return (
     <div className="relative flex flex-col md:flex-row w-full my-6 bg-secondary shadow-sm border border-slate-200 rounded-lg">
       <div className="relative p-2.5 md:w-2/5 shrink-0 overflow-hidden">
@@ -31,7 +33,7 @@ const InstructorCard = ({ instructor }) => {
           </div>
           <div>
             <h2 className="flex items-center">
-              4.3 <FaStar className="text-yellow-400"></FaStar>
+              {ratings} <FaStar className="text-yellow-400"></FaStar>
             </h2>
           </div>
         </div>
@@ -44,10 +46,9 @@ const InstructorCard = ({ instructor }) => {
         <div className="mt-4">
           <h3 className="font-semibold text-gray-800">Skills:</h3>
           <ul className="list-disc pl-5 text-gray-600">
-            <li>JavaScript</li>
-            <li>React</li>
-            <li>Node.js</li>
-            <li>MongoDB</li>
+            {skillSet.map((skill, idx) => (
+              <li key={idx}>{skill}</li>
+            ))}
           </ul>
         </div>
         <div className="flex justify-between items-center">

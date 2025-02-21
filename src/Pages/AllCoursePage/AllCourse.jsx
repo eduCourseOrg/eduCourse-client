@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { IoGrid } from "react-icons/io5";
 import { LiaBarsSolid } from "react-icons/lia";
@@ -50,7 +50,7 @@ const AllCourse = () => {
 
   console.log("level", levels);
 
-  const filteredCourse = useCallback(() => {
+  const filteredCourse = useMemo(() => {
     console.log(categories);
     console.log("data", courseData);
     return (
@@ -97,8 +97,6 @@ const AllCourse = () => {
     courseData,
   ]);
 
-  const displayCourses = useMemo(() => filteredCourse(), [filteredCourse]);
-
   const searchByClick = () => setSearchTriggered((prev) => !prev);
 
   // Function to handle Category checkbox selection
@@ -119,8 +117,10 @@ const AllCourse = () => {
   };
 
   useEffect(() => {
-    setFilteredCourses(displayCourses);
-  }, [displayCourses]);
+    filteredCourses.length === 0
+      ? setFilteredCourses(courseData)
+      : setFilteredCourses(filteredCourse);
+  }, [filteredCourse, courseData]);
 
   return (
     <section>
@@ -156,9 +156,7 @@ const AllCourse = () => {
               <h4 className="p-1">
                 We found
                 <span className="font-bold text-2xl mx-2 text-primary">
-                  {filteredCourses && filteredCourses.length > 0
-                    ? filteredCourses.length
-                    : courseData.length}
+                  {filteredCourses && filteredCourses.length}
                 </span>
                 Courses Available for you
               </h4>
@@ -182,7 +180,6 @@ const AllCourse = () => {
           </select>
         </div>
       </section>
-
       <section className="grid grid-cols-1 md:grid-cols-4">
         <div className="grid-cols-1 lg:mr-4 md:mr-2">
           {/* // Start left side section */}
@@ -264,19 +261,13 @@ const AllCourse = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-2">
             {" "}
-            {filteredCourses.length > 0
-              ? filteredCourses.map((singleCourse, index) => (
-                  <CourseCart
-                    key={index}
-                    singleCourse={singleCourse}
-                  ></CourseCart>
-                ))
-              : courseData.map((singleCourse, index) => (
-                  <CourseCart
-                    key={index}
-                    singleCourse={singleCourse}
-                  ></CourseCart>
-                ))}
+            {filteredCourses &&
+              filteredCourses.map((singleCourse, index) => (
+                <CourseCart
+                  key={index}
+                  singleCourse={singleCourse}
+                ></CourseCart>
+              ))}
           </div>
         </section>
       </section>
