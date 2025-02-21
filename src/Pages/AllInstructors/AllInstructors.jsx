@@ -7,6 +7,7 @@ const AllInstructors = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchTriggered, setSearchTriggered] = useState(false); //this state will be used when we use search button instead of search input
   const [selectedRating, setselectedRating] = useState([]);
+  const [selectedSkills, setSelectedSkills] = useState([]);
   const [sortBy, setSortBy] = useState([]);
   const [filteredInstructorData, setfilteredInstructorData] = useState([]);
 
@@ -29,77 +30,101 @@ const AllInstructors = () => {
       );
   }, []);
 
-  const ratings = useMemo(
+  const skills = useMemo(
     () => [
-      "All Rating",
-      ...new Set(
-        instructorData && instructorData.map((instructor) => instructor.ratings)
-      ),
-    ],
-    [instructorData]
-  );
-
-  const yearsOfExperience = useMemo(
-    () => [
-      "All",
+      "All Skills",
       ...new Set(
         instructorData &&
-          instructorData.map((instructor) => instructor.bio.yearsOfExperience)
+          instructorData
+            .map((instructor) => instructor.bio.skills.flat())
+            .flat()
       ),
     ],
     [instructorData]
   );
+  console.log("All skills", skills);
 
-  const filteredData = useCallback(() => {
-    console.log("data", instructorData);
-    return (
-      instructorData &&
-      instructorData.filter((instructor) => {
-        // Search term filter
+  // const ratings = useMemo(
+  //   () => [
+  //     "All Rating",
+  //     ...new Set(
+  //       instructorData && instructorData.map((instructor) => instructor.ratings)
+  //     ),
+  //   ],
+  //   [instructorData]
+  // );
 
-        const matchedSearch =
-          searchTerm.length === 0 ||
-          Object.values(instructor).some((value) =>
-            String(value).toLowerCase().includes(searchTerm.toLowerCase())
-          );
-        // Dropdown category filter (single category)
-        const matchesRating =
-          !selectedRating || // Allow filtering without selecting a category
-          selectedRating === "All Rating" ||
-          instructorData.rating === selectedRating;
-        console.log("matched-cat", instructorData.category);
+  const sortByRating = useCallback((order, data) => {
+    return [...data].sort((a, b) => {
+      if (order === "Ascending") return a.ratings - b.ratings;
+      if (order === "Descending") return b.ratings - a.ratings;
+      return 0;
+    });
+  }, []);
 
-        // Dropdown SortBy filter
+  // const filteredData = useCallback(() => {
 
-        const sortByExperiences = (order) => {
-          const shortedInstructors = [...yearsOfExperience].sort((a, b) => {
-            if (order == "Ascending") {
-              return a.yearsOfExperience - b.yearsOfExperience;
-            } else if (order == "Descending") {
-              return b.yearsOfExperience - a.yearsOfExperience;
-            }
-          });
-          setSortBy(shortedInstructors);
-        };
+  //   console.log("data", instructorData);
 
-        // Dropdown category filter (single category)
-        const matchesSorting =
-          !sortBy || // Allow filtering without selecting a category
-          sortBy === "All" ||
-          instructorData.rating === sortBy;
-        console.log("matched-cat", instructorData.category);
+  //   if (!instructorData) return [];
+  //   return instructorData.filter((instructor) => {
+  //     // Search term filter
 
-        return matchedSearch && matchesRating && sortByExperiences;
-      })
-    );
-  }, [searchTerm, selectedRating, instructorData, selectedSortBy]);
+  //     const matchedSearch =
+  //       searchTerm.length === 0 ||
+  //       Object.values(instructor).some((value) =>
+  //         String(value).toLowerCase().includes(searchTerm.toLowerCase())
+  //       );
+  //     // Dropdown skills filter (single skills)
+  //     const matchesSkills =
+  //       !selectedSkills || // Allow filtering without selecting a category
+  //       selectedSkills === "All Skills" ||
+  //       instructor.bio.skills?.includes(selectedSkills);
+  //     console.log("matched-cat", matchesSkills);
 
-  const displayInstructor = useMemo(() => filteredData(), [filteredData]);
+  //     // Dropdown sorting filter
+  //     const matchesSorting =
+  //       !sortBy || // Allow filtering without selecting a category
+  //       sortBy === "All" ||
+  //       instructor.ratings === sortBy;
+  //     console.log("matched-rating", ratings);
+
+  //     return matchedSearch && matchesSorting && matchesSkills;
+  //   });
+  // }, [searchTerm, sortBy, instructorData, selectedSkills]);
+  const filteredData = useMemo(() => {
+    if (!instructorData) return [];
+
+    let filtered = [...instructorData];
+
+    // 🔎 1️⃣ Search Filter
+    if (searchTerm.trim().length > 0) {
+      filtered = filtered.filter((instructor) =>
+        Object.values(instructor).some((value) =>
+          String(value).toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      );
+    }
+
+    // ✅ 2️⃣ Skills Filter
+    if (selectedSkills !== "All Skills") {
+      filtered = filtered.filter((instructor) =>
+        instructor.bio.skills?.includes(selectedSkills)
+      );
+    }
+
+    // 📊 3️⃣ Sorting (APPLY SORTING HERE!)
+    sortByRating(filtered, sortBy); // ⬅️ Proper sorting function
+
+    return filtered;
+  }, [searchTerm, selectedSkills, sortBy, instructorData, sortByRating]);
 
   const searchByClick = () => setSearchTriggered((prev) => !prev);
   useEffect(() => {
-    setfilteredInstructorData(displayInstructor);
-  }, [displayInstructor]);
+    setfilteredInstructorData(filteredData);
+  }, [filteredData]);
+
+  console.log("filterd Data", filteredInstructorData);
 
   return (
     <section>
@@ -121,18 +146,30 @@ const AllInstructors = () => {
           <button className="search-btn" onClick={searchByClick}></button>
         </div>
 
-        {/*  select option bar */}
+        {/*  select sorting filter */}
         <div className="grid-cols-1 block h-8">
           <select
             id="course-select"
-            value={selectedRating}
-            onChange={(e) => setselectedRating(e.target.value)}
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
             className="h-10 rounded-sm w-full border-slate-200 border-[2px] text-gray-600 text-base block py-1 px-4 focus:outline-none"
           >
-            {ratings &&
-              ratings?.map((singleRating, index) => (
-                <option key={index} value={singleRating}>
-                  {singleRating}
+            <option value="">Sort By</option>
+            <option value="Ascending">Rating: Low to High</option>
+            <option value="Descending">Rating: High to Low</option>
+          </select>
+        </div>
+        <div className="grid-cols-1 block h-8">
+          <select
+            id="course-select"
+            value={selectedSkills}
+            onChange={(e) => setSelectedSkills(e.target.value)}
+            className="h-10 rounded-sm w-full border-slate-200 border-[2px] text-gray-600 text-base block py-1 px-4 focus:outline-none"
+          >
+            {skills &&
+              skills?.map((singleSkill, index) => (
+                <option key={index} value={singleSkill}>
+                  {singleSkill}
                 </option>
               ))}
           </select>
