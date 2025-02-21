@@ -2,7 +2,7 @@ import { FaChevronDown, FaChevronUp, FaStar } from "react-icons/fa";
 import { FaUserGraduate } from "react-icons/fa";
 import { GiNetworkBars } from "react-icons/gi";
 import image1 from "/images/icons/students/svg-icon/icon-5.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 
 const CourseDetails = () => {
@@ -13,21 +13,8 @@ const CourseDetails = () => {
   const [selectAns, setSelectAns] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState(0);
+  const [openVideo, setOpenVideo] = useState();
   const lessons = singleCourse?.courseContent[0]?.lessons;
-  // const {
-  //   data: singleCourse = {},
-  //   isLoading,
-  //   refetch,
-  // } = useQuery({
-  //   queryKey: ["course"],
-  //   queryFn: async () => {
-  //     const res = await fetch(
-  //       "http://localhost:5000/courses/67b0d156b4fd54f6d9215b81"
-  //     );
-  //     const data = await res.json();
-  //     return data?.data;
-  //   },
-  // });
 
   const [activeTab, setActiveTab] = useState("Overview");
   const tabs = ["Overview", "Reviews", "Faqs", "Quizzes"];
@@ -54,14 +41,16 @@ const CourseDetails = () => {
     setScore(newScore);
     setSubmitted(true);
   };
+  useEffect(() => {
+    if (singleCourse?.courseContent[0]?.lessons?.length > 0) {
+      setOpenVideo(singleCourse.courseContent[0].lessons[0].videoUrl);
+    }
+  }, [singleCourse]);
+  const handleOpenVideo = (videoUrl) => {
+    console.log(videoUrl, "video for player");
+    setOpenVideo(videoUrl);
+  };
 
-  // if (isLoading) {
-  //   return (
-  //     <div className="w-full h-[100vh] flex items-center justify-center">
-  //       <h1 className="text-5xl">Loading....</h1>
-  //     </div>
-  //   );
-  // }
   console.log(lessons, "lessons");
 
   return (
@@ -71,7 +60,7 @@ const CourseDetails = () => {
           <div className="video-container h-[400px]">
             <iframe
               className="w-full h-full"
-              src="https://www.youtube.com/embed/56JJHL-ynB0?si=IVhEuQWSfSBd5ETZ"
+              src={openVideo}
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
@@ -297,10 +286,13 @@ const CourseDetails = () => {
                     {openLesson === index ? <FaChevronUp /> : <FaChevronDown />}
                   </button>
                   {openLesson === index && (
-                    <div>
-                      <p className="mt-2 text-black p-2 border-gray-400 border-2 border-t-0">
-                        {lesson?.videoUrl}
-                      </p>
+                    <div className="bg-secondary">
+                      <button
+                        className="text-black cursor-pointer p-2 border-gray-400 border-2 border-t-0"
+                        onClick={() => handleOpenVideo(lesson?.videoUrl)}
+                      >
+                        Watch Video
+                      </button>
                       <p className="mt-2 text-black p-2 border-gray-400 border-2 border-t-0">
                         Duration: {lesson?.duration}
                       </p>
