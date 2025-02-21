@@ -24,12 +24,14 @@ export const router = createBrowserRouter([
         element: <StudentRegister></StudentRegister>,
       },
       {
-        path: "/courseDetails",
+        path: "/courses/:id",
         element: <CourseDetails></CourseDetails>,
+        loader: async ({ params }) =>
+          fetch(`http://localhost:5000/courses/${params.id}`),
       },
       {
         path: "/instructorReg",
-        element: <InstructorForm></InstructorForm>
+        element: <InstructorForm></InstructorForm>,
       },
       {
         path: "/courses",
