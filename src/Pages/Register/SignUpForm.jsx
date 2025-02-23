@@ -2,7 +2,7 @@
 import { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from 'react-hot-toast';
-import PhoneInput from "react-phone-input-2";
+import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { Link } from 'react-router-dom';
 import Button from '../../Components/Buttons/Button';
@@ -68,7 +68,7 @@ const SignUpForm = ({setIsLogin}) => {
         <div>
           <form onSubmit={handleSubmit(onSubmit)} className="">
 
-          <div className="mt-10">
+          <div className="">
             <div className="">
              <label htmlFor="name" className="block text-sm/6 font-medium text-gray-900">
                 Full name
