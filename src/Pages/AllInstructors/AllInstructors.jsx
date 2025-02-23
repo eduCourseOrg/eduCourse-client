@@ -7,7 +7,7 @@ const AllInstructors = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const [selectedSkills, setSelectedSkills] = useState("All Skills");
-  const [sortBy, setSortBy] = useState("Ascending");
+  const [sortBy, setSortBy] = useState("");
   const [filteredInstructorData, setfilteredInstructorData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
@@ -44,7 +44,7 @@ const AllInstructors = () => {
     ],
     [instructorData]
   );
-
+  console.log("instructorData", instructorData);
   // Load data from local.json on component mount
 
   console.log("All skills", skills);
@@ -71,10 +71,10 @@ const AllInstructors = () => {
     }
 
     // Apply sorting
-    if (sortBy === "Ascending") {
-      filtered.sort((a, b) => a.rating - b.rating); // Ascending order
-    } else {
-      filtered.sort((a, b) => b.rating - a.rating); // Descending order
+    if (sortBy === "Descending") {
+      filtered.sort((a, b) => b.ratings - a.ratings); // Descending order
+    } else if (sortBy === "Ascending") {
+      filtered.sort((a, b) => a.ratings - b.ratings); // Ascending order
     }
 
     setfilteredInstructorData(filtered);
@@ -82,16 +82,18 @@ const AllInstructors = () => {
 
   // Pagination Logic
   const totalPages = Math.ceil(filteredInstructorData.length / itemsPerPage);
+  console.log("page", totalPages);
 
   useEffect(() => {
     applyFilters();
   }, [searchTerm, sortBy, selectedSkills]);
 
   return (
-    <section>
-      <section className="all-filter-section mb-6 grid grid-cols-1 md:grid-cols-4 gap-2">
+    <section className="p-4 border border-primary rounded-sm">
+      <section className="all-filter-section mb-2 grid grid-cols-1 text-center md:grid-cols-3 gap-2">
         {/* section for search input  */}
-        <div className="search-bar relative w-full justify-between items-center h-8 flex mb-2">
+        <div className="search-bar relative w-full justify-between items-center h-8 flex ">
+          {" "}
           <input
             type="text"
             value={searchTerm}
@@ -99,7 +101,7 @@ const AllInstructors = () => {
               setSearchTerm(e.target.value);
             }}
             placeholder="Search..."
-            className=" rounded-sm w-full h-10 border-slate-200 border-[2px] search-input "
+            className=" rounded-sm w-full h-8 border-slate-200 border-[2px] search-input py-1 px-4"
           />
           <FaSearch className="absolute right-5 top-2 font-light text-slate-600" />{" "}
           {/* Search Icon */}
@@ -107,16 +109,17 @@ const AllInstructors = () => {
         </div>
 
         {/*  select sorting filter */}
-        <div className="grid-cols-1 block h-8">
+        <div className="grid-cols-1 h-8 block ">
           <select
             id="course-select"
-            value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="h-10 rounded-sm w-full border-slate-200 border-[2px] text-gray-600 text-base block py-1 px-4 focus:outline-none"
+            className="h-8 rounded-sm w-full border-slate-200 border-[2px] text-gray-600 text-base block py-1 px-4 focus:outline-none"
           >
-            <option value="">Sort By</option>
-            <option value="Ascending">Rating: Low to High</option>
+            <option selected disabled value="">
+              Sort By
+            </option>
             <option value="Descending">Rating: High to Low</option>
+            <option value="Ascending">Rating: Low to High</option>
           </select>
         </div>
         <div className="grid-cols-1 block h-8">
@@ -125,7 +128,7 @@ const AllInstructors = () => {
             id="course-select"
             value={selectedSkills}
             onChange={(e) => setSelectedSkills(e.target.value)}
-            className="h-10 rounded-sm w-full border-slate-200 border-[2px] text-gray-600 text-base block py-1 px-4 focus:outline-none"
+            className="h-8 rounded-sm w-full border-slate-200 border-[2px] text-gray-600 text-base block py-1 px-4 focus:outline-none"
           >
             {skills &&
               skills?.map((singleSkill, index) => (
