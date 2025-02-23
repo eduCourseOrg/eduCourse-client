@@ -11,9 +11,9 @@ import profile from '/images/course-banner/course-banner-8.jpg'
 const InstructorProfile = () => {
   return (
       <div className="w-full flex flex-col gap-5 bg-[var(--color-secondary)]">
-          <div className="w-full p-4 flex gap-5 bg-[var(--color-secondary)]">
+          <div className="w-full md:p-4 md:flex space-y-5 gap-5 bg-[var(--color-secondary)]">
              {/* Left Sidebar */}
-          <div className="w-[30%] flex flex-col gap-8 items-center">
+          <div className="md:w-[30%] flex flex-col gap-8 items-center">
               {/* Profile Section */}
               <div className="w-full h-auto flex flex-col items-center gap-3 rounded-lg p-2 shadow-lg shadow-gray-400 bg-white">
                   <img src={profile} alt="Instructor Profile Image" className="w-full h-auto rounded-lg" />
@@ -110,7 +110,7 @@ const InstructorProfile = () => {
 
 
           {/* RightSide Content */}
-          <div className="w-[70%] grow flex flex-col gap-7 rounded-lg p-4 bg-white shadow-md shadow-gray-500">
+          <div className="md:w-[70%] grow flex flex-col gap-7 rounded-lg p-4 bg-white shadow-md shadow-gray-500">
               {/* Profile Name section */}
               <div className="flex flex-col gap-1">
                   <h3 className="text-xl font-bold">Hi, I am</h3>
@@ -149,9 +149,9 @@ const InstructorProfile = () => {
 
 
               {/* Profile Total courses and total student section */}
-              <div className="flex items-center gap-4 w-full h-[70px]">
+              <div className="md:flex space-y-5 items-center gap-4 w-full md:h-[70px]">
                   <div className="w-full h-full flex items-center gap-3">
-                      <div className="w-[25%] h-full rounded-xl bg-[var(--color-primary)] text-3xl text-[var(--color-secondary)] flex items-center justify-center">
+                      <div className="w-[25%] h-[80px] md:h-full rounded-xl bg-[var(--color-primary)] text-3xl text-[var(--color-secondary)] flex items-center justify-center">
                           <MdPlayArrow></MdPlayArrow>
                       </div>
                       <div className="">
@@ -160,7 +160,7 @@ const InstructorProfile = () => {
                       </div>
                   </div>
                   <div className="w-full h-full flex items-center gap-3">
-                      <div className="w-[25%] h-full rounded-xl bg-[var(--color-primary)] text-3xl text-[var(--color-secondary)] flex items-center justify-center">
+                      <div className="w-[25%] h-[80px] md:h-full rounded-xl bg-[var(--color-primary)] text-3xl text-[var(--color-secondary)] flex items-center justify-center">
                           <IoIosPeople></IoIosPeople>
                       </div>
                       <div className="">
@@ -169,7 +169,7 @@ const InstructorProfile = () => {
                       </div>
                   </div>
                   <div className="w-full h-full flex items-center gap-3">
-                      <div className="w-[25%] h-full rounded-xl bg-[var(--color-primary)] text-3xl text-[var(--color-secondary)] flex items-center justify-center">
+                      <div className="w-[25%] h-[80px] md:h-full rounded-xl bg-[var(--color-primary)] text-3xl text-[var(--color-secondary)] flex items-center justify-center">
                           <FaTrophy></FaTrophy>
                       </div>
                       <div className="">
@@ -185,7 +185,7 @@ const InstructorProfile = () => {
               {/* Couses List Card */}
               <div className="py-5 flex flex-col gap-4">
                   <h1 className="text-4xl font-bold">Courses List</h1>
-                  <div className="w-full grid grid-cols-2 gap-4 rounded-lg bg-[var(--color-secondary)] p-2">
+                  <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 rounded-lg bg-[var(--color-secondary)] p-2">
                       
                       {/* Card One */}
                     <div className="w-full bg-white shadow shadow-gray-400 rounded-lg">
@@ -252,9 +252,11 @@ const InstructorProfile = () => {
               </div>
           </div> 
           </div>
-          <div className="w-full flex flex-col gap-4 p-4">
+
+
+          <div className="w-full flex flex-col gap-4 md:p-4">
               <h1 className="text-4xl font-bold">Related Instructos</h1>
-              <div className="grid grid-cols-4 gap-3">
+              <div className="grid md:grid-cols-4 gap-3">
                   {/* Card One */}
                   <div className="w-full h-auto flex flex-col items-center gap-3 rounded-lg p-2 shadow-lg shadow-gray-400 bg-white">
                   <img src={profile} alt="Instructor Profile Image" className="w-full h-auto rounded-lg" />
