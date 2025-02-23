@@ -47,7 +47,7 @@ const LoginForm = ({setIsLogin}) => {
        <div>
           <form onSubmit={handleSubmit(onSubmit)} className="">
 
-          <div className="mt-10">
+          <div className="">
           
 
             <div className="sm:col-span-4 my-2 ">

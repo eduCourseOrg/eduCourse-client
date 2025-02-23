@@ -6,39 +6,39 @@
     md (≥768px) → tablet
     lg (≥1024px) → Red
     xl (≥1280px) → laptop */
-  --animate-menuToLeft: menuLeft 1s forwards;
-  --animate-menuToRight: menuRight 1s forwards;
+  /* --animate-menuToLeft: menuLeft 1s forwards;
+  --animate-menuToRight: menuRight 1s forwards; */
 
-  @keyframes menuLeft {
+  /* @keyframes menuLeft {
     0% {
-      transform: translateX(0);
+      transform: translateX(0)
     }
+
     100% {
-      transform: translateX(-120%);
+      transform: translateX(-120%)
     }
   }
+
   @keyframes menuRight {
     0% {
-      transform: translateX(-120%);
+      transform: translateX(-120%)
     }
+
     100% {
-      transform: translateX(0);
+      transform: translateX(0)
     }
-  }
+  } */
 }
 
 /* @plugin "daisyui"; */
 @layer base {
   :root {
-    --color-primary: #184e3a;
-    --color-secondary: #ebf1f4;
-    --color-accent: #fce6e5;
-    --color-accent2: #f8fcff;
-    /* --animate-review: review 1s ease-in-out; */
     --color-primary: #006a4e;
     --color-secondary: #eeeded;
     --color-accent: #fce6e5;
     --color-accent2: #f8fcff;
+    --animate-menuToLeft: menuLeft 1s forwards;
+    --animate-menuToRight: menuRight 1s forwards;
   }
 
   *,
@@ -49,8 +49,31 @@
     border-color: var(--color-gray-200, currentColor);
   }
 
+  @keyframes menuLeft {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-120%);
+    }
+  }
+
+  @keyframes menuRight {
+    0% {
+      transform: translateX(-120%);
+    }
+
+    100% {
+      transform: translateX(0);
+    }
+  }
+
   .bg-primary {
     background-color: var(--color-primary);
+  }
+  .border-primary {
+    border-color: var(--color-primary);
   }
 
   .text-primary {
@@ -59,6 +82,9 @@
 
   .bg-secondary {
     background-color: var(--color-secondary);
+  }
+  .border-secondary {
+    border-color: var(--color-secondary);
   }
 
   .text-secondary {
@@ -80,6 +106,9 @@
   .text-accent2 {
     color: var(--color-accent2);
   }
+  .animate-gradient {
+    animation: rotateGradient 4s linear infinite;
+  }
 }
 
 @layer utilities {
@@ -96,11 +125,13 @@
   0% {
     z-index: 10;
     transform: translateX(0) scale(1);
+    /* width:100%; */
   }
 
   100% {
     z-index: 0;
     transform: translateX(-50%) scale(0.8);
+    /* width: 50%; */
   }
 }
 
@@ -116,6 +147,15 @@
   }
 }
 
+@keyframes progressAnimation {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 50%;
+  }
+}
+
 @keyframes reviewBefore {
   0% {
     z-index: 0;
@@ -125,6 +165,16 @@
   100% {
     z-index: 5;
     transform: translateX(50%) scale(0.8);
+  }
+}
+
+@keyframes rotateGradient {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
   }
 }
 
