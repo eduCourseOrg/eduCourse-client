@@ -19,7 +19,7 @@ const OurProcess = () => {
                         </div>
                         <div className="">
                             {/* Step Mark */}
-                            <div className="absolute md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-[var(--color-primary)] rounded-full flex items-center justify-center text-[var(--color-secondary)]">
+                            <div className="absolute md:left-1/2 transform -translate-x-[50%] w-8 h-8 bg-[var(--color-primary)] rounded-full flex items-center justify-center text-[var(--color-secondary)]">
                                 <FaSearch className="z-10"></FaSearch>
                             </div>
                         </div>
