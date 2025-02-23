@@ -12,6 +12,8 @@ const AllCourse = () => {
   const [selectedLevelCheckboxes, setSelectedLevelCheckboxes] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [courseData, setCourseData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
   // const [selectedTags, setSelectedTags] = useState([]);
 
   useEffect(() => {
@@ -24,6 +26,7 @@ const AllCourse = () => {
       })
       .then((data) => {
         setCourseData(data.courses);
+        setFilteredCourses(data.courses);
       })
       .catch((error) =>
         console.error(
@@ -268,6 +271,43 @@ const AllCourse = () => {
                   singleCourse={singleCourse}
                 ></CourseCart>
               ))}
+          </div>
+
+          {/* Course List */}
+          <ul>
+            {paginatedCourses.length > 0 ? (
+              paginatedCourses.map((course) => (
+                <li key={course.id}>
+                  {course.name} - <strong>{course.category}</strong> (
+                  <em>{course.level}</em>)
+                  <span>
+                    {" "}
+                    📅 {course.date} | ⭐ {course.popularity}
+                  </span>
+                </li>
+              ))
+            ) : (
+              <li>No results found</li>
+            )}
+          </ul>
+
+          {/* Pagination */}
+          <div className="pagination">
+            <button
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage((prev) => prev - 1)}
+            >
+              ◀ Prev
+            </button>
+            <span>
+              Page {currentPage} of {totalPages}
+            </span>
+            <button
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage((prev) => prev + 1)}
+            >
+              Next ▶
+            </button>
           </div>
         </section>
       </section>

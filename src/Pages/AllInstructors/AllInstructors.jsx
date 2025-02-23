@@ -1,15 +1,16 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import InstructorCard from "../../Components/AllInstructor/InstructorCard";
 
 const AllInstructors = () => {
   const [instructorData, setInstructorData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchTriggered, setSearchTriggered] = useState(false); //this state will be used when we use search button instead of search input
-  const [selectedRating, setselectedRating] = useState([]);
-  const [selectedSkills, setSelectedSkills] = useState([]);
-  const [sortBy, setSortBy] = useState([]);
+
+  const [selectedSkills, setSelectedSkills] = useState("All Skills");
+  const [sortBy, setSortBy] = useState("Ascending");
   const [filteredInstructorData, setfilteredInstructorData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
 
   useEffect(() => {
     fetch("/instructors.json")
@@ -21,6 +22,7 @@ const AllInstructors = () => {
       })
       .then((data) => {
         setInstructorData(data);
+        setfilteredInstructorData(data);
       })
       .catch((error) =>
         console.error(
@@ -43,55 +45,16 @@ const AllInstructors = () => {
     [instructorData]
   );
 
+  // Load data from local.json on component mount
+
   console.log("All skills", skills);
 
-  const sortByRating = useCallback((data, order) => {
-    return [...data].sort((a, b) => {
-      if (order === "Ascending") return a.ratings - b.ratings;
-      if (order === "Descending") return b.ratings - a.ratings;
-      return 0;
-    });
-  }, []);
-
-  // const filteredData = useCallback(() => {
-
-  //   console.log("data", instructorData);
-
-  //   if (!instructorData) return [];
-  //   return instructorData.filter((instructor) => {
-  //     // Search term filter
-
-  //     const matchedSearch =
-  //       searchTerm.length === 0 ||
-  //       Object.values(instructor).some((value) =>
-  //         String(value).toLowerCase().includes(searchTerm.toLowerCase())
-  //       );
-  //     // Dropdown skills filter (single skills)
-  //     const matchesSkills =
-  //       !selectedSkills || // Allow filtering without selecting a category
-  //       selectedSkills === "All Skills" ||
-  //       instructor.bio.skills?.includes(selectedSkills);
-  //     console.log("matched-cat", matchesSkills);
-
-  //     // Dropdown sorting filter
-  //     const matchesSorting =
-  //       !sortBy || // Allow filtering without selecting a category
-  //       sortBy === "All" ||
-  //       instructor.ratings === sortBy;
-  //     console.log("matched-rating", ratings);
-
-  //     return matchedSearch && matchesSorting && matchesSkills;
-  //   });
-  // }, [searchTerm, sortBy, instructorData, selectedSkills]);
-  const filteredData = useMemo(() => {
-    if (!instructorData || instructorData.length === 0) return [];
-
+  const applyFilters = () => {
     let filtered = [...instructorData];
 
-    console.log("filtered", instructorData);
-
     // 🔎 1️⃣ Search Filter
-    if (searchTerm.trim().length > 0) {
+
+    if (searchTerm) {
       filtered = filtered.filter((instructor) =>
         Object.values(instructor).some((value) =>
           String(value).toLowerCase().includes(searchTerm.toLowerCase())
@@ -99,27 +62,30 @@ const AllInstructors = () => {
       );
     }
 
-    // ✅ 2️⃣ Skills Filter
+    // Apply skill filter
+
     if (selectedSkills !== "All Skills") {
-      filtered = filtered.filter((instructor) =>
-        instructor.bio.skills?.includes(selectedSkills)
+      filtered = filtered.filter((item) =>
+        item.bio?.skills?.includes(selectedSkills)
       );
     }
 
-    // 📊 3️⃣ Sorting (APPLY SORTING HERE!)
-    sortByRating(filtered, sortBy); // ⬅️ Proper sorting function
+    // Apply sorting
+    if (sortBy === "Ascending") {
+      filtered.sort((a, b) => a.rating - b.rating); // Ascending order
+    } else {
+      filtered.sort((a, b) => b.rating - a.rating); // Descending order
+    }
 
-    return filtered;
-  }, [searchTerm, selectedSkills, sortBy, instructorData, sortByRating]);
+    setfilteredInstructorData(filtered);
+  };
 
-  const searchByClick = () => setSearchTriggered((prev) => !prev);
+  // Pagination Logic
+  const totalPages = Math.ceil(filteredInstructorData.length / itemsPerPage);
+
   useEffect(() => {
-    filteredInstructorData.length === 0
-      ? setfilteredInstructorData(instructorData)
-      : setfilteredInstructorData(filteredData);
-  }, [filteredData, instructorData]);
-
-  console.log("filterd Data", filteredInstructorData);
+    applyFilters();
+  }, [searchTerm, sortBy, selectedSkills]);
 
   return (
     <section>
@@ -131,14 +97,13 @@ const AllInstructors = () => {
             value={searchTerm}
             onChange={(e) => {
               setSearchTerm(e.target.value);
-              setSearchTriggered(false);
             }}
             placeholder="Search..."
             className=" rounded-sm w-full h-10 border-slate-200 border-[2px] search-input "
           />
           <FaSearch className="absolute right-5 top-2 font-light text-slate-600" />{" "}
           {/* Search Icon */}
-          <button className="search-btn" onClick={searchByClick}></button>
+          <button className="search-btn"></button>
         </div>
 
         {/*  select sorting filter */}
@@ -156,6 +121,7 @@ const AllInstructors = () => {
         </div>
         <div className="grid-cols-1 block h-8">
           <select
+            // multiple={true}
             id="course-select"
             value={selectedSkills}
             onChange={(e) => setSelectedSkills(e.target.value)}
@@ -180,6 +146,39 @@ const AllInstructors = () => {
             ></InstructorCard>
           ))}
       </div>
+
+      {/* Items Per Page */}
+
+      {/* Pagination */}
+      <section className="flex justify-between items-center mt-4">
+        <div className="pagination">
+          <button
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage((prev) => prev - 1)}
+          >
+            ◀ Prev
+          </button>
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            disabled={currentPage === totalPages}
+            onClick={() => setCurrentPage((prev) => prev + 1)}
+          >
+            Next ▶
+          </button>
+        </div>
+        <select
+          value={itemsPerPage}
+          onChange={(e) => setItemsPerPage(Number(e.target.value))}
+        >
+          {[5, 10, 15].map((size) => (
+            <option key={size} value={size}>
+              Show {size} per page
+            </option>
+          ))}
+        </select>
+      </section>
     </section>
   );
 };
