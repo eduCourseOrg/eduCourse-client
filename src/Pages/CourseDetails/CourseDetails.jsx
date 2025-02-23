@@ -1,10 +1,10 @@
 import { FaChevronDown, FaChevronUp, FaStar } from "react-icons/fa";
 import { FaUserGraduate } from "react-icons/fa";
 import { GiNetworkBars } from "react-icons/gi";
-import image1 from "/images/icons/students/svg-icon/icon-5.svg";
 import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import VideoPlayer from "../../Components/VideoPlayer/VideoPlayer";
+import { useQuery } from "@tanstack/react-query";
 
 const CourseDetails = () => {
   const loaderData = useLoaderData({});
@@ -18,6 +18,17 @@ const CourseDetails = () => {
   const lessons = singleCourse?.courseContent[0]?.lessons;
   const [activeTab, setActiveTab] = useState("Overview");
   const tabs = ["Overview", "Reviews", "Faqs", "Quizzes"];
+
+  const { data: instructor = {}, isLoading } = useQuery({
+    queryKey: ["instructor"],
+    queryFn: async () => {
+      const res = await fetch(
+        `http://localhost:5000/instructors/${singleCourse?.instructorId}`
+      );
+      const data = await res.json();
+      return data?.data;
+    },
+  });
 
   const toggleFaq = (index) => {
     setOpenFaq(openFaq === index ? null : index);
@@ -51,7 +62,13 @@ const CourseDetails = () => {
     setOpenVideo(videoUrl);
   };
 
-  console.log(lessons, "lessons");
+  if (isLoading) {
+    return (
+      <div className="w-full h-[100vh] flex items-center justify-center">
+        <h1 className="text-5xl">Loading....</h1>
+      </div>
+    );
+  }
 
   return (
     <div className="w-11/12 mx-auto mb-8">
@@ -86,10 +103,14 @@ const CourseDetails = () => {
           </div>
           <div className="flex justify-between items-center mb-4">
             <div className="flex  items-center w-1/2 gap-4">
-              <img src={image1} alt="" className="w-2/12" />
+              <img
+                src={instructor?.image}
+                alt=""
+                className="w-2/12 rounded-full"
+              />
               <div>
-                <h5 className="text-lg font-semibold">Instructor Name</h5>
-                <p>Instructor Designation</p>
+                <h5 className="text-lg font-semibold">{instructor?.name}</h5>
+                <p>{instructor?.profession}</p>
               </div>
             </div>
             <div className="gap-4 flex">
