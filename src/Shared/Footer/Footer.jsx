@@ -7,7 +7,7 @@ import footerlogo from '/images/Footer/footer.png';
 
 const Footer = () => {
     return (
-        <footer className="border bg-white rounded-md shadow-md py-4 px-6">
+        <footer className="bg-white rounded-md shadow-md py-4 px-6">
             <div className='flex items-center justify-between border-b-2 border-[var(--color-primary)] pb-5 mb-5'>
                 <img src={logo} alt="logo" className='w-[50%] md:w-[13%]' />
                 <div className="flex items-center space-x-4">
@@ -76,8 +76,8 @@ const Footer = () => {
             <div className='md:flex space-y-3 justify-between items-center'>
                 <h2 className='text-3xl font-bold text-primary flex gap-5 items-center'><FaMailBulk className='text-2xl text-primary'></FaMailBulk> Our NewsLetter</h2>
                 <div className='flex items-center md:w-[50%]'>
-                    <input type="email" name="email" id="" placeholder='Your Email address' className='border-1 border-secondary p-2 w-[70%]'/>
-                    <button className='bg-secondary text-primary text-xl p-2'>Subscribe</button>
+                    <input type="email" name="email" id="" placeholder='Your Email address' className='p-2 w-[70%] bg-secondary text-primary '/>
+                    <button className='bg-primary text-secondary p-2 '>Subscribe</button>
                 </div>
             </div>
         </footer>
