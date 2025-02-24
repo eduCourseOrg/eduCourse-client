@@ -99,13 +99,13 @@ const AllInstructors = () => {
   }
   
   //Handle Previous and Next page function
-  const handleNext = () => {
-    setCurrentPage((prev) => (prev < totalPages ? prev + 1 : prev));
-  };
+  // const handleNext = () => {
+  //   setCurrentPage((prev) => (prev < totalPages ? prev + 1 : prev));
+  // };
   
-  const handlePrev = () => {
-    setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev));
-  };
+  // const handlePrev = () => {
+  //   setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev));
+  // };
   
   const handleItemsPerPageChanges=(e)=>{
   
