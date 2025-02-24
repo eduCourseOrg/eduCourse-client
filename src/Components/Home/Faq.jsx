@@ -21,7 +21,7 @@ const Faq = () => {
   };
 
   return (
-    <div className="flex flex-col gap-10 p-4">
+    <div className="flex flex-col gap-10 p-4 bg-white shadow-lg rounded-md">
           <div className='flex flex-col gap-1 items-center'>
               <h3 className='text-sm font-semibold text-gray-500 tracking-wide'>ALL YOU NEED TO KNOW</h3>
             <h1 className='text-4xl font-bold'>FREQUENTLY ASKED QUESTIONS</h1>
