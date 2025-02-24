@@ -102,6 +102,10 @@
   .bg-accent2 {
     background-color: var(--color-accent2);
   }
+  /* .active {
+    background-color: var(--color-accent2);
+    color: var(--color-primary);
+  } */
 
   .text-accent2 {
     color: var(--color-accent2);

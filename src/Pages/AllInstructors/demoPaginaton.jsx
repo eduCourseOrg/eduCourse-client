@@ -22,6 +22,7 @@ const currentItems = instructorData.slice(indexOfFirstItem, indexOfLastItem);
 
 const totalPages = Math.ceil(instructorData.length / itemsPerPage);
 const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+const std = [...Array(instructorData.length)];
 
 // Step 4: Handle Page Change
 // Update currentPage when a page button is clicked.

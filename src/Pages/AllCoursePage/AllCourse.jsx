@@ -55,70 +55,58 @@ const AllCourse = () => {
   console.log("level", levels);
 
   const filteredCourse = useMemo(() => {
-    console.log(categories);
-    console.log("data", courseData);
-    return (
-      courseData &&
-      courseData.filter((course) => {
-        // Search term filter
+    let filtered = [...courseData];
+    // Search term filter
 
-        const matchedSearch =
-          searchTerm.length === 0 ||
-          Object.values(course).some((value) =>
-            String(value).toLowerCase().includes(searchTerm.toLowerCase())
-          );
-        // Dropdown category filter (single category)
-        const matchesCategory =
-          !selectedCategory || // Allow filtering without selecting a category
-          selectedCategory === "All Categories" ||
-          course.category === selectedCategory;
-        console.log("matched-cat", course.category);
+    const matchedSearch =
+      searchTerm.length === 0 ||
+      filtered.some((value) =>
+        String(value).toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    // Dropdown category filter (single category)
+    const matchesCategory =
+      !selectedCategory || // Allow filtering without selecting a category
+      selectedCategory === "All Categories" ||
+      filtered.some((course) => course.category) === selectedCategory;
 
-        // Checkbox category filter (multiple categories)
-        const matchesCheckboxes =
-          selectedCheckboxes.length === 0 ||
-          selectedCheckboxes.includes(course.category);
+    // Checkbox category filter (multiple categories)
+    const selectedCheckboxesSet = new Set(selectedCheckboxes);
+    const matchesCheckboxes =
+      selectedCheckboxes.length === 0 ||
+      selectedCheckboxesSet.has(filtered.some((course) => course.category));
 
-        // Level Checkbox filter
-        const matchesLevelCheckboxes =
-          selectedLevelCheckboxes.length === 0 || // Ensure it’s always an array
-          selectedLevelCheckboxes.includes(course.courseLevel);
+    // Level Checkbox filter
 
+    const selectedLevelCheckboxesSet = new Set(selectedLevelCheckboxes);
+    const matchesLevelCheckboxes =
+      selectedLevelCheckboxes.length === 0 || // Ensure it’s always an array
+      selectedLevelCheckboxesSet.has(
+        filtered.some((course) => course.courseLevel)
+      );
 
-          //calculation of pagination
-
-          const indexOfLastCourse=currentPage*itemsPerPage
-          const indexOfFirstCourse=indexOfLastCourse-itemsPerPage
-          const currentCourses=filteredCourses.slice(indexOfFirstCourse, indexOfLastCourse)
-
-         // Step 3: Create Page Buttons Dynamically
-     // Generate page numbers dynamically based on the total number of courses.
-
-     const totalPage=Math.ceil(filteredCourses.length / itemsPerPage)
-
-     const pageNumbers=Array.from({length: totalPage},(_,i)=>i+1)
-
- 
-
-        return (
-          matchedSearch &&
-          matchesCategory &&
-          matchesCheckboxes &&
-          matchesLevelCheckboxes &&
-          currentCourses && totalPage && pageNumbers
-        );
-      })
+    // Apply all filters (search, category, checkboxes, level)
+    filtered = filtered.filter(
+      (course) =>
+        matchedSearch && // Always check the search term
+        matchesCategory && // Check if category matches
+        matchesCheckboxes && // Check if selected checkboxes match
+        matchesLevelCheckboxes // Check if selected levels match
     );
+
+    return filtered;
   }, [
     searchTerm,
     selectedCategory,
     selectedLevelCheckboxes,
     selectedCheckboxes,
-    categories,
     courseData,
-    currentPage,filteredCourses,itemsPerPage
-  
   ]);
+
+  useEffect(() => {
+    filteredCourses.length === 0
+      ? setFilteredCourses(courseData)
+      : setFilteredCourses(filteredCourse);
+  }, [filteredCourse, courseData]);
 
   const searchByClick = () => setSearchTriggered((prev) => !prev);
 
@@ -139,21 +127,34 @@ const AllCourse = () => {
     );
   };
 
+  //calculation of pagination
+
+  const indexOfLastCourse = currentPage * itemsPerPage;
+  const indexOfFirstCourse = indexOfLastCourse - itemsPerPage;
+  const currentCourses = filteredCourses.slice(
+    indexOfFirstCourse,
+    indexOfLastCourse
+  );
+
+  // Step 3: Create Page Buttons Dynamically
+  // Generate page numbers dynamically based on the total number of courses.
+
+  const totalPage = Math.ceil(filteredCourses.length / itemsPerPage);
+
+  const pageNumbers = Array.from({ length: totalPage }, (_, i) => i + 1);
+
   //function for pageNumber Button handle
 
-  const handlePageNumber=(pageNumber)=>{
-    setCurrentPage(pageNumber)
-   }
+  const handlePageNumber = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
-   //functon for itemSPerPageChanges dropdown handler
+  //functon for itemSPerPageChanges dropdown handler
 
-   const handleItemsPerPageChanges=(e)=>{
-
+  const handleItemsPerPageChanges = (e) => {
     setItemsPerPage(Number(e.target.value));
     setCurrentPage(1); //reset to first page every time items per page changes
-  
-  }
-
+  };
 
   useEffect(() => {
     filteredCourses.length === 0
@@ -294,14 +295,12 @@ const AllCourse = () => {
 
         {/* This is for Right side section */}
         <section className="lg:col-span-3  gap-2">
-          {/*
+          {/* */}
 
-*/}
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-3">
             {" "}
-            {filteredCourses &&
-              filteredCourses.map((singleCourse, index) => (
+            {currentCourses &&
+              currentCourses.map((singleCourse, index) => (
                 <CourseCart
                   key={index}
                   singleCourse={singleCourse}
@@ -309,54 +308,45 @@ const AllCourse = () => {
               ))}
           </div>
 
-          {/* Course List */}
-          <ul>
-            {paginatedCourses.length > 0 ? (
-              paginatedCourses.map((course) => (
-                <li key={course.id}>
-                  {course.name} - <strong>{course.category}</strong> (
-                  <em>{course.level}</em>)
-                  <span>
-                    {" "}
-                    📅 {course.date} | ⭐ {course.popularity}
-                  </span>
-                </li>
-              ))
-            ) : (
-              <li>No results found</li>
-            )}
-          </ul>
-
-        {/* Pagination */}
-      <section className="grid grid-cols-4 gap-2 mt-4">
-        <div className="pagination col-span-3 flex justify-center items-center gap-1">
-          <button
-            disabled={currentPage === 1}
-            onClick={() => setCurrentPage((prev) => prev - 1)}
-          >
-            ◀ Prev
-          </button>
-          {pageNumbers.map((number)=><button key={number} className= {`bg-cyan-900 text-cyan-100 h-6 rounded-sm w-8 ${currentPage===number && 'active'}`} onClick={()=>handlePageNumber(number)}>
-            {number}
-            </button>)}
-          <button
-            disabled={currentPage === totalPage}
-            onClick={() => setCurrentPage((prev) => prev + 1)}
-          >
-            Next ▶
-          </button>
-        </div>
-        <select
-          value={itemsPerPage}
-          onChange={(e) => handleItemsPerPageChanges(e)}
-        >
-          {[5, 10, 15].map((size) => (
-            <option key={size} value={size}>
-              Show {size} per page
-            </option>
-          ))}
-        </select>
-      </section>
+          {/* Pagination */}
+          <div className=" pagination-container grid grid-cols-4 gap-2 my-4">
+            <div className="pagination col-span-3 flex justify-center items-center gap-1">
+              <button
+                disabled={currentPage === 1}
+                onClick={() => setCurrentPage((prev) => prev - 1)}
+              >
+                ◀ Prev
+              </button>
+              {pageNumbers.map((number) => (
+                <button
+                  key={number}
+                  className={`bg-cyan-900 text-cyan-100 h-6 rounded-sm w-8 ${
+                    currentPage === number &&
+                    "active text-amber-50 bg-amber-500"
+                  }`}
+                  onClick={() => handlePageNumber(number)}
+                >
+                  {number}
+                </button>
+              ))}
+              <button
+                disabled={currentPage === totalPage}
+                onClick={() => setCurrentPage((prev) => prev + 1)}
+              >
+                Next ▶
+              </button>
+            </div>
+            <select
+              value={itemsPerPage}
+              onChange={(e) => handleItemsPerPageChanges(e)}
+            >
+              {[5, 10, 15].map((size) => (
+                <option key={size} value={size}>
+                  Show {size} per page
+                </option>
+              ))}
+            </select>
+          </div>
         </section>
       </section>
     </section>

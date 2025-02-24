@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import InstructorCard from "../../Components/AllInstructor/InstructorCard";
+import "./AllInstructor.css";
 
 const AllInstructors = () => {
   const [instructorData, setInstructorData] = useState([]);
@@ -78,45 +79,44 @@ const AllInstructors = () => {
     }
 
     setfilteredInstructorData(filtered);
+  };
 
-  }
+  //Calculatie pagination
 
-       //Calculatie pagination
+  const indexOfLastInstructor = currentPage * itemsPerPage;
+  const indexOfFirstInstructor = indexOfLastInstructor - itemsPerPage;
+  const currentInstructors = filteredInstructorData.slice(
+    indexOfFirstInstructor,
+    indexOfLastInstructor
+  );
 
-       const indexOfLastInstructor = currentPage * itemsPerPage;
-       const indexOfFirstInstructor = indexOfLastInstructor - itemsPerPage;
-       const currentInstructors = filteredInstructorData.slice(indexOfFirstInstructor, indexOfLastInstructor );
-     
-       // Step 3: Create Page Buttons Dynamically
-     // Generate page numbers dynamically based on the total number of items.
-     
-     const totalPages = Math.ceil(instructorData.length / itemsPerPage);
-     const pageNumbers=Array.from({length:totalPages},(_,i)=>(i+1))
-     
+  // Step 3: Create Page Buttons Dynamically
+  // Generate page numbers dynamically based on the total number of items.
 
-  const handlePageChanges=(pageNumber)=>{
-    setCurrentPage(pageNumber)
-  }
-  
+  const totalPages = Math.ceil(instructorData.length / itemsPerPage);
+  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+  const handlePageChanges = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   //Handle Previous and Next page function
   // const handleNext = () => {
   //   setCurrentPage((prev) => (prev < totalPages ? prev + 1 : prev));
   // };
-  
+
   // const handlePrev = () => {
   //   setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev));
   // };
-  
-  const handleItemsPerPageChanges=(e)=>{
-  
+
+  const handleItemsPerPageChanges = (e) => {
     setItemsPerPage(Number(e.target.value));
     setCurrentPage(1); //reset to first page every time items per page changes
-  
-  }
+  };
   useEffect(() => {
     applyFilters();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchTerm,sortBy, selectedSkills]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchTerm, sortBy, selectedSkills]);
 
   return (
     <section className="p-4 border border-primary rounded-sm">
@@ -191,9 +191,17 @@ const AllInstructors = () => {
           >
             ◀ Prev
           </button>
-          {pageNumbers.map((number)=><button key={number} className= {`bg-cyan-900 text-cyan-100 h-6 rounded-sm w-8 ${currentPage===number && 'active'}`} onClick={()=>handlePageChanges(number)}>
-            {number}
-            </button>)}
+          {pageNumbers.map((number) => (
+            <button
+              key={number}
+              className={`bg-cyan-900 text-cyan-100 h-6 rounded-sm w-8 ${
+                currentPage === number && "active text-blue-100 h-7"
+              }`}
+              onClick={() => handlePageChanges(number)}
+            >
+              {number}
+            </button>
+          ))}
           <button
             disabled={currentPage === totalPages}
             onClick={() => setCurrentPage((prev) => prev + 1)}
