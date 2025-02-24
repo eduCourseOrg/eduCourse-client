@@ -71,6 +71,9 @@
   .bg-primary {
     background-color: var(--color-primary);
   }
+  .border-primary {
+    border-color: var(--color-primary);
+  }
 
   .text-primary {
     color: var(--color-primary);
@@ -78,6 +81,9 @@
 
   .bg-secondary {
     background-color: var(--color-secondary);
+  }
+  .border-secondary {
+    border-color: var(--color-secondary);
   }
 
   .text-secondary {
@@ -99,6 +105,9 @@
   .text-accent2 {
     color: var(--color-accent2);
   }
+    .animate-gradient {
+      animation: rotateGradient 4s linear infinite;
+    }
 }
 
 @layer utilities {
@@ -112,11 +121,13 @@
   0% {
     z-index: 10;
     transform: translateX(0) scale(1);
+    /* width:100%; */
   }
 
   100% {
     z-index: 0;
     transform: translateX(-50%) scale(0.8);
+    /* width: 50%; */
   }
 }
 
@@ -132,6 +143,16 @@
   }
 }
 
+  @keyframes progressAnimation {
+    0%{
+      width: 0%;
+    }
+    100%{
+      width: 50%;
+    }
+  }
+
+
 @keyframes reviewBefore {
   0% {
     z-index: 0;
@@ -143,6 +164,19 @@
     transform: translateX(50%) scale(0.8);
   }
 }
+
+@keyframes rotateGradient {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+
 
 /* css to override the default styles of 'react-phone-input-2' package */
 .react-tel-input .form-control {
