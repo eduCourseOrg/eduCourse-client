@@ -78,15 +78,45 @@ const AllInstructors = () => {
     }
 
     setfilteredInstructorData(filtered);
+
+  }
+
+       //Calculatie pagination
+
+       const indexOfLastInstructor = currentPage * itemsPerPage;
+       const indexOfFirstInstructor = indexOfLastInstructor - itemsPerPage;
+       const currentInstructors = filteredInstructorData.slice(indexOfFirstInstructor, indexOfLastInstructor );
+     
+       // Step 3: Create Page Buttons Dynamically
+     // Generate page numbers dynamically based on the total number of items.
+     
+     const totalPages = Math.ceil(instructorData.length / itemsPerPage);
+     const pageNumbers=Array.from({length:totalPages},(_,i)=>(i+1))
+     
+
+  const handlePageChanges=(pageNumber)=>{
+    setCurrentPage(pageNumber)
+  }
+  
+  //Handle Previous and Next page function
+  const handleNext = () => {
+    setCurrentPage((prev) => (prev < totalPages ? prev + 1 : prev));
   };
-
-  // Pagination Logic
-  const totalPages = Math.ceil(filteredInstructorData.length / itemsPerPage);
-  console.log("page", totalPages);
-
+  
+  const handlePrev = () => {
+    setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev));
+  };
+  
+  const handleItemsPerPageChanges=(e)=>{
+  
+    setItemsPerPage(Number(e.target.value));
+    setCurrentPage(1); //reset to first page every time items per page changes
+  
+  }
   useEffect(() => {
     applyFilters();
-  }, [searchTerm, sortBy, selectedSkills]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchTerm,sortBy, selectedSkills]);
 
   return (
     <section className="p-4 border border-primary rounded-sm">
@@ -141,8 +171,8 @@ const AllInstructors = () => {
       </section>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {filteredInstructorData &&
-          filteredInstructorData.map((instructor, index) => (
+        {currentInstructors &&
+          currentInstructors.map((instructor, index) => (
             <InstructorCard
               key={index}
               instructor={instructor}
@@ -153,17 +183,17 @@ const AllInstructors = () => {
       {/* Items Per Page */}
 
       {/* Pagination */}
-      <section className="flex justify-between items-center mt-4">
-        <div className="pagination">
+      <section className="grid grid-cols-4 gap-2 mt-4">
+        <div className="pagination col-span-3 flex justify-center items-center gap-1">
           <button
             disabled={currentPage === 1}
             onClick={() => setCurrentPage((prev) => prev - 1)}
           >
             ◀ Prev
           </button>
-          <span>
-            Page {currentPage} of {totalPages}
-          </span>
+          {pageNumbers.map((number)=><button key={number} className= {`bg-cyan-900 text-cyan-100 h-6 rounded-sm w-8 ${currentPage===number && 'active'}`} onClick={()=>handlePageChanges(number)}>
+            {number}
+            </button>)}
           <button
             disabled={currentPage === totalPages}
             onClick={() => setCurrentPage((prev) => prev + 1)}
@@ -173,7 +203,7 @@ const AllInstructors = () => {
         </div>
         <select
           value={itemsPerPage}
-          onChange={(e) => setItemsPerPage(Number(e.target.value))}
+          onChange={(e) => handleItemsPerPageChanges(e)}
         >
           {[5, 10, 15].map((size) => (
             <option key={size} value={size}>

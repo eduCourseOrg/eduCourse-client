@@ -4,6 +4,7 @@ import { GiNetworkBars } from "react-icons/gi";
 import image1 from "/images/icons/students/svg-icon/icon-5.svg";
 import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import VideoPlayer from "../../Components/VideoPlayer/VideoPlayer";
 
 const CourseDetails = () => {
   const loaderData = useLoaderData({});
@@ -15,7 +16,6 @@ const CourseDetails = () => {
   const [score, setScore] = useState(0);
   const [openVideo, setOpenVideo] = useState();
   const lessons = singleCourse?.courseContent[0]?.lessons;
-
   const [activeTab, setActiveTab] = useState("Overview");
   const tabs = ["Overview", "Reviews", "Faqs", "Quizzes"];
 
@@ -58,13 +58,7 @@ const CourseDetails = () => {
       <div className="grid grid-cols-3 gap-8">
         <div className="col-span-2 border-0">
           <div className="video-container h-[400px]">
-            <iframe
-              className="w-full h-full"
-              src={openVideo}
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+            <VideoPlayer url={openVideo} />
           </div>
           <h1 className="text-3xl font-semibold mb-2">{singleCourse?.name}</h1>
           <div className="w-6/12 grid grid-cols-3 gap-2 mb-4">
@@ -99,8 +93,12 @@ const CourseDetails = () => {
               </div>
             </div>
             <div className="gap-4 flex">
-              <button className="btn">Follow</button>
-              <button className="btn">Share</button>
+              <button className="bg-primary rounded-md border-0 text-secondary px-4 py-2 cursor-pointer">
+                Follow
+              </button>
+              <button className="bg-primary rounded-md border-0 text-secondary px-4 py-2 cursor-pointer">
+                Share
+              </button>
             </div>
           </div>
           <div>
@@ -277,7 +275,7 @@ const CourseDetails = () => {
           <div className="">
             <div className="bg-secondary gap-2 items-center p-2 mb-2">
               {lessons?.map((lesson, index) => (
-                <div key={lesson?.index} className="mb-2">
+                <div key={index} className="mb-2">
                   <button
                     className="flex justify-between items-center w-full text-left text-lg font-medium bg-primary text-secondary p-2"
                     onClick={() => toggleLesson(index)}
