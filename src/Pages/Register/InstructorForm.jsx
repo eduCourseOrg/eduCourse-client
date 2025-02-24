@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useRef, useState } from "react";
 import { TiTick } from "react-icons/ti";
 import Confirmation from "./Form/Confirmation";
@@ -20,10 +21,24 @@ const InstructorForm = () => {
   const [formData, setFormData] = useState({});
 
   // Handles final form submission
-  const handleFinalSubmit = (finalData) => {
-    console.log("Submitting Final Data:", finalData);
+  const handleFinalSubmit = async (finalData) => {
+    // console.log("Submitting Final Data:", finalData);
+    try {
+      console.log("Final Data:", finalData);
+      const response = await axios.post(
+        "http://localhost:5000/instructors",
+        finalData
+      );
 
-   
+      if (response.data.success) {
+        alert("Form submitted successfully!");
+      } else {
+        alert("Submission failed!");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Something went wrong!");
+    }
   };
 
   // Handles step navigation & form submission

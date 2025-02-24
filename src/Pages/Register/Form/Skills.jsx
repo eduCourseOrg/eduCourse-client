@@ -14,7 +14,7 @@ const Skills = forwardRef(({ formData, setFormData, setCurrentStep }, ref) => {
 
   const handleForm = (data) => {
     // const updatedData = { ...formData, ...data };
-    const { availability, ...otherData } = JSON.parse(JSON.stringify(data));
+    const { availability, ...otherData } = data;
     const available = [];
 
     for (const avail in availability) {
@@ -25,8 +25,8 @@ const Skills = forwardRef(({ formData, setFormData, setCurrentStep }, ref) => {
     console.log("new available", availability, otherData, available);
     setFormData((prevData) => ({
       ...prevData,
-       availability: available,
       ...otherData,
+      availability: available,
     }));
     console.log("Skills Info Submitted:", data);
     setCurrentStep(4);
