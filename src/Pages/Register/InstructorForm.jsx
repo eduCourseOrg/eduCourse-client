@@ -21,25 +21,64 @@ const InstructorForm = () => {
   const [formData, setFormData] = useState({});
 
   // Handles final form submission
-  const handleFinalSubmit = async (finalData) => {
-    // console.log("Submitting Final Data:", finalData);
-    try {
-      console.log("Final Data:", finalData);
-      const response = await axios.post(
-        "http://localhost:5000/instructors",
-        finalData
-      );
+  // const handleFinalSubmit = async (finalData) => {
+  //   // console.log("Submitting Final Data:", finalData);
+  //   try {
+  //     console.log("Final Data:", finalData);
+  //     const response = await axios.post(
+  //       "http://localhost:5000/instructors",
+  //       finalData
+  //     );
 
-      if (response.data.success) {
-        alert("Form submitted successfully!");
-      } else {
-        alert("Submission failed!");
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      alert("Something went wrong!");
-    }
-  };
+  //     if (response.data.success) {
+  //       alert("Form submitted successfully!");
+  //     } else {
+  //       alert("Submission failed!");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error submitting form:", error);
+  //     alert("Something went wrong!");
+  //   }
+  // };
+ const handleFinalSubmit = async (finalData) => {
+   const formDataObject = new FormData();
+
+   // Append all non-file form fields
+   Object.keys(finalData).forEach((key) => {
+     if (key !== "profile" && key !== "resume") {
+       formDataObject.append(key, finalData[key]);
+     }
+   });
+
+   // Append files if they exist
+   if (finalData.profile && finalData.profile.length > 0) {
+     formDataObject.append("profile", finalData.profile[0]);
+   }
+   if (finalData.resume && finalData.resume.length > 0) {
+     formDataObject.append("resume", finalData.resume[0]);
+   }
+
+   try {
+     console.log("Submitting Data:", formDataObject);
+     const response = await axios.post(
+       "http://localhost:5000/instructors",
+       formDataObject,
+       {
+         headers: { "Content-Type": "multipart/form-data" },
+       }
+     );
+
+     if (response.data.success) {
+       alert("Form submitted successfully!");
+     } else {
+       alert("Submission failed!");
+     }
+   } catch (error) {
+     console.error("Error submitting form:", error);
+     alert("Something went wrong!");
+   }
+ };
+
 
   // Handles step navigation & form submission
   const handleNext = () => {
