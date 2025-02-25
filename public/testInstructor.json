@@ -1,0 +1,28 @@
+[
+  {
+    "name": "John Doe",
+    "image": "https://i.ibb.co.com/3yVDfwkM/114089.jpg",
+    "gender": "male",
+    "phoneNumber": "+1 234 567 8901",
+    "dob": "3/1/1993",
+    "education": "MSc in Computer Science, MIT",
+    "resume": "https://i.ibb.co.com/3yVDfwkM/114089.pdf",
+    "About ": "Senior Web Developer with 5+ years of experience in developing scalable and efficient web applications.",
+    "skills": ["JavaScript", "React", "Node.js", "MongoDB"],
+    "yearsOfExperience": 8,
+    "Preferred Teaching Mode": "online",
+    "profession": "Senior Web Developer",
+
+    "Availability": ["Afternoon", "Morning"],
+    "ratings": 4.9,
+    "linkedin": "https://linkedin.com/in/johndoe",
+    "facebook": "https://twitter.com/johndoe",
+    "website": "https://johndoe.dev",
+    "courses": ["C101", "C102"],
+    "totalEnrolledStudents": 270,
+    "joiningDate": "2017-06-15",
+    "address": "123 Main St, New York, USA",
+    "email": "john.doe@example.com",
+    "password": "12345678"
+  }
+]
