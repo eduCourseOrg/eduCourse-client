@@ -18,8 +18,8 @@ const Home = () => {
             <Review></Review>
             <OurProcess></OurProcess>
             <Faq></Faq>
-            <InputField></InputField>
-            <CustomDropdown></CustomDropdown>
+            {/* <InputField></InputField> */}
+            {/* <CustomDropdown></CustomDropdown> */}
         </>
     );
 };

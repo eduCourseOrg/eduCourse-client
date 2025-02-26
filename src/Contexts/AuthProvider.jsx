@@ -10,7 +10,8 @@ const eduAuth = getAuth(app);
 const GoogleProvider = new GoogleAuthProvider();
 const AuthProvider = ({children}) => {
     
-    const [user,setUser] = useState(null);
+    const [user, setUser] = useState(null);
+    const [role, setRole] = useState('instructor')
     const [loading, setLoading] = useState(true);
 
     const createAccount= (email,password)=>{
@@ -46,7 +47,7 @@ const AuthProvider = ({children}) => {
         }
     }, [])
     
-    const providerInfo = {createAccount,logIn,user,loading,googleLogin,logOut,eduAuth}
+    const providerInfo = {createAccount,logIn,user,loading,googleLogin,logOut,eduAuth,role}
    
     return (
         <EduCourseContexts.Provider value={providerInfo}>

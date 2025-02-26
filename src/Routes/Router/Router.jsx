@@ -8,6 +8,7 @@ import Home from "../../Pages/Home/Home";
 import InstructorDetails from "../../Pages/InstructorDetails/InstructorDetails";
 import InstructorForm from "../../Pages/Register/InstructorForm";
 import StudentRegister from "../../Pages/Register/StudentRegister";
+import Dashboard from "../../Layout/Dashboard/Dashboard";
 
 export const router = createBrowserRouter([
   {
@@ -47,4 +48,15 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: '/dashboard',
+    element: <Dashboard></Dashboard>,
+    errorElement: <Error></Error>,
+    children: [
+      {
+        path: '/dashboard',
+        element: <></>
+      },
+    ]
+  }
 ]);
