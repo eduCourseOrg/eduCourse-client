@@ -1,5 +1,5 @@
-import ReactPlayer from "react-player";
 import PropTypes from "prop-types";
+import ReactPlayer from "react-player";
 
 const VideoPlayer = ({ url }) => {
   if (!url) {
