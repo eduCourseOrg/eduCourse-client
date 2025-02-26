@@ -26,8 +26,8 @@ const AllCourse = () => {
         return response.json();
       })
       .then((data) => {
-        setCourseData(data.courses);
-        setFilteredCourses(data.courses);
+        setCourseData(data?.courses);
+        setFilteredCourses(data?.courses);
       })
       .catch((error) =>
         console.error(
@@ -54,59 +54,63 @@ const AllCourse = () => {
 
   console.log("level", levels);
 
-  const filteredCourse = useMemo(() => {
+  const filteredCourse = () => {
     let filtered = [...courseData];
     // Search term filter
 
-    const matchedSearch =
-      searchTerm.length === 0 ||
-      filtered.some((value) =>
-        String(value).toLowerCase().includes(searchTerm.toLowerCase())
+    if (searchTerm) {
+      filtered = filtered.filter((course) =>
+        Object.values(course).some((value) =>
+          String(value).toLowerCase().includes(searchTerm.toLowerCase())
+        )
       );
+    }
+
     // Dropdown category filter (single category)
-    const matchesCategory =
-      !selectedCategory || // Allow filtering without selecting a category
-      selectedCategory === "All Categories" ||
-      filtered.some((course) => course.category) === selectedCategory;
+
+    // if (selectedCategory !== "All Categories") {
+    //   filtered = filtered.filter((item) => item?.category === selectedCategory);
+    // }
+
+    if (selectedCategory !== "All Categories") {
+      filtered = filtered.filter((item) => item?.category?.includes(selectedCategory));
+    }
+    // Dropdown category filter (single category)
+    // const matchesCategory =(course)
+    //   !selectedCategory || // Allow filtering without selecting a category
+    //   selectedCategory === "All Categories" ||
+    //   course.category === selectedCategory;
 
     // Checkbox category filter (multiple categories)
-    const selectedCheckboxesSet = new Set(selectedCheckboxes);
-    const matchesCheckboxes =
-      selectedCheckboxes.length === 0 ||
-      selectedCheckboxesSet.has(filtered.some((course) => course.category));
+    // const selectedCheckboxesSet = new Set(selectedCheckboxes);
+    // const matchesCheckboxes =(course)=>
+    //   selectedCheckboxes.length === 0 ||
+    //   selectedCheckboxesSet.has( course.category);
+    if (selectedCheckboxes.length > 0) {
+      const selectedCheckboxesSet = new Set(selectedCheckboxes);
+      filtered = filtered.filter((item) =>
+        selectedCheckboxesSet.has(item.category)
+      );
+    }
 
     // Level Checkbox filter
 
-    const selectedLevelCheckboxesSet = new Set(selectedLevelCheckboxes);
-    const matchesLevelCheckboxes =
-      selectedLevelCheckboxes.length === 0 || // Ensure it’s always an array
-      selectedLevelCheckboxesSet.has(
-        filtered.some((course) => course.courseLevel)
+    if (selectedLevelCheckboxes.length > 0) {
+      const selectedLevelChecbocSet = new Set(selectedLevelCheckboxes);
+      filtered = filtered.filter((item) =>
+        selectedLevelChecbocSet.has(item.courseLevel)
       );
+    }
 
-    // Apply all filters (search, category, checkboxes, level)
-    filtered = filtered.filter(
-      (course) =>
-        matchedSearch && // Always check the search term
-        matchesCategory && // Check if category matches
-        matchesCheckboxes && // Check if selected checkboxes match
-        matchesLevelCheckboxes // Check if selected levels match
-    );
+    // const selectedLevelCheckboxesSet = new Set(selectedLevelCheckboxes);
+    // const matchesLevelCheckboxes =
+    //   selectedLevelCheckboxes.length === 0 || // Ensure it’s always an array
+    //   selectedLevelCheckboxesSet.has(
+    //     filtered.some((course) => course.courseLevel)
+    //   );
 
-    return filtered;
-  }, [
-    searchTerm,
-    selectedCategory,
-    selectedLevelCheckboxes,
-    selectedCheckboxes,
-    courseData,
-  ]);
-
-  useEffect(() => {
-    filteredCourses.length === 0
-      ? setFilteredCourses(courseData)
-      : setFilteredCourses(filteredCourse);
-  }, [filteredCourse, courseData]);
+    setFilteredCourses(filtered);
+  };
 
   const searchByClick = () => setSearchTriggered((prev) => !prev);
 
@@ -157,10 +161,17 @@ const AllCourse = () => {
   };
 
   useEffect(() => {
-    filteredCourses.length === 0
-      ? setFilteredCourses(courseData)
-      : setFilteredCourses(filteredCourse);
-  }, [filteredCourse, courseData]);
+    filteredCourse();
+  }, [
+    searchTerm,
+    selectedCategory,
+    selectedCheckboxes,
+    selectedLevelCheckboxes,
+  ]);
+
+  console.log("Defaulte", courseData);
+  console.log("filtered", filteredCourses);
+  console.log("pagination", currentCourses);
 
   return (
     <section>
