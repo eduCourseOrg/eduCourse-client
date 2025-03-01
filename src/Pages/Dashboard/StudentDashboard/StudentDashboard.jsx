@@ -1,8 +1,7 @@
-
 const StudentDashboard = () => {
     return (
         <div>
-            Student Dashboard
+            Student
         </div>
     );
 };

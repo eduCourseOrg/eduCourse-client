@@ -1,14 +1,28 @@
 import { createBrowserRouter } from "react-router-dom";
-import Main from "../../Layout/Main/Main";
-import AllCourse from "../../Pages/AllCoursePage/AllCourse";
-import AllInstructors from "../../Pages/AllInstructors/AllInstructors";
-import CourseDetails from "../../Pages/CourseDetails/CourseDetails";
-import Error from "../../Pages/Error/Error";
-import Home from "../../Pages/Home/Home";
-import InstructorDetails from "../../Pages/InstructorDetails/InstructorDetails";
-import InstructorForm from "../../Pages/Register/InstructorForm";
-import StudentRegister from "../../Pages/Register/StudentRegister";
-import Dashboard from "../../Layout/Dashboard/Dashboard";
+import {
+  Main,
+  AllCourse,
+  AllInstructors,
+  CourseDetails,
+  Error,
+  Home,
+  InstructorDetails,
+  InstructorForm,
+  StudentRegister,
+  Dashboard,
+  DashboardSwitch,
+  Courses,
+  Analytics,
+  CreateCourse,
+  Messages,
+  Notifications,
+  Certificates,
+  Reviews,
+  Earnings,
+  Payouts,
+  Statements,
+  Setting,
+  Credits } from './RouterImport';
 
 export const router = createBrowserRouter([
   {
@@ -17,33 +31,33 @@ export const router = createBrowserRouter([
     errorElement: <Error></Error>,
     children: [
       {
-        path: "/",
+        index: true,
         element: <Home></Home>,
       },
       {
-        path: "/register",
+        path: "register",
         element: <StudentRegister></StudentRegister>,
       },
       {
-        path: "/courses/:id",
+        path: "courses/:id",
         element: <CourseDetails></CourseDetails>,
         loader: async ({ params }) =>
           fetch(`http://localhost:5000/courses/${params.id}`),
       },
       {
-        path: "/instructorReg",
+        path: "instructorReg",
         element: <InstructorForm></InstructorForm>,
       },
       {
-        path: "/courses",
+        path: "courses",
         element: <AllCourse></AllCourse>,
       },
       {
-        path: "/instructorDetails",
+        path: "instructorDetails",
         element: <InstructorDetails></InstructorDetails>,
       },
       {
-        path: "/instructors",
+        path: "instructors",
         element: <AllInstructors></AllInstructors>,
       },
     ],
@@ -54,9 +68,57 @@ export const router = createBrowserRouter([
     errorElement: <Error></Error>,
     children: [
       {
-        path: '/dashboard',
-        element: <></>
+        index: true,
+        element: <DashboardSwitch></DashboardSwitch>
       },
+      {
+        path: 'courses', 
+        element: <Courses></Courses>
+      },
+      {
+        path: 'analytics',
+        element: <Analytics></Analytics>
+      },
+      {
+        path: 'create-course',
+        element: <CreateCourse></CreateCourse>
+      },
+      {
+        path: 'messages',
+        element: <Messages></Messages>
+      },
+      {
+        path: 'notifications',
+        element: <Notifications></Notifications>
+      },
+      {
+        path: 'certificates',
+        element: <Certificates></Certificates>
+      },
+      {
+        path: 'reviews',
+        element: <Reviews></Reviews>
+      },
+      {
+        path: 'earnings',
+        element: <Earnings></Earnings>
+      },
+      {
+        path: 'payout',
+        element: <Payouts></Payouts>
+      },
+      {
+        path: 'statements',
+        element: <Statements></Statements>
+      },
+      {
+        path: 'setting',
+        element: <Setting></Setting>
+      },
+      {
+        path: 'credits',
+        element: <Credits></Credits>
+      }
     ]
   }
 ]);

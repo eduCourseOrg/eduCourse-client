@@ -1,35 +1,11 @@
 @import 'tailwindcss';
 
-@theme {
-  /* sm (≥640px) → Green
+ /* sm (≥640px) → Green
     md (≥768px) → tablet
     lg (≥1024px) → Red
     xl (≥1280px) → laptop */
-  /* --animate-menuToLeft: menuLeft 1s forwards;
-  --animate-menuToRight: menuRight 1s forwards; */
 
-  /* @keyframes menuLeft {
-    0% {
-      transform: translateX(0)
-    }
 
-    100% {
-      transform: translateX(-120%)
-    }
-  }
-
-  @keyframes menuRight {
-    0% {
-      transform: translateX(-120%)
-    }
-
-    100% {
-      transform: translateX(0)
-    }
-  } */
-}
-
-/* @plugin "daisyui"; */
 @layer base {
   :root {
     --color-primary: #006A4E;
@@ -40,6 +16,38 @@
     --animate-menuToRight: menuRight 1s forwards;
   }
 
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-secondary)
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  display: none;
+}
+
+.sidebar:hover::-webkit-scrollbar {
+  display: block;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 8px;
+}
+.sidebar::-webkit-scrollbar-track {
+  background: var(--color-secondary)
+}
+
+
   *,
   ::after,
   ::before,
@@ -47,6 +55,7 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
+
 
   @keyframes menuLeft {
     0% {
@@ -121,13 +130,11 @@
   0% {
     z-index: 10;
     transform: translateX(0) scale(1);
-    /* width:100%; */
   }
 
   100% {
     z-index: 0;
     transform: translateX(-50%) scale(0.8);
-    /* width: 50%; */
   }
 }
 
