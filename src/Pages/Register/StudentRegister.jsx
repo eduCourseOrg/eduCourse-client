@@ -14,7 +14,8 @@ const StudentRegister = () => {
             <button className={!isLogin? "btn  w-1/2 p-2 cursor-pointer rounded-t-lg font-bold text-[20px] text-[var(--color-secondary)]  bg-[var(--color-primary)]":"btn  w-1/2 p-2 cursor-pointer rounded-t-lg font-bold text-[20px] text-[var(--color-primary)]  bg-[var(--color-secondary)]"} onClick={()=>setIsLogin(false)}>Sign Up</button>
             
             {
-              isLogin?           
+              isLogin?  
+                      
               <LoginForm setIsLogin={setIsLogin}></LoginForm>
               :
               <SignUpForm setIsLogin={setIsLogin}></SignUpForm>
