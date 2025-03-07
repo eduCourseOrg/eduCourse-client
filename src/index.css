@@ -48,6 +48,24 @@
   background: var(--color-secondary)
 }
 
+.create-course::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  display: none;
+}
+
+.create-course:hover::-webkit-scrollbar {
+  display: block;
+}
+
+.create-course::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 8px;
+}
+.create-course::-webkit-scrollbar-track {
+  background: var(--color-secondary)
+}
+
 
   *,
   ::after,
