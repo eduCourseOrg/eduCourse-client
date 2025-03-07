@@ -22,7 +22,13 @@ import {
   Payouts,
   Statements,
   Setting,
-  Credits } from './RouterImport';
+  Credits, 
+  Curriculum,
+  Drip,
+  CourseSetting,
+  Pricing,
+  FAQ,
+  Notice} from './RouterImport';
 
 export const router = createBrowserRouter([
   {
@@ -80,10 +86,6 @@ export const router = createBrowserRouter([
         element: <Analytics></Analytics>
       },
       {
-        path: 'create-course',
-        element: <CreateCourse></CreateCourse>
-      },
-      {
         path: 'messages',
         element: <Messages></Messages>
       },
@@ -118,6 +120,37 @@ export const router = createBrowserRouter([
       {
         path: 'credits',
         element: <Credits></Credits>
+      }
+    ]
+  },
+  {
+    path: '/create-course',
+    element: <CreateCourse></CreateCourse>,
+    errorElement: <Error></Error>,
+    children: [
+      {
+        index: true,
+        element: <Curriculum></Curriculum>
+      },
+      {
+        path: 'drip',
+        element: <Drip></Drip>
+      },
+      {
+        path: 'setting',
+        element: <CourseSetting></CourseSetting>
+      },
+      {
+        path: 'pricing',
+        element: <Pricing></Pricing>
+      },
+      {
+        path: 'FAQ',
+        element: <FAQ></FAQ>
+      },
+      {
+        path: 'notice',
+        element: <Notice></Notice>
       }
     ]
   }

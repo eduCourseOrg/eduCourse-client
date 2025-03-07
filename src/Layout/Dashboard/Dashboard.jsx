@@ -42,8 +42,6 @@ const Dashboard = () => {
         <NavLink to='/dashboard/courses' className={({ isActive }) => `${isActive ? 'bg-primary text-secondary' : 'text-primary hover:text-[var(--color-secondary)] hover:bg-[var(--color-primary)]'} transform transition-all duration-700 flex items-center p-4 leading-none`}><h1><FaBook></FaBook></h1> <h1 className={`${open ? 'opacity-100' : 'opacity-0'} pl-4`}>Courses</h1></NavLink>
         
         <NavLink to='/dashboard/analytics' className={({ isActive }) => `${isActive ? 'bg-primary text-secondary' : 'text-primary hover:text-[var(--color-secondary)] hover:bg-[var(--color-primary)]'} transform transition-all duration-700 flex items-center p-4 leading-none`}><h1><IoAnalyticsSharp></IoAnalyticsSharp></h1> <h1 className={`${open ? 'opacity-100' : 'opacity-0'} pl-4`}>Analytics</h1></NavLink>
-        
-        <NavLink to='/dashboard/create-course' className={({ isActive }) => `${isActive ? 'bg-primary text-secondary' : 'text-primary hover:text-[var(--color-secondary)] hover:bg-[var(--color-primary)]'} transform transition-all duration-700 flex items-center p-4 leading-none`}><h1><LuCirclePlus></LuCirclePlus></h1> <h1 className={`${open ? 'opacity-100' : 'opacity-0'} pl-4`}>Create Course</h1></NavLink>
 
         <NavLink to='/dashboard/messages' className={({ isActive }) => `${isActive ? 'bg-primary text-secondary' : 'text-primary hover:text-[var(--color-secondary)] hover:bg-[var(--color-primary)]'} transform transition-all duration-700 flex items-center p-4 leading-none`}><h1><MdMessage></MdMessage></h1> <h1 className={`${open ? 'opacity-100' : 'opacity-0'} pl-4`}>Messages</h1></NavLink>
         
@@ -71,8 +69,10 @@ const Dashboard = () => {
                     <RxHamburgerMenu></RxHamburgerMenu>
                 </div>
                 <div className='w-[96%] h-full flex items-center justify-between'>
-                    <img src={logo} alt="Logo image" className='w-[10%] h-full' />
-                    <div className='flex gap-5 pr-4 text-xl text-primary'>
+                    <NavLink className='w-[10%] h-full' to={'/dashboard'}><img src={logo} alt="Logo image" className='w-full h-full' /></NavLink>
+                    <div className='flex gap-5 pr-4 text-xl text-primary items-center'>
+
+                        <NavLink to='/create-course' end className={`h-full bg-primary py-1 px-2 text-secondary text-lg rounded hover:bg-[var(--color-secondary)] hover:text-[var(--color-primary)]`}><button className='flex items-center gap-2 cursor-pointer'><LuCirclePlus></LuCirclePlus> <span>Create Course</span></button></NavLink>
                         <span className='relative p-[1px]'><FaShoppingCart></FaShoppingCart> <span className='w-[10px] h-[10px] absolute top-0 right-0 bg-red-500 rounded-full text-secondary text-[10px] flex items-center justify-center'>2</span></span>
 
                         <span className='relative p-[1px]'><IoIosMail></IoIosMail> <span className='w-[10px] h-[10px] absolute top-0 right-0 bg-red-500 rounded-full text-secondary text-[10px] flex items-center justify-center'>2</span></span>

@@ -21,6 +21,12 @@ import Payouts from "../../Pages/Dashboard/InstructorDashboard/Payouts/Payouts";
 import Statements from "../../Pages/Dashboard/DashboardShared/Statements/Statements";
 import Setting from "../../Pages/Dashboard/DashboardShared/Setting/Setting";
 import Credits from "../../Pages/Dashboard/StudentDashboard/Credits/Credits";
+import Curriculum from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Curriculum";
+import Drip from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Drip";
+import CourseSetting from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Settings";
+import Pricing from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Pricing";
+import Notice from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Notice";
+import FAQ from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/FAQ";
 
 
 export {
@@ -47,4 +53,10 @@ export {
   Statements,
   Setting,
   Credits,
+  Curriculum,
+  Drip,
+  CourseSetting,
+  Pricing,
+  Notice,
+  FAQ,
 };
