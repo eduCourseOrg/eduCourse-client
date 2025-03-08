@@ -28,7 +28,12 @@ import {
   CourseSetting,
   Pricing,
   FAQ,
-  Notice} from './RouterImport';
+  Notice,
+  Build,
+  TextLesson,
+  VideoLesson,
+  Quiz,
+  Assignment} from './RouterImport';
 
 export const router = createBrowserRouter([
   {
@@ -129,8 +134,31 @@ export const router = createBrowserRouter([
     errorElement: <Error></Error>,
     children: [
       {
-        index: true,
-        element: <Curriculum></Curriculum>
+        path: '/create-course',
+        element: <Curriculum></Curriculum>,
+        errorElement: <Error></Error>,
+        children: [
+          {
+            index: true,
+            element: <Build></Build>
+          },
+          {
+            path: 'text',
+            element: <TextLesson></TextLesson>
+          },
+          {
+            path: 'video',
+            element: <VideoLesson></VideoLesson>
+          },
+          {
+            path: 'quiz',
+            element: <Quiz></Quiz>
+          },
+          {
+            path: 'assignment',
+            element: <Assignment></Assignment>
+          }
+        ]
       },
       {
         path: 'drip',
