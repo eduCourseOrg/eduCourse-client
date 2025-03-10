@@ -2,7 +2,7 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { Link, NavLink, Outlet } from "react-router-dom";
 const CreateCourse = () => {
     return (
-        <section className="w-full h-screen flex flex-col">
+        <section className="w-full h-[100vh] flex flex-col">
             <nav className="w-full h-[10vh] bg-primary flex items-center justify-between text-secondary text-md gap-3 px-3">
                 <Link to={"/dashboard"} className="w-[13%] h-full border-r border-gray-100/30 flex items-center justify-center cursor-pointer">
                     <IoIosArrowRoundBack className="text-3xl"/>

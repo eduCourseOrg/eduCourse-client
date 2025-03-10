@@ -34,7 +34,7 @@ const Curriculum = () => {
     return (
         <div className="w-full h-full flex">
             {/* leftSidebar */}
-            <div className="w-[30%] border-r border-green-500/50 flex flex-col gap-4 p-4">
+            <div className="w-[30%] h-full border-r border-green-500/50 flex flex-col gap-4 p-4">
                 <h1 className="text-3xl font-semibold text-primary">Curriculum</h1>
                 <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
                     <SortableContext items={lessons.map(lesson => lesson.id)} strategy={verticalListSortingStrategy}>
@@ -50,7 +50,7 @@ const Curriculum = () => {
                 <button onClick={handleButtonClick} className="flex gap-2 items-center justify-center w-full py-3 border border-primary rounded text-primary cursor-pointer hover:bg-[var(--color-primary)] hover:text-[var(--color-secondary)]"><AiFillPlusCircle></AiFillPlusCircle> <span>New Section</span></button>
             </div>
             {/* RightSideContent */}
-            <div className="w-[70%] p-4 h-full overflow-y-auto">
+            <div className="w-[70%] p-4 h-full">
                 <Outlet></Outlet>
             </div>
         </div>

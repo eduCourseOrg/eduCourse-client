@@ -66,14 +66,27 @@
   background: var(--color-secondary)
 }
 
+/* .quill{
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+} */
+
 .ql-toolbar{
   background-color: var(--color-secondary);
 }
 
 .ql-container {
+  height: 100%;
   overflow-y: scroll;
-  height: 10vh;
 }
+
+/* .ql-editor{
+  height: 100%;
+  border: 3px solid red;
+  overflow-y: scroll;
+} */
+
 
 
   *,
