@@ -13,10 +13,10 @@ import { HiOutlineVideoCamera } from "react-icons/hi2";
 import SortableLecture from "./SortableLecture";
 import { closestCenter, DndContext } from "@dnd-kit/core";
 import Modal from "../../../../Components/Modal/Modal";
-import { useState } from "react";
+import { memo, useCallback, useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 
-export default function SortableItem({ id, lesson, setLessons, lessons, activeLecture, lectureClicked }) {
+const SortableItem = ({ id, lesson, setLessons, lessons, activeLecture, lectureClicked }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
 
@@ -39,22 +39,33 @@ export default function SortableItem({ id, lesson, setLessons, lessons, activeLe
     setIsModalOpen(true)
   }
 
-  const handleDragEnd = (event) => {
+  const handleDragEnd = useCallback((event) => {
     const { active, over } = event;
     if (!over || active.id === over.id) return;
+
     const lessonIndex = lessons.findIndex(lesson => lesson.id === id);
     if (lessonIndex === -1) return;
 
     const oldIndex = lessons[lessonIndex].lectures.findIndex(lecture => lecture.lessonId === active.id);
     const newIndex = lessons[lessonIndex].lectures.findIndex(lecture => lecture.lessonId === over.id);
-    if (oldIndex !== -1 && newIndex !== -1) {
-      const updatedLessons = [...lessons];
-      updatedLessons[lessonIndex].lectures = arrayMove(updatedLessons[lessonIndex].lectures, oldIndex, newIndex);
-      setLessons(updatedLessons);
-    };
-  }
 
-  const handleAddLesson = (value) => {
+    if (oldIndex !== newIndex) {
+        setLessons(prevLessons => {
+            const updatedLessons = [...prevLessons];
+            updatedLessons[lessonIndex].lectures = arrayMove(
+                updatedLessons[lessonIndex].lectures,
+                oldIndex,
+                newIndex
+            );
+            return updatedLessons;
+        });
+    }
+}, [id, lessons,setLessons]);
+
+
+
+
+  const handleAddLesson = useCallback((value) => {
     const data = [...lessons];
     const filterData = data.find(lesson => lesson.id === id);
     const index = data.findIndex(lesson => lesson.id === id);
@@ -67,7 +78,7 @@ export default function SortableItem({ id, lesson, setLessons, lessons, activeLe
     data.splice(index,1,filterData)
     setLessons(data)
     setIsModalOpen(false)
-  }
+  },[id,lessons,setLessons])
 
 
   
@@ -91,8 +102,8 @@ export default function SortableItem({ id, lesson, setLessons, lessons, activeLe
           <SortableContext items={lesson?.lectures?.map(lesson => lesson.lessonId)} strategy={verticalListSortingStrategy}>
           <ul className="w-full h-auto p-2 bg-white border-t border-primary">
               {
-                lesson?.lectures?.map((lecture, idx) => (
-                  <SortableLecture key={idx} lecture={lecture} id={lecture?.lessonId} clicked={lectureClicked} activeLecture={activeLecture}></SortableLecture>
+                lesson?.lectures?.map((lecture) => (
+                  <SortableLecture key={lecture?.lessonId} lecture={lecture} id={lecture?.lessonId} clicked={lectureClicked} activeLecture={activeLecture}></SortableLecture>
                 ))
             }
           </ul>
@@ -159,3 +170,5 @@ export default function SortableItem({ id, lesson, setLessons, lessons, activeLe
       </div>
   );
 }
+
+export default memo(SortableItem) ;

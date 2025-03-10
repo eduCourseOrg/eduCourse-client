@@ -143,19 +143,19 @@ export const router = createBrowserRouter([
             element: <Build></Build>
           },
           {
-            path: 'text',
+            path: 'text/:id',
             element: <TextLesson></TextLesson>
           },
           {
-            path: 'video',
+            path: 'video/:id',
             element: <VideoLesson></VideoLesson>
           },
           {
-            path: 'quiz',
+            path: 'quiz/:id',
             element: <Quiz></Quiz>
           },
           {
-            path: 'assignment',
+            path: 'assignment/:id',
             element: <Assignment></Assignment>
           }
         ]

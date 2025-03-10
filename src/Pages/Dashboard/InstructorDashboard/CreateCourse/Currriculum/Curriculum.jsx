@@ -1,6 +1,6 @@
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from "@dnd-kit/sortable";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { AiFillPlusCircle } from "react-icons/ai";
 import SortableItem from '../SortableItem';
 import { Outlet } from 'react-router-dom';
@@ -15,11 +15,11 @@ const Curriculum = () => {
         setLessons([...lessons, newSection]);
     }
 
-    const handleLectureClicked = (value) => {
+    const handleLectureClicked = useCallback((value) => {
         setClickedLecture(value)
-    }
+    },[])
 
-    const handleDragEnd = (event) => {
+    const handleDragEnd = useCallback((event) => {
         const { active, over } = event;
         if (!over || active.id === over.id) return; // No valid drop target
 
@@ -29,7 +29,7 @@ const Curriculum = () => {
         if (oldIndex !== newIndex) {
             setLessons(arrayMove(lessons, oldIndex, newIndex)); // Reorder array
         }
-    };
+    },[lessons])
 
     return (
         <div className="w-full h-full flex">
@@ -50,7 +50,7 @@ const Curriculum = () => {
                 <button onClick={handleButtonClick} className="flex gap-2 items-center justify-center w-full py-3 border border-primary rounded text-primary cursor-pointer hover:bg-[var(--color-primary)] hover:text-[var(--color-secondary)]"><AiFillPlusCircle></AiFillPlusCircle> <span>New Section</span></button>
             </div>
             {/* RightSideContent */}
-            <div className="grow p-4 h-full overflow-y-auto">
+            <div className="w-[70%] p-4 h-full overflow-y-auto">
                 <Outlet></Outlet>
             </div>
         </div>

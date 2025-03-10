@@ -12,7 +12,7 @@ const CreateCourse = () => {
                     <h1 className="text-md font-bold">How to Design Components Right</h1>
                 </div>
                 <div className="grow h-full flex items-center justify-center gap-3">
-                    <NavLink to='/create-course' end className={({isActive}) => `${isActive && 'border-b-2 border-[var(--color-secondary)] bg-blue-100/10'} h-full flex items-center px-3`}>Curriculum</NavLink>
+                    <NavLink to='/create-course' className={({isActive}) => `${isActive && 'border-b-2 border-[var(--color-secondary)] bg-blue-100/10'} h-full flex items-center px-3`}>Curriculum</NavLink>
                     
                     <NavLink to='/create-course/drip' className={({isActive}) => `${isActive && 'border-b-2 border-[var(--color-secondary)] bg-blue-100/10'} h-full flex items-center px-3`}>Drip</NavLink>
                     

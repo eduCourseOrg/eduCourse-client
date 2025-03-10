@@ -66,6 +66,15 @@
   background: var(--color-secondary)
 }
 
+.ql-toolbar{
+  background-color: var(--color-secondary);
+}
+
+.ql-container {
+  overflow-y: scroll;
+  height: 10vh;
+}
+
 
   *,
   ::after,
