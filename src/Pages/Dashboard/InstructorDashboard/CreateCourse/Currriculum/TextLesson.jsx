@@ -67,39 +67,39 @@ const TextLesson = () => {
                     {
                         activeButton ?
                             <div className="w-full flex flex-col gap-4">
-                        {/* Duration */}
-                        <div className=" flex flex-col gap-1 w-1/2">
-                            <h2 className="text-sm font-semibold">Lesson Duration</h2>
-                            <input 
-                                placeholder="Lesson Duration" 
-                                type="text" 
-                                name="duration" 
-                                className="h-full w-full px-3 py-2 border border-secondary rounded focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-transparent transition duration-200" 
-                            />
-                        </div>
+                                {/* Duration */}
+                                <div className=" flex flex-col gap-1 w-1/2">
+                                    <h2 className="text-sm font-semibold">Lesson Duration</h2>
+                                    <input 
+                                        placeholder="Lesson Duration" 
+                                        type="text" 
+                                        name="duration" 
+                                        className="h-full w-full px-3 py-2 border border-secondary rounded focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-transparent transition duration-200" 
+                                    />
+                                </div>
 
-                        {/* Short Description */}
-                        <div className=" flex flex-col gap-1 w-full">
-                            <h2 className="text-sm font-semibold">Description of the lesson</h2>
-                            <ReactQuill 
-                                theme="snow" 
-                                value={description}
-                                modules={modules}
-                                onChange={handleContentChange} 
-                                placeholder="Write your lesson description here..." 
-                                className="bg-white w-full h-50 flex flex-col"
-                            />
-                        </div>
+                                {/* Short Description */}
+                                <div className=" flex flex-col gap-1 w-full">
+                                    <h2 className="text-sm font-semibold">Description of the lesson</h2>
+                                    <ReactQuill 
+                                        theme="snow" 
+                                        value={description}
+                                        modules={modules}
+                                        onChange={handleContentChange} 
+                                        placeholder="Write your lesson description here..." 
+                                        className="bg-white w-full h-50 flex flex-col"
+                                    />
+                                </div>
 
-                        {/* Lesson Materials */}
-                        <div className=" flex flex-col gap-1 w-full h-60">
-                            <h2 className="text-sm font-semibold">Lesson Materials</h2>
-                            <div className="w-full h-full flex flex-col items-center gap-1 justify-center border-dashed border-1 rounded bg-secondary">
-                                <h3>Browse files from your computer</h3>
-                                <label htmlFor="browsefile" className="bg-primary text-secondary rounded px-5 py-2 cursor-pointer">Browse Files</label>
-                                <input className="hidden" type="file" name="browse" id="browsefile" />
-                            </div>
-                        </div>
+                                {/* Lesson Materials */}
+                                <div className=" flex flex-col gap-1 w-full h-60">
+                                    <h2 className="text-sm font-semibold">Lesson Materials</h2>
+                                    <div className="w-full h-full flex flex-col items-center gap-1 justify-center border-dashed border-1 rounded bg-secondary">
+                                        <h3>Browse files from your computer</h3>
+                                        <label htmlFor="browsefile" className="bg-primary text-secondary rounded px-5 py-2 cursor-pointer">Browse Files</label>
+                                        <input className="hidden" type="file" name="browse" id="browsefile" />
+                                    </div>
+                                </div>
                             </div>
                             :
                             <div className="w-full flex flex-col gap-4 border-t border-gray-200/90 py-4">
