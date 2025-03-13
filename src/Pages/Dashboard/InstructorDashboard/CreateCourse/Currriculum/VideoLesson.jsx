@@ -23,20 +23,29 @@ const VideoLesson = () => {
 
         try {
             if (!ffmpeg.loaded) await ffmpeg.load()
-            ffmpeg.writeFile("videoFile.mp4", await fetchFile(file));
+            ffmpeg.writeFile("videoFile.mp4", await fetchFile(file)); // use a relevant name, as your wish
             
             await ffmpeg.exec([
-                '-i', 'videoFile.mp4',
-                '-c:v', 'libx264',
-                '-crf', '28', 
+                '-i', 'videoFile.mp4', // input file name, same as writefile name
+                '-c:v', 'libx264', // convert video type
+                '-crf', '28', // 23-28 range. lower means high quality
                 '-preset', 'veryfast', // Compression speed (veryfast, fast, medium, slow, etc.)
-                'output.mp4'
+                'output.mp4' // this is the output video name. call it for output result.
             ]);
 
             const compressedData = await ffmpeg.readFile("output.mp4");
-            // Convert binary data to a binary string
-            const blob = new Blob([compressedData.buffer], { type: "text/plain" });
+            // Convert binary data to a binary string for storing it to Database as string
+            const binaryString = Array.from(compressedData)
+                .map((byte) => String.fromCharCode(byte))
+                .join("");
+            // Retrive the string from database and convert it to unit8Array for display the video
+            const byteArray = new Uint8Array(
+                [...binaryString].map((char) => char.charCodeAt(0))
+            );
+            // After retrive from database create a blob and make a output url. call it in video src.
+            const blob = new Blob([byteArray], { type: "video/mp4" });
             const outputUrl = URL.createObjectURL(blob);
+            // console.log("compressed",compressedData, "blob", blob, "output",binaryString)
             setFileData((prev)=> ({...prev, video: outputUrl}))
         } catch (error) {
             console.error("Error during compression/conversion:", error);
@@ -151,7 +160,7 @@ const VideoLesson = () => {
                                                             :
                                                             <><h3>Browse image from your computer</h3>
                                                             <label htmlFor="browseImage" className="bg-primary text-secondary rounded px-5 py-2 cursor-pointer">Upload an image</label>
-                                                            <input onChange={handleImageChange} className="hidden" type="file" name="browseImage" id="browseImage" /></>
+                                                            <input onChange={handleImageChange} className="hidden" type="file" name="browseImage" id="browseImage" accept="image/*"/></>
                                                 }
                                             </div>
                                         </div>
@@ -177,7 +186,7 @@ const VideoLesson = () => {
                                                             :
                                                             <><h3>Browse mp4 type video file from your computer</h3>
                                                             <label htmlFor="browseVideo" className="bg-primary text-secondary rounded px-5 py-2 cursor-pointer">Browse Video</label>
-                                                            <input onChange={compressAndConvertToBinary} className="hidden" type="file" name="browseVideo" id="browseVideo" accept="video/mp4" /></>
+                                                            <input onChange={compressAndConvertToBinary} className="hidden" type="file" name="browseVideo" id="browseVideo" accept="video/*" /></>
                                                 }
                                             </div>
                                         </div>
