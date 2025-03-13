@@ -4,12 +4,14 @@ import { useState } from "react";
 import ReactQuill from "react-quill";
 import { RxAvatar } from "react-icons/rx";
 import { FaTrashAlt } from "react-icons/fa";
+import { useParams } from "react-router-dom";
 
 
 const TextLesson = () => {
     const [activeButton, setActiveButton] = useState(true);
     const [description, setDescription] = useState("");
-    console.log('description', description)
+    const { id } = useParams();
+    console.log('lessonId', id)
 
     const handleContentChange = (value) => {
         setDescription(value);

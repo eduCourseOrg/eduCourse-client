@@ -1,16 +1,66 @@
-
 import { MdOutlineVideoLibrary } from "react-icons/md";
 import { useState } from "react";
 import ReactQuill from "react-quill";
 import { RxAvatar } from "react-icons/rx";
 import { FaTrashAlt } from "react-icons/fa";
+import { FFmpeg } from '@ffmpeg/ffmpeg';
+import { fetchFile } from '@ffmpeg/util';
 
 
 const VideoLesson = () => {
     const [activeButton, setActiveButton] = useState(true);
     const [description, setDescription] = useState("");
-    const [source, setSource] = useState('')
-    console.log('description', description)
+    const [source, setSource] = useState('');
+    const [fileData, setFileData] = useState({});
+    const [loading, setLoading] = useState(false);
+
+    const ffmpeg = new FFmpeg();
+
+    const compressAndConvertToBinary = async (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+        setLoading(true);
+
+        try {
+            if (!ffmpeg.loaded) await ffmpeg.load()
+            ffmpeg.writeFile("videoFile.mp4", await fetchFile(file));
+            
+            await ffmpeg.exec([
+                '-i', 'videoFile.mp4',
+                '-c:v', 'libx264',
+                '-crf', '28', 
+                '-preset', 'veryfast', // Compression speed (veryfast, fast, medium, slow, etc.)
+                'output.mp4'
+            ]);
+
+            const compressedData = await ffmpeg.readFile("output.mp4");
+            // Convert binary data to a binary string
+            const blob = new Blob([compressedData.buffer], { type: "text/plain" });
+            const outputUrl = URL.createObjectURL(blob);
+            setFileData((prev)=> ({...prev, video: outputUrl}))
+        } catch (error) {
+            console.error("Error during compression/conversion:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+
+    const handleImageChange = (event) => {
+        const selectedFile = event.target.files[0];
+        if (selectedFile) {
+            const imagePreview = URL.createObjectURL(selectedFile);
+            setFileData((prev)=> ({...prev, image: imagePreview}));
+        }
+    };
+
+    const deleteImage = () => {
+        setFileData((prev)=> ({...prev, image: ""}))
+    }
+
+    const deleteVideo = () => {
+        setFileData((prev)=> ({...prev, video: ""}))
+    }
 
     const handleContentChange = (value) => {
         setDescription(value);
@@ -37,7 +87,6 @@ const VideoLesson = () => {
     };
 
     const handleSourceSelect = (e) => {
-        console.log('selected')
         const value = e.target.value;
         setSource(value)
     }
@@ -90,19 +139,46 @@ const VideoLesson = () => {
                                     <div className="flex flex-col gap-8">
                                         <div className=" flex flex-col gap-1 w-full h-60">
                                             <h2 className="text-sm font-semibold">Lesson video poster</h2>
-                                            <div className="w-[60%] h-full flex flex-col items-center gap-1 justify-center border-dashed border-1 rounded ">
-                                                <h3>Browse image from your computer</h3>
-                                                <label htmlFor="browsefile" className="bg-primary text-secondary rounded px-5 py-2 cursor-pointer">Upload an image</label>
-                                                <input className="hidden" type="file" name="browse" id="browsefile" />
+                                            <div className="w-[60%] h-full flex flex-col items-center gap-2 justify-center border-dashed border-1 rounded ">
+                                                {
+                                                        fileData?.image ?
+                                                            <div className="w-full h-full relative group">
+                                                                <img src={fileData?.image} alt="Preview Image" className="w-full h-full" />
+                                                                <div className="w-full h-full hidden items-center justify-center absolute top-0 left-0 group-hover:flex bg-gray-100/40">
+                                                                    <button onClick={deleteImage} className="px-4 py-2 rounded bg-primary text-secondary cursor-pointer">Remove</button>
+                                                                </div>
+                                                            </div>
+                                                            :
+                                                            <><h3>Browse image from your computer</h3>
+                                                            <label htmlFor="browseImage" className="bg-primary text-secondary rounded px-5 py-2 cursor-pointer">Upload an image</label>
+                                                            <input onChange={handleImageChange} className="hidden" type="file" name="browseImage" id="browseImage" /></>
+                                                }
                                             </div>
                                         </div>
                                             {/* lesson Video */}
                                         <div className=" flex flex-col gap-1 w-full h-60">
                                             <h2 className="text-sm font-semibold">Lesson video</h2>
-                                            <div className="w-[60%] h-full flex flex-col items-center gap-1 justify-center border-dashed border-1 rounded ">
-                                                <h3>Browse files from your computer</h3>
-                                                <label htmlFor="browsefile" className="bg-primary text-secondary rounded px-5 py-2 cursor-pointer">Browse File</label>
-                                                <input className="hidden" type="file" name="browse" id="browsefile" />
+                                                <div className="w-[60%] h-full flex flex-col items-center gap-2 justify-center border-dashed border-1 rounded overflow-hidden">
+                                                {
+                                                    fileData?.video ?
+                                                        <div className="w-full h-full relative group">
+                                                            <video
+                                                            controls
+                                                            className="w-full h-full"
+                                                            >
+                                                            <source src={fileData?.video} type={'video/mp4'} />
+                                                            Your browser does not support the video tag.
+                                                            </video>
+                                                            <button onClick={deleteVideo} className="px-4 py-2 rounded bg-primary text-secondary cursor-pointer absolute top-3 right-3 hidden group-hover:block">Remove</button>    
+                                                        </div>
+                                                        :
+                                                        loading ? 
+                                                            <p className="text-xl">Loading....</p>
+                                                            :
+                                                            <><h3>Browse mp4 type video file from your computer</h3>
+                                                            <label htmlFor="browseVideo" className="bg-primary text-secondary rounded px-5 py-2 cursor-pointer">Browse Video</label>
+                                                            <input onChange={compressAndConvertToBinary} className="hidden" type="file" name="browseVideo" id="browseVideo" accept="video/mp4" /></>
+                                                }
                                             </div>
                                         </div>
                                     </div>
