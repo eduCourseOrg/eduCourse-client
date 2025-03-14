@@ -10,7 +10,7 @@
 @layer base {
   :root {
     --color-primary: #006a4e;
-    --color-secondary: #eeeded;
+    --color-secondary: #EEF1F7;
     --color-accent: #fce6e5;
     --color-accent2: #f8fcff;
     --animate-menuToLeft: menuLeft 1s forwards;
@@ -74,6 +74,30 @@
 
 .ql-toolbar{
   background-color: var(--color-secondary);
+}
+
+.ql-toolbar.ql-snow .ql-formats{
+  margin-right: 5px !important;
+  vertical-align: baseline !important;
+  /* border-right: 2px solid var(--color-primary); */
+}
+
+.ql-snow .ql-formats button{
+  padding: 2px !important;
+}
+
+.ql-snow .ql-formats .ql-font{
+  border: 1px solid var(--color-primary);
+  border-radius: 4% !important;
+}
+.ql-snow .ql-formats .ql-picker{
+  border: 1px solid var(--color-primary);
+  border-radius: 4% !important;
+}
+
+.ql-snow .ql-formats button:hover{
+  border: 1px solid var(--color-primary) !important;
+  border-radius: 10% !important;
 }
 
 .ql-container {
