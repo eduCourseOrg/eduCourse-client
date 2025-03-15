@@ -4,7 +4,7 @@ import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { GrFormEdit } from "react-icons/gr";
 import { RiImageAddFill } from "react-icons/ri";
 import { RxSquare } from "react-icons/rx";
-import { GoPlus } from "react-icons/go";
+import { GoPlus, GoPlusCircle } from "react-icons/go";
 import ReactQuill from "react-quill";
 
 const Quiz = () => {
@@ -13,7 +13,7 @@ const Quiz = () => {
     const [description2, setDescription2] = useState('');
     const [select, setSelect] = useState("single-choice");
     const [selectPosition, setSelectPosition] = useState('');
-    const [data, setData] = useState([]);
+    const [data, setData] = useState([{title: "first title"}, {title: "second title"}]);
 
     // const handleContentChange1 = (value) => {
     //     console.log('typed', value);
@@ -52,14 +52,33 @@ const Quiz = () => {
         }
     };
 
-    const CreateComponent = () => {
+    const handleAddQuiz = (id, position) => {
+        if (!id && !position) {
+            setData(prev => [...prev, {}]);
+            setSelectPosition("")
+        } else {
+            const oldData = [...data];
+            if ((position === "top") && (id === 0)) {
+                setData(prev => [{}, ...prev]);
+                setSelectPosition("");
+            } else {
+                if (position === "top") {
+                    oldData.splice(id, 0, {});
+                    setSelectPosition("");
+                    setData(()=> oldData);
+                } else {
+                    oldData.splice(id+1, 0, {});
+                    setSelectPosition("");
+                    setData(() => oldData);
+                }
+            }
+        }
+    }
+
+    const CreateComponent = ({id, position}) => {
         return (
             <div className="w-full border-2 border-dashed border-gray-300 py-5 flex items-center justify-center bg-white rounded">
-                <select name="questionSelect" id="" className="w-[20%] px-2 py-1 border rounded">
-                    <option value="single-choice">Single Choice</option>
-                    <option value="multiple-choice">Multiple Choice</option>
-                    <option value="true-false">True-False</option>
-                </select>
+                <button onClick={()=>handleAddQuiz(id, position)} className="px-4 py-2 rounded bg-primary text-secondary text-md cursor-pointer flex items-center gap-2"><GoPlusCircle></GoPlusCircle> <span>Create Quiz</span></button>
             </div>)
     }
 
@@ -67,7 +86,7 @@ const Quiz = () => {
         return (
             <div className="w-full flex flex-col gap-2">
                 {
-                    selectPosition === `top+${idx}` && <CreateComponent></CreateComponent>
+                    selectPosition === `top+${idx}` && <CreateComponent id={idx} position={"top"}></CreateComponent>
                 }
                 <div className="w-full h-auto bg-secondary rounded flex flex-col gap-4 pb-5 relative group/btn">
                     {/* Hover Button start*/}
@@ -96,7 +115,7 @@ const Quiz = () => {
                                 placeholder="Write your Question ..." 
                                 className="bg-white w-full h-40 flex flex-col"
                             />
-                            <select onChange={(e)=>setSelect(e.target.value)} name="questionType" id="" className="w-[30%] bg-white p-2 rounded">
+                            <select value={data?.type} onChange={(e)=>setSelect(e.target.value)} name="questionType" id="" className="w-[30%] bg-white p-2 rounded">
                                 <option value="single-choice">Single Choice</option>
                                 <option value="multiple-choice">Multiple Choice</option>
                                 <option value="true-false">True-False</option>
@@ -106,7 +125,7 @@ const Quiz = () => {
                     </div>
                     <hr className="border-t border-gray-500/50 h-[1px]" />
                     {
-                        select === "single-choice" &&
+                        data?.type === "single-choice" &&
                         <div className="w-full flex flex-col gap-3 px-4">
                             <h2 className="text-sm font-semibold">Answeres</h2>
                             {
@@ -123,12 +142,34 @@ const Quiz = () => {
                                             type="radio"
                                             name="option"
                                             className="appearance-none h-4 w-4 p-1 rounded-full border-2 border-gray-500 text-primary checked:bg-[var(--color-primary)] hover:border-green-500 cursor-pointer"
-                                        />
+                                            />
                                         </h2>
                                     </div>
                                 ))
                             }
                             <input type="text" name="answereText" placeholder="Add an answere" id="" className="w-full p-3 border border-secondary rounded focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-transparent transition duration-200 bg-white font-semibold"/>
+                        </div>
+                    }
+                    {
+                        data?.type === "true-false" &&
+                        <div className="w-full flex flex-col gap-3 px-4">
+                            <h2 className="text-sm font-semibold">Answeres</h2>
+                            <div className="w-full px-4 py-3 rounded bg-white flex items-center gap-3">
+                                <input
+                                    type="radio"
+                                    name="option"
+                                    className="appearance-none h-4 w-4 p-1 rounded-full border-2 border-gray-500 text-primary checked:bg-[var(--color-primary)] hover:border-green-500 cursor-pointer"
+                                />
+                                <span className="font-semibold">True</span>
+                            </div>
+                            <div className="w-full px-4 py-3 rounded bg-white flex items-center gap-3">
+                                <input
+                                    type="radio"
+                                    name="option"
+                                    className="appearance-none h-4 w-4 p-1 rounded-full border-2 border-gray-500 text-primary checked:bg-[var(--color-primary)] hover:border-green-500 cursor-pointer"
+                                />
+                                <span className="font-semibold">False</span>
+                            </div>
                         </div>
                     }
                     {/* Hover Button start*/}
@@ -138,7 +179,7 @@ const Quiz = () => {
                     {/* Hover Button End */}
                 </div>
                 {
-                    selectPosition === `bottom+${idx}` && <CreateComponent></CreateComponent>
+                    selectPosition === `bottom+${idx}` && <CreateComponent position={"bottom"} id={idx}></CreateComponent>
                 }
             </div>
         )
@@ -183,23 +224,29 @@ const Quiz = () => {
                         select === "single-choice" &&
                         <div className="w-full flex flex-col gap-3 px-4">
                             <h2 className="text-sm font-semibold">Answeres</h2>
-                            <div className="w-full px-4 py-3 flex items-center justify-between bg-white rounded group">
-                                <h1 className="flex items-center gap-3">
-                                    <RxSquare></RxSquare> 
-                                    <span className="font-semibold">Answere one of one</span>
-                                    <GrFormEdit className="text-xl hidden group-hover:block cursor-pointer"></GrFormEdit>
-                                </h1>
-                                <h2 className="flex items-center gap-2">
-                                    <span className="font-semibold">Correct</span> 
-                                    <input
+                            <input onKeyDown={handleQuestionAdd} type="text" name="answereText" placeholder="Add an answere" id="" className="w-full p-3 border border-secondary rounded focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-transparent transition duration-200 bg-white font-semibold"/>
+                        </div>
+                    }
+                    {
+                        select === "true-false" &&
+                        <div className="w-full flex flex-col gap-3 px-4">
+                            <h2 className="text-sm font-semibold">Answeres</h2>
+                            <div className="w-full px-4 py-3 rounded bg-white flex items-center gap-3">
+                                <input
                                     type="radio"
                                     name="option"
                                     className="appearance-none h-4 w-4 p-1 rounded-full border-2 border-gray-500 text-primary checked:bg-[var(--color-primary)] hover:border-green-500 cursor-pointer"
                                 />
-                                </h2>
+                                <span className="font-semibold">True</span>
                             </div>
-                            
-                            <input onKeyDown={handleQuestionAdd} type="text" name="answereText" placeholder="Add an answere" id="" className="w-full p-3 border border-secondary rounded focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-transparent transition duration-200 bg-white font-semibold"/>
+                            <div className="w-full px-4 py-3 rounded bg-white flex items-center gap-3">
+                                <input
+                                    type="radio"
+                                    name="option"
+                                    className="appearance-none h-4 w-4 p-1 rounded-full border-2 border-gray-500 text-primary checked:bg-[var(--color-primary)] hover:border-green-500 cursor-pointer"
+                                />
+                                <span className="font-semibold">False</span>
+                            </div>
                         </div>
                     }
                 </div>
@@ -244,7 +291,7 @@ console.log('data', data)
                     <div className="w-full px-4 pt-3 pb-5 flex flex-col gap-2">
                         {
                             data.length === 0 ? 
-                            <BlankQuiz></BlankQuiz>
+                            <CreateComponent></CreateComponent>
                             :
                             <>
                                 {
