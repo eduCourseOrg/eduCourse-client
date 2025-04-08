@@ -1,44 +1,117 @@
-@import 'tailwindcss';
+@import "tailwindcss";
+@import "tailwindcss";
 
-@theme {
-  /* sm (≥640px) → Green
+ /* sm (≥640px) → Green
     md (≥768px) → tablet
     lg (≥1024px) → Red
     xl (≥1280px) → laptop */
-  /* --animate-menuToLeft: menuLeft 1s forwards;
-  --animate-menuToRight: menuRight 1s forwards; */
 
-  /* @keyframes menuLeft {
-    0% {
-      transform: translateX(0)
-    }
 
-    100% {
-      transform: translateX(-120%)
-    }
-  }
-
-  @keyframes menuRight {
-    0% {
-      transform: translateX(-120%)
-    }
-
-    100% {
-      transform: translateX(0)
-    }
-  } */
-}
-
-/* @plugin "daisyui"; */
 @layer base {
   :root {
-    --color-primary: #006A4E;
-    --color-secondary: #EEEDED;
-    --color-accent: #FCE6E5;
-    --color-accent2: #F8FCFF;
+    --color-primary: #006a4e;
+    --color-secondary: #EEF1F7;
+    --color-accent: #fce6e5;
+    --color-accent2: #f8fcff;
     --animate-menuToLeft: menuLeft 1s forwards;
     --animate-menuToRight: menuRight 1s forwards;
   }
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-secondary)
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  display: none;
+}
+
+.sidebar:hover::-webkit-scrollbar {
+  display: block;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 8px;
+}
+.sidebar::-webkit-scrollbar-track {
+  background: var(--color-secondary)
+}
+
+.create-course::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  display: none;
+}
+
+.create-course:hover::-webkit-scrollbar {
+  display: block;
+}
+
+.create-course::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 8px;
+}
+.create-course::-webkit-scrollbar-track {
+  background: var(--color-secondary)
+}
+
+/* .quill{
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+} */
+
+.ql-toolbar{
+  background-color: var(--color-secondary);
+}
+
+.ql-toolbar.ql-snow .ql-formats{
+  margin-right: 5px !important;
+  vertical-align: baseline !important;
+  /* border-right: 2px solid var(--color-primary); */
+}
+
+.ql-snow .ql-formats button{
+  padding: 2px !important;
+}
+
+.ql-snow .ql-formats .ql-font{
+  border: 1px solid var(--color-primary);
+  border-radius: 4% !important;
+}
+.ql-snow .ql-formats .ql-picker{
+  border: 1px solid var(--color-primary);
+  border-radius: 4% !important;
+}
+
+.ql-snow .ql-formats button:hover{
+  border: 1px solid var(--color-primary) !important;
+  border-radius: 10% !important;
+}
+
+.ql-container {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+/* .ql-editor{
+  height: 100%;
+  border: 3px solid red;
+  overflow-y: scroll;
+} */
+
+
 
   *,
   ::after,
@@ -48,23 +121,24 @@
     border-color: var(--color-gray-200, currentColor);
   }
 
+
   @keyframes menuLeft {
     0% {
-      transform: translateX(0)
+      transform: translateX(0);
     }
 
     100% {
-      transform: translateX(-120%)
+      transform: translateX(-120%);
     }
   }
 
   @keyframes menuRight {
     0% {
-      transform: translateX(-120%)
+      transform: translateX(-120%);
     }
 
     100% {
-      transform: translateX(0)
+      transform: translateX(0);
     }
   }
 
@@ -101,33 +175,38 @@
   .bg-accent2 {
     background-color: var(--color-accent2);
   }
+  /* .active {
+    background-color: var(--color-accent2);
+    color: var(--color-primary);
+  } */
 
   .text-accent2 {
     color: var(--color-accent2);
   }
-    .animate-gradient {
-      animation: rotateGradient 4s linear infinite;
-    }
+  .animate-gradient {
+    animation: rotateGradient 4s linear infinite;
+  }
 }
 
 @layer utilities {
   .bg-gradient-custom {
-    background: linear-gradient(to right, var(--color-accent), var(--color-accent2));
+    background: linear-gradient(
+      to right,
+      var(--color-accent),
+      var(--color-accent2)
+    );
   }
 }
-
 
 @keyframes reviewPlus {
   0% {
     z-index: 10;
     transform: translateX(0) scale(1);
-    /* width:100%; */
   }
 
   100% {
     z-index: 0;
     transform: translateX(-50%) scale(0.8);
-    /* width: 50%; */
   }
 }
 
@@ -143,15 +222,14 @@
   }
 }
 
-  @keyframes progressAnimation {
-    0%{
-      width: 0%;
-    }
-    100%{
-      width: 50%;
-    }
+@keyframes progressAnimation {
+  0% {
+    width: 0%;
   }
-
+  100% {
+    width: 50%;
+  }
+}
 
 @keyframes reviewBefore {
   0% {
@@ -174,9 +252,6 @@
     transform: rotate(360deg);
   }
 }
-
-
-
 
 /* css to override the default styles of 'react-phone-input-2' package */
 .react-tel-input .form-control {

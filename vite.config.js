@@ -3,8 +3,8 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 // https://vite.dev/config/
 export default defineConfig({
-  optimizeDeps: {
-    include: ["@ffmpeg/ffmpeg"],
-  },
   plugins: [react(), tailwindcss()],
+  optimizeDeps: {
+    exclude: ["@ffmpeg/ffmpeg", "@ffmpeg/util"],
+  },
 });
