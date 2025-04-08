@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import VideoPlayer from "../../Components/VideoPlayer/VideoPlayer";
 import { useQuery } from "@tanstack/react-query";
+// import VideoUpload from "../../Components/VideoUpload/VideoUpload";
 
 const CourseDetails = () => {
   const loaderData = useLoaderData({});
@@ -323,6 +324,7 @@ const CourseDetails = () => {
           </div>
         </div>
       </div>
+      <div className="mt-8 border-2 border-primary p-4"></div>
     </div>
   );
 };
