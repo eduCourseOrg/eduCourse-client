@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from 'react-hot-toast';
-import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { Link } from 'react-router-dom';
 import Button from '../../Components/Buttons/Button';
@@ -15,21 +14,23 @@ const SignUpForm = ({setIsLogin}) => {
     reset ,
     formState: { errors },
   } = useForm()
-  const [phone, setPhone] = useState("");
-  const handleOnChange = value => {
-    setPhone(value);
-  };
-  const handleOnChangephone = e => {
-    setPhone(e.target.value);
-  };
+  // const [phone, setPhone] = useState("");
+  // const handleOnChange = value => {
+  //   setPhone(value);
+  // };
+  // const handleOnChangephone = e => {
+  //   setPhone(e.target.value);
+  // };
   const onSubmit = (data) => {
     console.log(data);
     createAccount(data.email,data.password)
         .then((res)=>{
           const user = res.user;
+          toast.success("Log in Successfully");
           console.log(user);
         })
         .catch((error) => {console.log(error);
+          toast.error("This is an error!", error.message);
     })
     reset();
   }
@@ -44,6 +45,7 @@ const SignUpForm = ({setIsLogin}) => {
       console.log(error);
       toast.error('This is an error!',error.message);
        })
+        reset();
   }
   //   const handleRegister = e =>{
   //       e.preventDefault();
@@ -90,7 +92,7 @@ const SignUpForm = ({setIsLogin}) => {
                   {errors.name?.type==='minLength' && <span className="text-red-700">Valid Name is required</span>}
                   {errors.name?.type==='maxLength' && <span className="text-red-700">Valid Name is required</span>}
               </div>
-              <label htmlFor="name" className="mt-3 block text-sm/6 font-medium text-gray-900">
+              {/* <label htmlFor="name" className="mt-3 block text-sm/6 font-medium text-gray-900">
                 Phone number
                  <PhoneInput className="w-full!"
         name="number"
@@ -100,10 +102,10 @@ const SignUpForm = ({setIsLogin}) => {
         value={phone}
         onChange={handleOnChange}
       />
-              </label>
+              </label> */}
                
      
-              <div className="mt-4">
+              {/* <div className="mt-4">
                 <input
                   
                   name="number"
@@ -116,14 +118,14 @@ const SignUpForm = ({setIsLogin}) => {
                   
                     })} 
                      value={phone}
-        onChange={handleOnChangephone}
+        
                 />
 
 
                 {errors.number?.type==='required' && <span className="text-red-700">Please give your Phone number</span>}
                 {errors.number?.type==='minLength' && <span className="text-red-700">Please give a valid Phone number</span>}
                 
-              </div>
+              </div> */}
            
             </div>
 
