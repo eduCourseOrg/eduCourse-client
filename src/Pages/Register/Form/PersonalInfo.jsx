@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 
 const PersonalInfo = forwardRef(
   ({ formData, setFormData, setCurrentStep }, ref) => {
-    // console.log(props);
     const {
       register,
       handleSubmit,
@@ -14,20 +13,24 @@ const PersonalInfo = forwardRef(
       defaultValues: formData,
     });
 
-
-
     const handleForm = (data) => {
-    //  const collectData = {
-    //    ...formData,
-    //    name: data.name,
-    //    gender: data.gender,
-    //    dob: data.dob,
-    //    profile: data.profile,
-    //    mobile: data.mobile,
-    //    address: data.address,
-    //  };
-     setFormData((prevData)=>({...prevData,...data}));
+      const formDataObject = new FormData();
+
+      // Append text fields
+      Object.keys(data).forEach((key) => {
+        if (key !== "profile") {
+          formDataObject.append(key, data[key]);
+        }
+      });
+
+      // Append file (profile picture)
+      if (data.profile && data.profile[0]) {
+        formDataObject.append("profile", data.profile[0]); // `data.profile` is an array, so take the first file
+      }
+
+      setFormData((prevData) => ({ ...prevData, ...data }));
       console.log("Personal Info Submitted:", data);
+
       setCurrentStep(2);
     };
 
@@ -38,14 +41,17 @@ const PersonalInfo = forwardRef(
 
     return (
       <div className="w-full">
-        <form className="p-4 bg-white rounded-lg shadow-lg">
+        <form
+          className="p-4 bg-white rounded-lg shadow-lg"
+          encType="multipart/form-data"
+        >
           <div className="flex flex-row justify-between gap-4 mt-5">
             <div className="w-1/2">
               <label
                 htmlFor="name"
                 className="block text-sm font-medium text-gray-700"
               >
-                Full name
+                Full Name
               </label>
               <input
                 id="name"
@@ -85,6 +91,7 @@ const PersonalInfo = forwardRef(
               )}
             </div>
           </div>
+
           <div className="flex flex-row justify-between gap-4 mt-5">
             <div className="w-1/2">
               <label
@@ -116,11 +123,11 @@ const PersonalInfo = forwardRef(
               <input
                 id="profile"
                 type="file"
-                placeholder="Profile Image"
+                accept="image/*"
                 {...register("profile", {
-                  required: "Profile Picture is required",
+                  required: "Profile picture is required",
                 })}
-                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full p-2 border border-gray-300 rounded-md"
               />
               {errors.profile && (
                 <span className="text-red-500 text-sm">
@@ -129,13 +136,14 @@ const PersonalInfo = forwardRef(
               )}
             </div>
           </div>
+
           <div className="flex flex-row justify-between gap-4 mt-5">
             <div className="w-1/2">
               <label
                 htmlFor="mobile"
                 className="block text-sm font-medium text-gray-700"
               >
-                Mobile number
+                Mobile Number
               </label>
               <input
                 id="mobile"
@@ -174,7 +182,7 @@ const PersonalInfo = forwardRef(
                 placeholder="Write your address"
                 {...register("address", { required: "Address is required" })}
                 className="w-full p-2 border border-gray-300 rounded-md"
-              ></input>
+              />
               {errors.address && (
                 <span className="text-red-500 text-sm">
                   {errors.address.message}
@@ -188,5 +196,4 @@ const PersonalInfo = forwardRef(
   }
 );
 
-// Ensure you export correctly
 export default PersonalInfo;

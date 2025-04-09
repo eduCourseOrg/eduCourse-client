@@ -1,4 +1,4 @@
-import CustomDropdown from "../../Components/CustomDropDown";
+
 import Categories from "../../Components/Home/Categories";
 import Counter from "../../Components/Home/Counter";
 import Faq from "../../Components/Home/Faq";
@@ -18,8 +18,13 @@ const Home = () => {
             <Review></Review>
             <OurProcess></OurProcess>
             <Faq></Faq>
+<<<<<<< HEAD
+            <InputField></InputField>
+         
+=======
             {/* <InputField></InputField> */}
             {/* <CustomDropdown></CustomDropdown> */}
+>>>>>>> 32524e3d4ab01b2d1c2e89cd4f234134c3b87c40
         </>
     );
 };
