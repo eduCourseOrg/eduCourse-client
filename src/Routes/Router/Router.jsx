@@ -1,14 +1,40 @@
 import { createBrowserRouter } from "react-router-dom";
-import Main from "../../Layout/Main/Main";
-import AllCourse from "../../Pages/AllCoursePage/AllCourse";
-import AllInstructors from "../../Pages/AllInstructors/AllInstructors";
-import CourseDetails from "../../Pages/CourseDetails/CourseDetails";
-import Error from "../../Pages/Error/Error";
-import Home from "../../Pages/Home/Home";
-import InstructorDetails from "../../Pages/InstructorDetails/InstructorDetails";
-
 import InstructorRegistration from "../../Pages/Register/InstructorRegistration/InstructorRegistration";
-import StudentRegister from "../../Pages/Register/StudentRegister";
+import {
+  AllCourse,
+  AllInstructors,
+  Analytics,
+  Assignment,
+  Build,
+  Certificates,
+  CourseDetails,
+  Courses,
+  CourseSetting,
+  CreateCourse,
+  Credits,
+  Curriculum,
+  Dashboard,
+  DashboardSwitch,
+  Drip,
+  Earnings,
+  Error,
+  FAQ,
+  Home,
+  InstructorDetails,
+  Main,
+  Messages,
+  Notice,
+  Notifications,
+  Payouts,
+  Pricing,
+  Quiz,
+  Reviews,
+  Setting,
+  Statements,
+  StudentRegister,
+  TextLesson,
+  VideoLesson
+} from './RouterImport';
 
 export const router = createBrowserRouter([
   {
@@ -17,15 +43,15 @@ export const router = createBrowserRouter([
     errorElement: <Error></Error>,
     children: [
       {
-        path: "/",
+        index: true,
         element: <Home></Home>,
       },
       {
-        path: "/register",
+        path: "register",
         element: <StudentRegister></StudentRegister>,
       },
       {
-        path: "/courses/:id",
+        path: "courses/:id",
         element: <CourseDetails></CourseDetails>,
         loader: async ({ params }) =>
           fetch(`http://localhost:5000/courses/${params.id}`),
@@ -35,17 +61,126 @@ export const router = createBrowserRouter([
         element: <InstructorRegistration></InstructorRegistration>
       },
       {
-        path: "/courses",
+        path: "courses",
         element: <AllCourse></AllCourse>,
       },
       {
-        path: "/instructorDetails",
+        path: "instructorDetails",
         element: <InstructorDetails></InstructorDetails>,
       },
       {
-        path: "/instructors",
+        path: "instructors",
         element: <AllInstructors></AllInstructors>,
       },
     ],
   },
+  {
+    path: '/dashboard',
+    element: <Dashboard></Dashboard>,
+    errorElement: <Error></Error>,
+    children: [
+      {
+        index: true,
+        element: <DashboardSwitch></DashboardSwitch>
+      },
+      {
+        path: 'courses', 
+        element: <Courses></Courses>
+      },
+      {
+        path: 'analytics',
+        element: <Analytics></Analytics>
+      },
+      {
+        path: 'messages',
+        element: <Messages></Messages>
+      },
+      {
+        path: 'notifications',
+        element: <Notifications></Notifications>
+      },
+      {
+        path: 'certificates',
+        element: <Certificates></Certificates>
+      },
+      {
+        path: 'reviews',
+        element: <Reviews></Reviews>
+      },
+      {
+        path: 'earnings',
+        element: <Earnings></Earnings>
+      },
+      {
+        path: 'payout',
+        element: <Payouts></Payouts>
+      },
+      {
+        path: 'statements',
+        element: <Statements></Statements>
+      },
+      {
+        path: 'setting',
+        element: <Setting></Setting>
+      },
+      {
+        path: 'credits',
+        element: <Credits></Credits>
+      }
+    ]
+  },
+  {
+    path: '/create-course',
+    element: <CreateCourse></CreateCourse>,
+    errorElement: <Error></Error>,
+    children: [
+      {
+        path: '/create-course',
+        element: <Curriculum></Curriculum>,
+        errorElement: <Error></Error>,
+        children: [
+          {
+            index: true,
+            element: <Build></Build>
+          },
+          {
+            path: 'text/:id',
+            element: <TextLesson></TextLesson>
+          },
+          {
+            path: 'video/:id',
+            element: <VideoLesson></VideoLesson>
+          },
+          {
+            path: 'quiz/:id',
+            element: <Quiz></Quiz>
+          },
+          {
+            path: 'assignment/:id',
+            element: <Assignment></Assignment>
+          }
+        ]
+      },
+      {
+        path: 'drip',
+        element: <Drip></Drip>
+      },
+      {
+        path: 'setting',
+        element: <CourseSetting></CourseSetting>
+      },
+      {
+        path: 'pricing',
+        element: <Pricing></Pricing>
+      },
+      {
+        path: 'FAQ',
+        element: <FAQ></FAQ>
+      },
+      {
+        path: 'notice',
+        element: <Notice></Notice>
+      }
+    ]
+  }
 ]);

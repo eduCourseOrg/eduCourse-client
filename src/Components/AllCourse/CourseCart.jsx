@@ -19,10 +19,10 @@ const CourseCart = ({ singleCourse }) => {
   // console.log(category, description,name)
 
   return (
-    <div className="w-full border-1 p-2 rounded-md border-gray-300   h-full">
+    <div className="w-full border-1  rounded-md border-gray-300 p-2 h-full">
       {/* Card One start form here */}
 
-      <div className="w-full h-full bg-white">
+      <div className="w-full h-[460px] p-2 bg-white">
         {/* Card Image Section */}
         <div className="w-full h-[45%] mb-3">
           <img src={banner} alt="" className="w-full h-full" />
