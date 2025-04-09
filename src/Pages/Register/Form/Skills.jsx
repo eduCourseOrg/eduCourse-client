@@ -2,16 +2,21 @@
 /* eslint-disable react/display-name */
 import { forwardRef, useImperativeHandle } from "react";
 import { useForm } from "react-hook-form";
+import DropDownWq from "../DropDownWq";
+
 
 const Skills = forwardRef(({ formData, setFormData, setCurrentStep }, ref) => {
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: formData,
   });
-
+  // Watch the selected skills
+  const selectedSkills = watch("skills", []);
   const handleForm = (data) => {
     // const updatedData = { ...formData, ...data };
     const { availability, ...otherData } = data;
@@ -40,28 +45,34 @@ const Skills = forwardRef(({ formData, setFormData, setCurrentStep }, ref) => {
   return (
     <div className="w-full">
       <form className="p-4 bg-white rounded-lg shadow-lg">
-        <div className="flex flex-row justify-between gap-4 mt-5">
-          <div className="w-1/2">
-            <label
-              htmlFor="skills"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Expertise/skills
-            </label>
-            <input
+        <div className="w-full mt-5">
+          <label
+            htmlFor="skills"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Expertise/skills
+          </label>
+          {/* Replace input with CustomDropdown */}
+          <DropDownWq
+            className="w-full border border-gray-300 rounded-md p-2"
+            selected={selectedSkills}
+            setSelected={(values) => setValue("skills", values)}
+          />
+          {/* <input
               id="skills"
               type="text"
               placeholder="Expertise/skills"
               {...register("skills", { required: "Skills are required" })}
               className="w-full p-2 border border-gray-300 rounded-md"
-            />
-            {errors.skills && (
-              <span className="text-red-500 text-sm">
-                {errors.skills.message}
-              </span>
-            )}
-          </div>
+            /> */}
+          {errors.skills && (
+            <span className="text-red-500 text-sm">
+              {errors.skills.message}
+            </span>
+          )}
+        </div>
 
+        <div className="flex flex-row justify-between gap-4 mt-5">
           <div className="w-1/2">
             <label
               htmlFor="experience"
@@ -84,24 +95,6 @@ const Skills = forwardRef(({ formData, setFormData, setCurrentStep }, ref) => {
                 {errors.experience.message}
               </span>
             )}
-          </div>
-        </div>
-
-        <div className="flex flex-row justify-between gap-4 mt-5">
-          <div className="w-1/2">
-            <label
-              htmlFor="portfolio"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Portfolio/Website
-            </label>
-            <input
-              id="portfolio"
-              type="url"
-              placeholder="Portfolio/Website"
-              {...register("portfolio")}
-              className="w-full p-2 border border-gray-300 rounded-md"
-            />
           </div>
 
           <div className="w-1/2">
