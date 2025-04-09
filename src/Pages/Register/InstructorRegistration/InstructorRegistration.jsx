@@ -145,7 +145,7 @@ const handleFinalSubmit = async (finalData) => {
     return (
       <>
         
-        <TextEditor />
+        
         <div className="wq-form-container">
           <StepIndicator
             steps={steps}
