@@ -2,9 +2,10 @@ import { createBrowserRouter } from "react-router-dom";
 import InstructorRegistration from "../../Pages/Register/InstructorRegistration/InstructorRegistration";
 import {
   AllCourse,
-  AllInstructors,
+  // AllInstructors,
   Analytics,
   Assignment,
+  BackEndAllInstructors,
   Build,
   Certificates,
   CourseDetails,
@@ -33,8 +34,8 @@ import {
   Statements,
   StudentRegister,
   TextLesson,
-  VideoLesson
-} from './RouterImport';
+  VideoLesson,
+} from "./RouterImport";
 
 export const router = createBrowserRouter([
   {
@@ -58,7 +59,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/instructorReg",
-        element: <InstructorRegistration></InstructorRegistration>
+        element: <InstructorRegistration></InstructorRegistration>,
       },
       {
         path: "courses",
@@ -70,117 +71,117 @@ export const router = createBrowserRouter([
       },
       {
         path: "instructors",
-        element: <AllInstructors></AllInstructors>,
+        element: <BackEndAllInstructors></BackEndAllInstructors>,
       },
     ],
   },
   {
-    path: '/dashboard',
+    path: "/dashboard",
     element: <Dashboard></Dashboard>,
     errorElement: <Error></Error>,
     children: [
       {
         index: true,
-        element: <DashboardSwitch></DashboardSwitch>
+        element: <DashboardSwitch></DashboardSwitch>,
       },
       {
-        path: 'courses', 
-        element: <Courses></Courses>
+        path: "courses",
+        element: <Courses></Courses>,
       },
       {
-        path: 'analytics',
-        element: <Analytics></Analytics>
+        path: "analytics",
+        element: <Analytics></Analytics>,
       },
       {
-        path: 'messages',
-        element: <Messages></Messages>
+        path: "messages",
+        element: <Messages></Messages>,
       },
       {
-        path: 'notifications',
-        element: <Notifications></Notifications>
+        path: "notifications",
+        element: <Notifications></Notifications>,
       },
       {
-        path: 'certificates',
-        element: <Certificates></Certificates>
+        path: "certificates",
+        element: <Certificates></Certificates>,
       },
       {
-        path: 'reviews',
-        element: <Reviews></Reviews>
+        path: "reviews",
+        element: <Reviews></Reviews>,
       },
       {
-        path: 'earnings',
-        element: <Earnings></Earnings>
+        path: "earnings",
+        element: <Earnings></Earnings>,
       },
       {
-        path: 'payout',
-        element: <Payouts></Payouts>
+        path: "payout",
+        element: <Payouts></Payouts>,
       },
       {
-        path: 'statements',
-        element: <Statements></Statements>
+        path: "statements",
+        element: <Statements></Statements>,
       },
       {
-        path: 'setting',
-        element: <Setting></Setting>
+        path: "setting",
+        element: <Setting></Setting>,
       },
       {
-        path: 'credits',
-        element: <Credits></Credits>
-      }
-    ]
+        path: "credits",
+        element: <Credits></Credits>,
+      },
+    ],
   },
   {
-    path: '/create-course',
+    path: "/create-course",
     element: <CreateCourse></CreateCourse>,
     errorElement: <Error></Error>,
     children: [
       {
-        path: '/create-course',
+        path: "/create-course",
         element: <Curriculum></Curriculum>,
         errorElement: <Error></Error>,
         children: [
           {
             index: true,
-            element: <Build></Build>
+            element: <Build></Build>,
           },
           {
-            path: 'text/:id',
-            element: <TextLesson></TextLesson>
+            path: "text/:id",
+            element: <TextLesson></TextLesson>,
           },
           {
-            path: 'video/:id',
-            element: <VideoLesson></VideoLesson>
+            path: "video/:id",
+            element: <VideoLesson></VideoLesson>,
           },
           {
-            path: 'quiz/:id',
-            element: <Quiz></Quiz>
+            path: "quiz/:id",
+            element: <Quiz></Quiz>,
           },
           {
-            path: 'assignment/:id',
-            element: <Assignment></Assignment>
-          }
-        ]
+            path: "assignment/:id",
+            element: <Assignment></Assignment>,
+          },
+        ],
       },
       {
-        path: 'drip',
-        element: <Drip></Drip>
+        path: "drip",
+        element: <Drip></Drip>,
       },
       {
-        path: 'setting',
-        element: <CourseSetting></CourseSetting>
+        path: "setting",
+        element: <CourseSetting></CourseSetting>,
       },
       {
-        path: 'pricing',
-        element: <Pricing></Pricing>
+        path: "pricing",
+        element: <Pricing></Pricing>,
       },
       {
-        path: 'FAQ',
-        element: <FAQ></FAQ>
+        path: "FAQ",
+        element: <FAQ></FAQ>,
       },
       {
-        path: 'notice',
-        element: <Notice></Notice>
-      }
-    ]
-  }
+        path: "notice",
+        element: <Notice></Notice>,
+      },
+    ],
+  },
 ]);

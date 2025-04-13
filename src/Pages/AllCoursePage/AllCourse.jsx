@@ -66,28 +66,12 @@ const AllCourse = () => {
       );
     }
 
-    // Dropdown category filter (single category)
-
-    // if (selectedCategory !== "All Categories") {
-    //   filtered = filtered.filter((item) => item?.category === selectedCategory);
-    // }
-
     if (selectedCategory !== "All Categories") {
       filtered = filtered.filter((item) =>
         item?.category?.includes(selectedCategory)
       );
     }
-    // Dropdown category filter (single category)
-    // const matchesCategory =(course)
-    //   !selectedCategory || // Allow filtering without selecting a category
-    //   selectedCategory === "All Categories" ||
-    //   course.category === selectedCategory;
 
-    // Checkbox category filter (multiple categories)
-    // const selectedCheckboxesSet = new Set(selectedCheckboxes);
-    // const matchesCheckboxes =(course)=>
-    //   selectedCheckboxes.length === 0 ||
-    //   selectedCheckboxesSet.has( course.category);
     if (selectedCheckboxes.length > 0) {
       const selectedCheckboxesSet = new Set(selectedCheckboxes);
       filtered = filtered.filter((item) =>
@@ -103,13 +87,6 @@ const AllCourse = () => {
         selectedLevelChecbocSet.has(item.courseLevel)
       );
     }
-
-    // const selectedLevelCheckboxesSet = new Set(selectedLevelCheckboxes);
-    // const matchesLevelCheckboxes =
-    //   selectedLevelCheckboxes.length === 0 || // Ensure it’s always an array
-    //   selectedLevelCheckboxesSet.has(
-    //     filtered.some((course) => course.courseLevel)
-    //   );
 
     setFilteredCourses(filtered);
   };

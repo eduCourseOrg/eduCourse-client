@@ -2,6 +2,7 @@ import Dashboard from "../../Layout/Dashboard/Dashboard";
 import Main from "../../Layout/Main/Main";
 import AllCourse from "../../Pages/AllCoursePage/AllCourse";
 import AllInstructors from "../../Pages/AllInstructors/AllInstructors";
+import BackEndAllInstructors from "../../Pages/AllInstructors/BackEndAllInstructor";
 import CourseDetails from "../../Pages/CourseDetails/CourseDetails";
 import Certificates from "../../Pages/Dashboard/DashboardShared/Certificates/Certificates";
 import Courses from "../../Pages/Dashboard/DashboardShared/Courses/Courses";
@@ -13,7 +14,12 @@ import Statements from "../../Pages/Dashboard/DashboardShared/Statements/Stateme
 import DashboardSwitch from "../../Pages/Dashboard/DashboardSwitch";
 import Analytics from "../../Pages/Dashboard/InstructorDashboard/Analytics/Analytics";
 import CreateCourse from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/CreateCourse";
+import Assignment from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/Assignment";
+import Build from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/Build";
 import Curriculum from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/Curriculum";
+import Quiz from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/Quiz";
+import TextLesson from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/TextLesson";
+import VideoLesson from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/VideoLesson";
 import Drip from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Drip";
 import FAQ from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/FAQ";
 import Notice from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Notice";
@@ -25,18 +31,16 @@ import Credits from "../../Pages/Dashboard/StudentDashboard/Credits/Credits";
 import Error from "../../Pages/Error/Error";
 import Home from "../../Pages/Home/Home";
 import InstructorDetails from "../../Pages/InstructorDetails/InstructorDetails";
-import InstructorForm from "../../Pages/Register/InstructorForm";
+// import InstructorForm from "../../Pages/Register/InstructorRegistration";
 import StudentRegister from "../../Pages/Register/StudentRegister";
-import Build from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/Build";
-import TextLesson from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/TextLesson";
-import VideoLesson from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/VideoLesson";
-import Quiz from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/Quiz";
-import Assignment from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/Assignment";
 
 export {
   AllCourse,
   AllInstructors,
   Analytics,
+  Assignment,
+  BackEndAllInstructors,
+  Build,
   Certificates,
   CourseDetails,
   Courses,
@@ -52,20 +56,18 @@ export {
   FAQ,
   Home,
   InstructorDetails,
-  InstructorForm,
+  // InstructorForm,
   Main,
   Messages,
   Notice,
   Notifications,
   Payouts,
   Pricing,
+  Quiz,
   Reviews,
   Setting,
   Statements,
   StudentRegister,
-  Build,
   TextLesson,
   VideoLesson,
-  Quiz,
-  Assignment,
 };
