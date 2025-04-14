@@ -25,7 +25,7 @@ import Credits from "../../Pages/Dashboard/StudentDashboard/Credits/Credits";
 import Error from "../../Pages/Error/Error";
 import Home from "../../Pages/Home/Home";
 import InstructorDetails from "../../Pages/InstructorDetails/InstructorDetails";
-import InstructorForm from "../../Pages/Register/InstructorForm";
+// import InstructorForm from "../../Pages/Register/InstructorForm";
 import StudentRegister from "../../Pages/Register/StudentRegister";
 import Build from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/Build";
 import TextLesson from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/TextLesson";
@@ -52,7 +52,7 @@ export {
   FAQ,
   Home,
   InstructorDetails,
-  InstructorForm,
+  // InstructorForm,
   Main,
   Messages,
   Notice,

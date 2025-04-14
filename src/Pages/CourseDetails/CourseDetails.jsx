@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import VideoPlayer from "../../Components/VideoPlayer/VideoPlayer";
 import { useQuery } from "@tanstack/react-query";
+
 // import VideoUpload from "../../Components/VideoUpload/VideoUpload";
 
 const CourseDetails = () => {
@@ -19,7 +20,7 @@ const CourseDetails = () => {
   const lessons = singleCourse?.courseContent[0]?.lessons;
   const [activeTab, setActiveTab] = useState("Overview");
   const tabs = ["Overview", "Reviews", "Faqs", "Quizzes"];
-
+  console.log(singleCourse, "singleCourse");
   const { data: instructor = {}, isLoading } = useQuery({
     queryKey: ["instructor"],
     queryFn: async () => {
@@ -27,6 +28,7 @@ const CourseDetails = () => {
         `http://localhost:5000/instructors/${singleCourse?.instructorId}`
       );
       const data = await res.json();
+      console.log(data, "course data");
       return data?.data;
     },
   });
