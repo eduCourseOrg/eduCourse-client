@@ -1,6 +1,7 @@
 import Dashboard from "../../Layout/Dashboard/Dashboard";
 import Main from "../../Layout/Main/Main";
-import AllCourse from "../../Pages/AllCoursePage/AllCourse";
+// import AllCourse from "../../Pages/AllCoursePage/AllCourse";
+import BackEndAllCourse from "../../Pages/AllCoursePage/BackEndAllCourse";
 import AllInstructors from "../../Pages/AllInstructors/AllInstructors";
 import BackEndAllInstructors from "../../Pages/AllInstructors/BackEndAllInstructor";
 import CourseDetails from "../../Pages/CourseDetails/CourseDetails";
@@ -35,10 +36,11 @@ import InstructorDetails from "../../Pages/InstructorDetails/InstructorDetails";
 import StudentRegister from "../../Pages/Register/StudentRegister";
 
 export {
-  AllCourse,
   AllInstructors,
   Analytics,
   Assignment,
+  // AllCourse,
+  BackEndAllCourse,
   BackEndAllInstructors,
   Build,
   Certificates,
