@@ -25,19 +25,18 @@ import Credits from "../../Pages/Dashboard/StudentDashboard/Credits/Credits";
 import Error from "../../Pages/Error/Error";
 import Home from "../../Pages/Home/Home";
 import InstructorDetails from "../../Pages/InstructorDetails/InstructorDetails";
-import InstructorForm from "../../Pages/Register/InstructorForm";
-import StudentRegister from "../../Pages/Register/StudentRegister";
+// import InstructorForm from "../../Pages/Register/InstructorForm";
+import Assignment from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/Assignment";
 import Build from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/Build";
+import Quiz from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/Quiz";
 import TextLesson from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/TextLesson";
 import VideoLesson from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/VideoLesson";
-import Quiz from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/Quiz";
-import Assignment from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/Assignment";
+import StudentRegister from "../../Pages/Register/StudentRegister";
 
 export {
   AllCourse,
   AllInstructors,
-  Analytics,
-  Certificates,
+  Analytics, Assignment, Build, Certificates,
   CourseDetails,
   Courses,
   CourseSetting,
@@ -52,20 +51,16 @@ export {
   FAQ,
   Home,
   InstructorDetails,
-  InstructorForm,
+
   Main,
   Messages,
   Notice,
   Notifications,
   Payouts,
-  Pricing,
-  Reviews,
+  Pricing, Quiz, Reviews,
   Setting,
   Statements,
-  StudentRegister,
-  Build,
-  TextLesson,
-  VideoLesson,
-  Quiz,
-  Assignment,
+  StudentRegister, TextLesson,
+  VideoLesson
 };
+

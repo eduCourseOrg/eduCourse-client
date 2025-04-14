@@ -60,7 +60,7 @@ const EducationalInfo = forwardRef(
                 type="text"
                 placeholder="Education Qualification"
                 {...register("education", {
-                  required: "Education qualification is required",
+                  // required: "Education qualification is required",
                 })}
                 className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
@@ -96,7 +96,7 @@ const EducationalInfo = forwardRef(
             <textarea
               placeholder="About yourself"
               {...register("yourself", {
-                required: "About yourself is required",
+                // required: "About yourself is required",
               })}
               className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
             ></textarea>
