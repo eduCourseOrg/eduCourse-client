@@ -85,7 +85,7 @@ const Skills = forwardRef(({ formData, setFormData, setCurrentStep }, ref) => {
               type="number"
               placeholder="Years of Experience"
               {...register("experience", {
-                required: "Experience is required",
+                // required: "Experience is required",
                 min: { value: 0, message: "Experience cannot be negative" },
               })}
               className="w-full p-2 border border-gray-300 rounded-md"
@@ -107,7 +107,7 @@ const Skills = forwardRef(({ formData, setFormData, setCurrentStep }, ref) => {
             <select
               id="teachingMode"
               {...register("teachingMode", {
-                required: "This field is required",
+                // required: "This field is required",
               })}
               className="w-full p-2 border border-gray-300 rounded-md"
             >
