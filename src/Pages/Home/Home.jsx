@@ -1,4 +1,3 @@
-
 import Categories from "../../Components/Home/Categories";
 import Counter from "../../Components/Home/Counter";
 import Faq from "../../Components/Home/Faq";
