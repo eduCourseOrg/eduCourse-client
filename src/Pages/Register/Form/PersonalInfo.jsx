@@ -57,7 +57,9 @@ const PersonalInfo = forwardRef(
                 id="name"
                 type="text"
                 placeholder="Write your name"
-                {...register("name", { required: "Your name is required" })}
+                {...register("name", { 
+                  // required: "Your name is required"
+                 })}
                 className="w-full p-2 border border-gray-300 rounded-md"
               />
               {errors.name && (
@@ -76,7 +78,9 @@ const PersonalInfo = forwardRef(
               </label>
               <select
                 id="gender"
-                {...register("gender", { required: "Gender is required" })}
+                {...register("gender", { 
+                  // required: "Gender is required"
+                 })}
                 className="w-full p-2 border border-gray-300 rounded-md"
               >
                 <option value="">Select gender</option>
@@ -103,7 +107,9 @@ const PersonalInfo = forwardRef(
               <input
                 id="dob"
                 type="date"
-                {...register("dob", { required: "Date of birth is required" })}
+                {...register("dob", { 
+                  // required: "Date of birth is required" 
+                })}
                 className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
               {errors.dob && (
@@ -125,7 +131,7 @@ const PersonalInfo = forwardRef(
                 type="file"
                 accept="image/*"
                 {...register("profile", {
-                  required: "Profile picture is required",
+                  // required: "Profile picture is required",
                 })}
                 className="w-full p-2 border border-gray-300 rounded-md"
               />
@@ -150,7 +156,7 @@ const PersonalInfo = forwardRef(
                 type="tel"
                 placeholder="Mobile number"
                 {...register("mobile", {
-                  required: "Mobile number is required",
+                  // required: "Mobile number is required",
                   minLength: {
                     value: 11,
                     message: "Mobile number must be at least 11 digits",
@@ -180,7 +186,9 @@ const PersonalInfo = forwardRef(
                 id="address"
                 type="text"
                 placeholder="Write your address"
-                {...register("address", { required: "Address is required" })}
+                {...register("address", { 
+                  // required: "Address is required" 
+                })}
                 className="w-full p-2 border border-gray-300 rounded-md"
               />
               {errors.address && (
