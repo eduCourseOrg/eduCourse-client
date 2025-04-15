@@ -25,13 +25,26 @@ const BackEndAllcourse = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       const params = new URLSearchParams({
-        searchTerm,
-        selectedCategory,
-        selectedCheckboxes: selectedCheckboxes.join(","),
-        selectedLevelCheckboxes: selectedLevelCheckboxes.join(","),
-        page,
-        limit,
+        // searchTerm,
+        // selectedCategory,
+        // selectedCheckboxes: selectedCheckboxes.join(","),
+        // selectedLevelCheckboxes: selectedLevelCheckboxes.join(","),
+        // page,
+        // limit,
       });
+
+      if (searchTerm) params.append("searchTerm", searchTerm);
+      if (selectedCategory && selectedCategory !== "All Categories")
+        params.append("selectedCategory", selectedCategory);
+      if (selectedCheckboxes.length > 0)
+        params.append("selectedCheckboxes", selectedCheckboxes.join(","));
+      if (selectedLevelCheckboxes.length > 0)
+        params.append(
+          "selectedLevelCheckboxes",
+          selectedLevelCheckboxes.join(",")
+        );
+      params.append("page", page);
+      params.append("limit", limit);
 
       console.log("params", params);
 
@@ -53,6 +66,7 @@ const BackEndAllcourse = () => {
     page,
     limit,
   ]);
+  console.log("search", searchTerm, courseData);
 
   const categories = useMemo(
     () => [
@@ -85,6 +99,7 @@ const BackEndAllcourse = () => {
 
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value);
+    console.log("selectedCategory", e.target.value);
     setPage(1);
   };
 
@@ -94,6 +109,7 @@ const BackEndAllcourse = () => {
         ? prev.filter((c) => c !== category)
         : [...prev, category]
     );
+    console.log("selectedCheckboxes", selectedCheckboxes);
     setPage(1);
   };
 
@@ -104,9 +120,9 @@ const BackEndAllcourse = () => {
     setPage(1);
   };
 
-  const handlePageChange = (newPage) => {
-    setPage(newPage);
-  };
+  // const handlePageChange = (newPage) => {
+  //   setPage(newPage);
+  // };
 
   const handleItemsPerPageChange = (e) => {
     setLimit(parseInt(e.target.value));
@@ -159,7 +175,7 @@ const BackEndAllcourse = () => {
           <select
             id="course-select"
             value={selectedCategory}
-            onChange={(e) => handleCategoryChange(e)}
+            onChange={handleCategoryChange}
             className="h-10 rounded-sm w-full border-slate-200 border-[2px] text-gray-600 text-base block py-1 px-4 focus:outline-none"
           >
             {categories &&
@@ -270,18 +286,21 @@ const BackEndAllcourse = () => {
               </button>
               {[...Array(pagination.totalPages)].map((_, index) => {
                 const pageNum = index + 1;
-                <button
-                  key={pageNum}
-                  className={`bg-cyan-900 text-cyan-100 h-6 rounded-sm w-8 ${
-                    pagination.page === pageNum
-                      ? "active text-amber-50 bg-amber-500"
-                      : ""
-                  }`}
-                  onClick={() => handlePageChange(pageNum)}
-                >
-                  {pageNum}
-                </button>;
+                return (
+                  <button
+                    key={pageNum}
+                    className={`bg-cyan-900 text-cyan-100 h-6 rounded-sm w-8 ${
+                      pagination.page === pageNum
+                        ? "active text-blue-100 h-7"
+                        : ""
+                    }`}
+                    onClick={() => setPage(pageNum)}
+                  >
+                    {pageNum}
+                  </button>
+                );
               })}
+
               <button
                 disabled={pagination.page === pagination.totalPages}
                 onClick={() => setPage((prev) => prev + 1)}
