@@ -25,7 +25,6 @@ const BackEndAllcourse = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       const params = new URLSearchParams({
-        
         // searchTerm,
         // selectedCategory,
         // selectedCheckboxes: selectedCheckboxes.join(","),
@@ -35,14 +34,17 @@ const BackEndAllcourse = () => {
       });
 
       if (searchTerm) params.append("searchTerm", searchTerm);
-if (selectedCategory && selectedCategory !== "All Categories")
-  params.append("selectedCategory", selectedCategory);
-if (selectedCheckboxes.length > 0)
-  params.append("selectedCheckboxes", selectedCheckboxes.join(","));
-if (selectedLevelCheckboxes.length > 0)
-  params.append("selectedLevelCheckboxes", selectedLevelCheckboxes.join(","));
-params.append("page", page);
-params.append("limit", limit);
+      if (selectedCategory && selectedCategory !== "All Categories")
+        params.append("selectedCategory", selectedCategory);
+      if (selectedCheckboxes.length > 0)
+        params.append("selectedCheckboxes", selectedCheckboxes.join(","));
+      if (selectedLevelCheckboxes.length > 0)
+        params.append(
+          "selectedLevelCheckboxes",
+          selectedLevelCheckboxes.join(",")
+        );
+      params.append("page", page);
+      params.append("limit", limit);
 
       console.log("params", params);
 
@@ -64,6 +66,7 @@ params.append("limit", limit);
     page,
     limit,
   ]);
+  console.log("search", searchTerm, courseData);
 
   const categories = useMemo(
     () => [
@@ -96,6 +99,7 @@ params.append("limit", limit);
 
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value);
+    console.log("selectedCategory", e.target.value);
     setPage(1);
   };
 
@@ -105,9 +109,9 @@ params.append("limit", limit);
         ? prev.filter((c) => c !== category)
         : [...prev, category]
     );
+    console.log("selectedCheckboxes", selectedCheckboxes);
     setPage(1);
   };
- 
 
   const handleLevelCheckboxChange = (level) => {
     setSelectedLevelCheckboxes((prev) =>
@@ -116,9 +120,9 @@ params.append("limit", limit);
     setPage(1);
   };
 
-  const handlePageChange = (newPage) => {
-    setPage(newPage);
-  };
+  // const handlePageChange = (newPage) => {
+  //   setPage(newPage);
+  // };
 
   const handleItemsPerPageChange = (e) => {
     setLimit(parseInt(e.target.value));
@@ -281,21 +285,22 @@ params.append("limit", limit);
                 ◀ Prev
               </button>
               {[...Array(pagination.totalPages)].map((_, index) => {
-            const pageNum = index + 1;
-            return (
-              <button
-                key={pageNum}
-                className={`bg-cyan-900 text-cyan-100 h-6 rounded-sm w-8 ${
-                  pagination.page === pageNum ? "active text-blue-100 h-7" : ""
-                }`}
-                onClick={() => setPage(pageNum)}
-              >
-                {pageNum}
-              </button>
-            );
-          })}
-             
-              
+                const pageNum = index + 1;
+                return (
+                  <button
+                    key={pageNum}
+                    className={`bg-cyan-900 text-cyan-100 h-6 rounded-sm w-8 ${
+                      pagination.page === pageNum
+                        ? "active text-blue-100 h-7"
+                        : ""
+                    }`}
+                    onClick={() => setPage(pageNum)}
+                  >
+                    {pageNum}
+                  </button>
+                );
+              })}
+
               <button
                 disabled={pagination.page === pagination.totalPages}
                 onClick={() => setPage((prev) => prev + 1)}

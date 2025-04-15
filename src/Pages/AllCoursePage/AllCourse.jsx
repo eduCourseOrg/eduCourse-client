@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { IoGrid } from "react-icons/io5";
 import { LiaBarsSolid } from "react-icons/lia";
@@ -35,7 +35,7 @@ const AllCourse = () => {
           error
         )
       );
-  }, []);
+  }, [filteredCourses]);
 
   const categories = useMemo(
     () => [
@@ -54,6 +54,7 @@ const AllCourse = () => {
 
   console.log("level", levels);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const filteredCourse = () => {
     let filtered = [...courseData];
     // Search term filter
@@ -169,7 +170,8 @@ const AllCourse = () => {
     selectedCategory,
     selectedCheckboxes,
     selectedLevelCheckboxes,
-    filteredCourse
+    filteredCourses,
+    filteredCourse,
   ]);
 
   console.log("Defaulte", courseData);
