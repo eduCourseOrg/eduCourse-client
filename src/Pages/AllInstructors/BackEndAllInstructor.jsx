@@ -42,6 +42,7 @@ const BackEndAllInstructors = () => {
     fetchInstructorData();
   }, [searchTerm, selectedSkills, sortBy, page, limit]);
   console.log("filteredInstructorData", filteredInstructorData);
+  
 
   const skills = useMemo(
     () => [
