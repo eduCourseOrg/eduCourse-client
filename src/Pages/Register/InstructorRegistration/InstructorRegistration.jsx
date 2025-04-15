@@ -1,14 +1,15 @@
 import axios from "axios";
 import { useRef, useState } from "react";
+import toast from "react-hot-toast";
+
 import Confirmation from "../Form/Confirmation";
 import EducationalInfo from "../Form/EducationalInfo";
 import PersonalInfo from "../Form/PersonalInfo";
 import Skills from "../Form/Skills";
-import TextEditor from "../TextEditor/TextEditor";
 import "./MultiStepForm.css";
 import NavigationButtons from "./NavigationButtons";
 import StepIndicator from "./StepIndicator";
-
+import ThankYou from "./ThankYou";
 const InstructorRegistration = () => {
   const personalInfoRef = useRef(null);
   const educationalInfoRef = useRef(null);
@@ -87,9 +88,10 @@ const InstructorRegistration = () => {
       );
 
       if (response.data.success) {
-        alert("Form submitted successfully!");
+        setComplete(true);
+        toast.success("Form submitted successfully!");
       } else {
-        alert("Submission failed!");
+        toast.error("Form submition failed!!!");
       }
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -144,20 +146,27 @@ const InstructorRegistration = () => {
 
   return (
     <>
+      {/* <TextEditor /> */}
       <div className="wq-form-container">
-        <StepIndicator
-          steps={steps}
-          currentStep={currentStep}
-          complete={complete}
-        />
-        <div>{stepForms[currentStep - 1]}</div>
-        <NavigationButtons
-          currentStep={currentStep}
-          steps={steps}
-          setCurrentStep={setCurrentStep}
-          handleNext={handleNext}
-          complete={complete}
-        />
+        {complete ? (
+          <ThankYou></ThankYou>
+        ) : (
+          <>
+            <StepIndicator
+              steps={steps}
+              currentStep={currentStep}
+              complete={complete}
+            />
+            <div>{stepForms[currentStep - 1]}</div>
+            <NavigationButtons
+              currentStep={currentStep}
+              steps={steps}
+              setCurrentStep={setCurrentStep}
+              handleNext={handleNext}
+              complete={complete}
+            />
+          </>
+        )}
       </div>
     </>
   );

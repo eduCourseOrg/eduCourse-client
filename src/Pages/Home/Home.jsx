@@ -6,7 +6,7 @@ import Hero from "../../Components/Home/Hero";
 import OurProcess from "../../Components/Home/OurProcess";
 import PopularCourse from "../../Components/Home/PopularCourse";
 import Review from "../../Components/Home/Review";
-// import InputField from "../../Components/InputField";
+import InputField from "../../Components/InputField";
 
 const Home = () => {
   return (
@@ -18,7 +18,7 @@ const Home = () => {
       <Review></Review>
       <OurProcess></OurProcess>
       <Faq></Faq>
-      <CustomVideoPlayer src="/video/VID_20221014_053436.mp4" />
+      <InputField></InputField>
       {/* <InputField></InputField> */}
       {/* <CustomDropdown></CustomDropdown> */}
     </>

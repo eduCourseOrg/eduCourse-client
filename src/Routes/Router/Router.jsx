@@ -1,10 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import InstructorRegistration from "../../Pages/Register/InstructorRegistration/InstructorRegistration";
 import {
-  AllCourse,
-  AllInstructors,
+  // AllCourse,
+  // AllInstructors,
   Analytics,
   Assignment,
+  BackEndAllCourse,
+  BackEndAllInstructors,
   Build,
   Certificates,
   CourseDetails,
@@ -63,7 +65,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "courses",
-        element: <AllCourse></AllCourse>,
+        element: <BackEndAllCourse></BackEndAllCourse>,
       },
       {
         path: "instructorDetails",
@@ -71,7 +73,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "instructors",
-        element: <AllInstructors></AllInstructors>,
+        element: <BackEndAllInstructors></BackEndAllInstructors>,
       },
     ],
   },

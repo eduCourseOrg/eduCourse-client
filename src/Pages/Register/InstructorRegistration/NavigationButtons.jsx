@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
+
 
 const NavigationButtons = ({
   currentStep,
@@ -22,9 +23,7 @@ const NavigationButtons = ({
         className="cusBtn next-btn"
         type="button"
         onClick={handleNext}
-        aria-label={
-          currentStep === steps.length ? "Submit form" : "Go to next step"
-        }
+       
       >
         {currentStep === steps.length ? "Submit" : "Next"}
       </button>
