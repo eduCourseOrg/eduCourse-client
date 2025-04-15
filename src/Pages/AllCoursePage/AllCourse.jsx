@@ -169,6 +169,7 @@ const AllCourse = () => {
     selectedCategory,
     selectedCheckboxes,
     selectedLevelCheckboxes,
+    filteredCourse
   ]);
 
   console.log("Defaulte", courseData);
