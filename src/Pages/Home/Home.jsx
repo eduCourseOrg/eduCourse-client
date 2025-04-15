@@ -18,7 +18,7 @@ const Home = () => {
       <Review></Review>
       <OurProcess></OurProcess>
       <Faq></Faq>
-      <InputField></InputField>
+      {/* <InputField></InputField> */}
       {/* <InputField></InputField> */}
       {/* <CustomDropdown></CustomDropdown> */}
     </>

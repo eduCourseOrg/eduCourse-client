@@ -196,7 +196,7 @@ const CourseDetails = () => {
                       {singleCourse?.quizzes?.map((quiz, index) => (
                         <div
                           key={index}
-                          className="border-2 border-primary p-4 rounded-xl"
+                          className="border-2 border-primary p-4 rounded-md"
                         >
                           <h3 className="bg-primary text-secondary p-2 font-medium rounded-lg">
                             {quiz?.question}
