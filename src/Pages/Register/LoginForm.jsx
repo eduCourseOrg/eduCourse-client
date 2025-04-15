@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import axios from "axios";
 import { useContext } from 'react';
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from 'react-hot-toast';
@@ -20,7 +21,13 @@ const LoginForm = ({setIsLogin}) => {
         console.log(data);
         logIn(data.email,data.password)
             .then((res)=>{
-              const user = res.user;
+              console.log(res.user.email)
+              const user = {email:res.user.email};
+              axios.post("http://localhost:5000/jwt",user,{withCredentials:true})
+              .then(res=>{
+                console.log(res.data)    
+              });
+
               toast.success('Log in Successfully');
               console.log(user);
             })

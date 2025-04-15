@@ -7,19 +7,19 @@ import PopularCourse from "../../Components/Home/PopularCourse";
 import Review from "../../Components/Home/Review";
 
 const Home = () => {
-  return (
-    <>
-      <Hero></Hero>
-      <Counter></Counter>
-      <Categories></Categories>
-      <PopularCourse></PopularCourse>
-      <Review></Review>
-      <OurProcess></OurProcess>
-      <Faq></Faq>
-      {/* <InputField></InputField> */}
-      {/* <CustomDropdown></CustomDropdown> */}
-    </>
-  );
+    return (
+        <>
+            <Hero></Hero>
+            <Counter></Counter>
+            <Categories></Categories>
+            <PopularCourse></PopularCourse>
+            <Review></Review>
+            <OurProcess></OurProcess>
+            <Faq></Faq>
+            {/* <InputField></InputField> */}
+            {/* <CustomDropdown></CustomDropdown> */}
+        </>
+    );
 };
 
 export default Home;

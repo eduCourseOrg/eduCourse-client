@@ -32,14 +32,13 @@ import Credits from "../../Pages/Dashboard/StudentDashboard/Credits/Credits";
 import Error from "../../Pages/Error/Error";
 import Home from "../../Pages/Home/Home";
 import InstructorDetails from "../../Pages/InstructorDetails/InstructorDetails";
-// import InstructorForm from "../../Pages/Register/InstructorRegistration";
+// import InstructorForm from "../../Pages/Register/InstructorForm";
 import StudentRegister from "../../Pages/Register/StudentRegister";
 
 export {
   AllInstructors,
   Analytics,
   Assignment,
-  // AllCourse,
   BackEndAllCourse,
   BackEndAllInstructors,
   Build,
@@ -58,7 +57,6 @@ export {
   FAQ,
   Home,
   InstructorDetails,
-  // InstructorForm,
   Main,
   Messages,
   Notice,
