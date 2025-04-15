@@ -53,10 +53,11 @@ export const router = createBrowserRouter([
         element: <StudentRegister></StudentRegister>,
       },
       {
-        path: "courses/:id",
+        path: "/courses/:id",
         element: <CourseDetails></CourseDetails>,
-        loader: async ({ params }) =>
-          fetch(`http://localhost:5000/courses/${params.id}`),
+        loader: async ({ params }) => {
+          return fetch(`http://localhost:5000/courses/${params.id}`);
+        },
       },
       {
         path: "/instructorReg",

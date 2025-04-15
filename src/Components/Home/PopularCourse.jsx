@@ -15,17 +15,22 @@ const PopularCourse = () => {
   const [dWidth, setDWidth] = useState(0);
 
   useEffect(() => {
-    setDWidth(window.innerWidth);
+    const handleResize = () => setDWidth(window.innerWidth);
+    handleResize(); // set initial
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const { data: courses = [], isLoading } = useQuery({
-    queryKey: ["course"],
+    queryKey: ["courses"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:3000/courses");
+      const res = await fetch("http://localhost:5000/courses");
       const data = await res.json();
-      return data;
+      console.log(data, "data in popular");
+      return data?.data;
     },
   });
+  console.log(courses, "courses in popular");
 
   if (isLoading) {
     return (
@@ -71,13 +76,13 @@ const PopularCourse = () => {
             Cyber Security
           </NavLink>
           <NavLink
-            onClick={() => setSelect("Development")}
+            onClick={() => setSelect("Web Development")}
             className={`px-2 md:px-4 py-1 md:py-2 ${
-              select == "Development" &&
+              select == "Web Development" &&
               "bg-primary text-[var(--color-secondary)]"
             } text-[var(--color-primary)] flex items-center`}
           >
-            Development
+            Web Development
           </NavLink>
           <NavLink
             onClick={() => setSelect("Graphic Design")}
@@ -104,20 +109,10 @@ const PopularCourse = () => {
           className="mySwiper w-full h-full"
         >
           {courses
-            .filter((course) => {
-              if (select == "All") {
-                return true;
-              } else if (select == "Development") {
-                return course.category == "Web Development";
-              } else if (select == "Data Science") {
-                return course.category == "Data Science";
-              } else if (select == "Cyber Security") {
-                return course.category == "Cyber Security";
-              } else if (select == "Graphic Design") {
-                return course.category == "Graphic Design";
-              }
-            })
-            .map((course, idx) => (
+            ?.filter((course) =>
+              select === "All" ? true : course.category === select
+            )
+            ?.map((course, idx) => (
               <SwiperSlide
                 key={idx}
                 className="w-full h-full bg-white rounded-md pb-4"
