@@ -291,7 +291,7 @@ const BackEndAllcourse = () => {
                     key={pageNum}
                     className={`bg-cyan-900 text-cyan-100 h-6 rounded-sm w-8 ${
                       pagination.page === pageNum
-                        ? "active text-blue-100 h-7"
+                        ? "active font-bold rounded-4xl text-orange-100 h-7"
                         : ""
                     }`}
                     onClick={() => setPage(pageNum)}

@@ -2,7 +2,7 @@ import Dashboard from "../../Layout/Dashboard/Dashboard";
 import Main from "../../Layout/Main/Main";
 // import AllCourse from "../../Pages/AllCoursePage/AllCourse";
 import BackEndAllCourse from "../../Pages/AllCoursePage/BackEndAllCourse";
-import AllInstructors from "../../Pages/AllInstructors/AllInstructors";
+
 import BackEndAllInstructors from "../../Pages/AllInstructors/BackEndAllInstructor";
 import CourseDetails from "../../Pages/CourseDetails/CourseDetails";
 import Certificates from "../../Pages/Dashboard/DashboardShared/Certificates/Certificates";
@@ -36,7 +36,6 @@ import InstructorDetails from "../../Pages/InstructorDetails/InstructorDetails";
 import StudentRegister from "../../Pages/Register/StudentRegister";
 
 export {
-  AllInstructors,
   Analytics,
   Assignment,
   BackEndAllCourse,

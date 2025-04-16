@@ -1,5 +1,5 @@
 import { FaClock, FaStar } from "react-icons/fa";
-import { PiCellSignalFullBold } from "react-icons/pi";
+import { GiProgression } from "react-icons/gi";
 import { TbWorld } from "react-icons/tb";
 import { Link } from "react-router-dom";
 
@@ -34,8 +34,8 @@ const CourseCart = ({ singleCourse }) => {
           <div className="w-full h-[55%] px-3 flex flex-col gap-1">
             <h1 className="text-2xl font-bold">{name}</h1>
             <div className="flex items-center justify-between">
-              <span className="text-sm font-semibold">
-                By: Md. Foysal Uddin
+              <span className="text-sm text-lime-900 font-bold">
+                {category}
               </span>
               <h2 className="text-xl font-bold">$99</h2>
             </div>
@@ -45,21 +45,17 @@ const CourseCart = ({ singleCourse }) => {
                 <FaStar className="text-yellow-400"></FaStar>
                 <FaStar className="text-yellow-400"></FaStar>
                 <FaStar className="text-yellow-400"></FaStar>
-                <FaStar className="text-yellow-400"></FaStar>
-                (2)
+                <FaStar className="text-yellow-400"></FaStar>({ratings})
               </h2>
             </div>
-            <h3>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit,
-              modi.
-            </h3>
+            <h3>{description}</h3>
             <hr className="bg-primary h-[2px] mt-5" />
             <div className="mt-2 flex items-center justify-between font-semibold">
               <span className="flex items-center gap-1">
-                <FaClock></FaClock> 3 Days
+                <FaClock></FaClock> {enrolledCount}
               </span>
               <span className="flex items-center gap-1">
-                <PiCellSignalFullBold></PiCellSignalFullBold> Beginner
+                <GiProgression></GiProgression> {courseLevel}
               </span>
               <span className="flex items-center gap-1">
                 <TbWorld></TbWorld> English
