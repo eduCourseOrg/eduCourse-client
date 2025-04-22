@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
-import { forwardRef, useImperativeHandle } from "react";
+import { forwardRef, useImperativeHandle, useState } from "react";
 import { useForm } from "react-hook-form";
 
 const EducationalInfo = forwardRef(
@@ -13,10 +13,31 @@ const EducationalInfo = forwardRef(
       defaultValues: formData,
     });
 
-    const handleForm = (data) => {
-      
+    const [selectedResume, setSelectedResume] = useState(null);
+
+    const handleForm = async (data) => {
+      const formDataObject = new FormData();
+
+      // Append text fields
+      Object.keys(data).forEach((key) => {
+        if (key !== "resume") {
+          formDataObject.append(key, data[key]);
+        }
+      });
+
+      // Append file if exists
+      if (data.resume && data.resume[0]) {
+        formDataObject.append("resume", data.resume[0]);
+        setSelectedResume(data.resume[0].name); // Update selected file state
+      }
+
+      // Log FormData for debugging
+      console.log(
+        "Educational Info Submitted:",
+        Object.fromEntries(formDataObject)
+      );
+
       setFormData((prevData) => ({ ...prevData, ...data }));
-      console.log("Educational Info Submitted:", data);
       setCurrentStep(3);
     };
 
@@ -26,7 +47,10 @@ const EducationalInfo = forwardRef(
 
     return (
       <div className="w-full">
-        <form className="p-4 bg-white rounded-lg shadow-lg">
+        <form
+          className="p-4 bg-white rounded-lg shadow-lg"
+          encType="multipart/form-data"
+        >
           <div className="flex flex-row justify-between gap-4 mt-5">
             <div className="w-1/2">
               <label className="block text-sm font-medium text-gray-700">
@@ -36,7 +60,7 @@ const EducationalInfo = forwardRef(
                 type="text"
                 placeholder="Education Qualification"
                 {...register("education", {
-                  required: "Education qualification is required",
+                  // required: "Education qualification is required",
                 })}
                 className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
@@ -48,13 +72,20 @@ const EducationalInfo = forwardRef(
             </div>
             <div className="w-1/2">
               <label className="block text-sm font-medium text-gray-700">
-                Resume
+                Resume (PDF, DOC, Image)
               </label>
               <input
+                id="resume"
                 type="file"
+                accept=".pdf, .doc, .docx, image/*"
                 {...register("resume")}
                 className="w-full p-2 border border-gray-300 rounded-md"
               />
+              {selectedResume && (
+                <p className="text-sm text-gray-600 mt-1">
+                  Selected: {selectedResume}
+                </p>
+              )}
             </div>
           </div>
 
@@ -65,7 +96,7 @@ const EducationalInfo = forwardRef(
             <textarea
               placeholder="About yourself"
               {...register("yourself", {
-                required: "About yourself is required",
+                // required: "About yourself is required",
               })}
               className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
             ></textarea>
@@ -75,7 +106,8 @@ const EducationalInfo = forwardRef(
               </span>
             )}
           </div>
-          <div className="flex flex-row justify-between gap-4  mt-5">
+
+          <div className="flex flex-row justify-between gap-4 mt-5">
             <div className="w-1/2">
               <label className="block">Portfolio/Website</label>
               <input
@@ -89,18 +121,19 @@ const EducationalInfo = forwardRef(
               <label className="block">Facebook</label>
               <input
                 type="url"
-                placeholder="Facebook url"
+                placeholder="Facebook URL"
                 {...register("facebook")}
                 className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
             </div>
           </div>
-          <div className="flex flex-row justify-between gap-4  mt-5">
+
+          <div className="flex flex-row justify-between gap-4 mt-5">
             <div className="w-1/2">
               <label className="block">Instagram</label>
               <input
                 type="url"
-                placeholder="Instagram url"
+                placeholder="Instagram URL"
                 {...register("instagram")}
                 className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
@@ -109,7 +142,7 @@ const EducationalInfo = forwardRef(
               <label className="block">LinkedIn</label>
               <input
                 type="url"
-                placeholder="LinkedIn Url"
+                placeholder="LinkedIn URL"
                 {...register("linkedIn")}
                 className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               />

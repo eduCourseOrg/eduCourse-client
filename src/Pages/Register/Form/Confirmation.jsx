@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
-import { forwardRef, useImperativeHandle } from "react";
+import { forwardRef, useContext, useImperativeHandle } from "react";
 import { useForm } from "react-hook-form";
-
+import { EduCourseContexts } from "../../../Contexts/AuthProvider";
 const Confirmation = forwardRef(
   ({ formData, setFormData, handleFinalSubmit }, ref) => {
     const {
@@ -12,7 +12,7 @@ const Confirmation = forwardRef(
     } = useForm({
       defaultValues: formData,
     });
-
+ const { createAccount, user } = useContext(EduCourseContexts);
     const handleForm = (data) => {
       const finalData = { ...formData, ...data };
       setFormData(finalData);
@@ -41,7 +41,8 @@ const Confirmation = forwardRef(
               <input
                 id="email"
                 type="email"
-                placeholder="Email"
+                placeholder={user ? user.email : "email"}
+                value={user ? user.email : ""}
                 {...register("email", {
                   required: "Email is required",
                   pattern: {
