@@ -36,8 +36,6 @@ import {
   StudentRegister,
   TextLesson,
   VideoLesson,
-  Quiz,
-  Assignment,
   BecomeAnInstructor,
   Step1,
   Step2,

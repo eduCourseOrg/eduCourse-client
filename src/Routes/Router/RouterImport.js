@@ -34,11 +34,6 @@ import Home from "../../Pages/Home/Home";
 import InstructorDetails from "../../Pages/InstructorDetails/InstructorDetails";
 // import InstructorForm from "../../Pages/Register/InstructorForm";
 import StudentRegister from "../../Pages/Register/StudentRegister";
-import Build from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/Build";
-import TextLesson from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/TextLesson";
-import VideoLesson from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/VideoLesson";
-import Quiz from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/Quiz";
-import Assignment from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/Assignment";
 import BecomeAnInstructor from "../../Pages/BecomeAnInstructor/BecomeAnInstructor";
 import Step1 from "../../Pages/BecomeAnInstructor/Step1";
 import Step2 from "../../Pages/BecomeAnInstructor/Step2";
@@ -79,8 +74,6 @@ export {
   StudentRegister,
   TextLesson,
   VideoLesson,
-  Quiz,
-  Assignment,
   BecomeAnInstructor,
   Step1,
   Step2,

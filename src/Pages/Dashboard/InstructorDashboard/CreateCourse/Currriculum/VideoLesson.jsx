@@ -157,7 +157,7 @@ const VideoLesson = () => {
                     {/* Lesson Content */}
                     {
                         activeButton ?
-                            <div className="w-full flex flex-col gap-4">
+                            (<div className="w-full flex flex-col gap-4">
                                 {/* Source type */}
                                 <div className=" flex flex-col gap-1 w-1/2">
                                     <h2 className="text-sm font-semibold">Source Type</h2>
