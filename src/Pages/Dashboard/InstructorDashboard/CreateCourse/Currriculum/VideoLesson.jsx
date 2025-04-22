@@ -13,6 +13,7 @@ const VideoLesson = () => {
     const [source, setSource] = useState('');
     const [fileData, setFileData] = useState({});
     const [loading, setLoading] = useState(false);
+    const [progress, setProgress] = useState(0);
 
     const ffmpeg = new FFmpeg();
 
@@ -24,7 +25,7 @@ const VideoLesson = () => {
         try {
             if (!ffmpeg.loaded) await ffmpeg.load()
             ffmpeg.writeFile("videoFile.mp4", await fetchFile(file)); // use a relevant name, as your wish
-            
+            ffmpeg.on('progress', ({ progress }) => { setProgress(Number(`${progress * 100}`).toFixed(2)) })
             await ffmpeg.exec([
                 '-i', 'videoFile.mp4', // input file name, same as writefile name
                 '-c:v', 'libx264', // convert video type
@@ -34,7 +35,9 @@ const VideoLesson = () => {
             ]);
 
             const compressedData = await ffmpeg.readFile("output.mp4");
-            // Convert binary data to a binary string for storing it to Database as string
+            setProgress(0)
+            // const buffer = Buffer.from(compressedData);  // Convert to Buffer if needed in the backend.
+            // Convert binary data to a binary string for storing it to Database as string, this can be heavier for memory. you may directly store compressdata to the database.
             const binaryString = Array.from(compressedData)
                 .map((byte) => String.fromCharCode(byte))
                 .join("");
@@ -43,6 +46,7 @@ const VideoLesson = () => {
                 [...binaryString].map((char) => char.charCodeAt(0))
             );
             // After retrive from database create a blob and make a output url. call it in video src.
+            // Or we send the blob file in the backend for uploading to the database.
             const blob = new Blob([byteArray], { type: "video/mp4" });
             const outputUrl = URL.createObjectURL(blob);
             // console.log("compressed",compressedData, "blob", blob, "output",binaryString)
@@ -182,7 +186,7 @@ const VideoLesson = () => {
                                                         </div>
                                                         :
                                                         loading ? 
-                                                            <p className="text-xl">Loading....</p>
+                                                            <p className="text-xl">{progress} %</p>
                                                             :
                                                             <><h3>Browse mp4 type video file from your computer</h3>
                                                             <label htmlFor="browseVideo" className="bg-primary text-secondary rounded px-5 py-2 cursor-pointer">Browse Video</label>

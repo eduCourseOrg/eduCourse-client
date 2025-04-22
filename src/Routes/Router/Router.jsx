@@ -33,7 +33,11 @@ import {
   TextLesson,
   VideoLesson,
   Quiz,
-  Assignment} from './RouterImport';
+  Assignment,
+  BecomeAnInstructor,
+  Step1,
+  Step2,
+  Step3} from './RouterImport';
 
 export const router = createBrowserRouter([
   {
@@ -54,10 +58,6 @@ export const router = createBrowserRouter([
         element: <CourseDetails></CourseDetails>,
         loader: async ({ params }) =>
           fetch(`http://localhost:5000/courses/${params.id}`),
-      },
-      {
-        path: "instructorReg",
-        element: <InstructorForm></InstructorForm>,
       },
       {
         path: "courses",
@@ -181,5 +181,25 @@ export const router = createBrowserRouter([
         element: <Notice></Notice>
       }
     ]
-  }
+  },
+  {
+    path: "/instructorReg",
+    // element: <InstructorForm></InstructorForm>,
+    element: <BecomeAnInstructor></BecomeAnInstructor>,
+    errorElement: <Error></Error>,
+    children: [
+      {
+        index: true,
+        element: <Step1></Step1>
+      },
+      {
+        path: "step2",
+        element: <Step2></Step2>
+      },
+      {
+        path: "step3",
+        element: <Step3></Step3>
+      }
+    ]
+  },
 ]);

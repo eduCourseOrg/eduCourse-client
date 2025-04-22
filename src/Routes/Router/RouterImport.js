@@ -32,6 +32,10 @@ import TextLesson from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/C
 import VideoLesson from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/VideoLesson";
 import Quiz from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/Quiz";
 import Assignment from "../../Pages/Dashboard/InstructorDashboard/CreateCourse/Currriculum/Assignment";
+import BecomeAnInstructor from "../../Pages/BecomeAnInstructor/BecomeAnInstructor";
+import Step1 from "../../Pages/BecomeAnInstructor/Step1";
+import Step2 from "../../Pages/BecomeAnInstructor/Step2";
+import Step3 from "../../Pages/BecomeAnInstructor/Step3";
 
 export {
   AllCourse,
@@ -68,4 +72,8 @@ export {
   VideoLesson,
   Quiz,
   Assignment,
+  BecomeAnInstructor,
+  Step1,
+  Step2,
+  Step3
 };
