@@ -137,7 +137,23 @@
     "website": "https://davidwilson.ai",
     "address": "101 AI Blvd, Berlin, Germany",
     "email": "david.wilson@example.com",
-    "phoneNumber": "+49 987 654 3210"
+    "phoneNumber": "+49 987 654 3210",
+    "review": [
+      {
+        "studentId": "R001",
+        "StudentName": "Alice Brown",
+        "review": "David's course on AI was incredibly insightful!",
+        "rating": 5,
+        "date": "2023-01-15"
+      },
+      {
+        "studentId": "R002",
+        "StudentName": "Alice Brown",
+        "review": "David's course on AI was incredibly insightful!",
+        "rating": 4.9,
+        "date": "2023-01-15"
+      }
+    ]
   },
   {
     "instructorId": "107",

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { IoGrid } from "react-icons/io5";
 import { LiaBarsSolid } from "react-icons/lia";
@@ -8,7 +8,10 @@ const BackEndAllcourse = () => {
   const [courseData, setCourseData] = useState([]);
 
   const [searchTerm, setSearchTerm] = useState("");
+  const [categories, setCategories] = useState([])
+  const [levels,setLevels]=useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
+  
   const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
   const [selectedLevelCheckboxes, setSelectedLevelCheckboxes] = useState([]);
 
@@ -24,14 +27,7 @@ const BackEndAllcourse = () => {
   // const [selectedTags, setSelectedTags] = useState([]);
   useEffect(() => {
     const fetchCourses = async () => {
-      const params = new URLSearchParams({
-        // searchTerm,
-        // selectedCategory,
-        // selectedCheckboxes: selectedCheckboxes.join(","),
-        // selectedLevelCheckboxes: selectedLevelCheckboxes.join(","),
-        // page,
-        // limit,
-      });
+      const params = new URLSearchParams();
 
       if (searchTerm) params.append("searchTerm", searchTerm);
       if (selectedCategory && selectedCategory !== "All Categories")
@@ -53,7 +49,13 @@ const BackEndAllcourse = () => {
 
       if (json.success) {
         setCourseData(json.data);
+        console.log("data",json.data)
         setPagination(json.pagination);
+      
+        console.log("categories", json.filterOptions.categories);
+        setCategories(["All Categories", ...new Set(json.filterOptions.categories.map(category=>category.value))])
+     
+        setLevels([...new Set(json.filterOptions.levels.map(level=>level.value))])
       }
     };
 
@@ -68,20 +70,8 @@ const BackEndAllcourse = () => {
   ]);
   console.log("search", searchTerm, courseData);
 
-  const categories = useMemo(
-    () => [
-      "All Categories",
-      ...new Set(courseData && courseData.map((course) => course.category)),
-    ],
-    [courseData]
-  );
+ 
 
-  const levels = useMemo(
-    () => [
-      ...new Set(courseData && courseData.map((course) => course.courseLevel)),
-    ],
-    [courseData]
-  );
 
   console.log(
     "level",
@@ -119,7 +109,12 @@ const BackEndAllcourse = () => {
     );
     setPage(1);
   };
-
+  // const handleCheckboxChange = (value, stateSetter) => {
+  //   stateSetter((prev) =>
+  //     prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
+  //   );
+  //   setPage(1);
+  // };
   // const handlePageChange = (newPage) => {
   //   setPage(newPage);
   // };
@@ -191,7 +186,7 @@ const BackEndAllcourse = () => {
         <div className="grid-cols-1 lg:mr-4 md:mr-2">
           {/* // Start left side section */}
 
-          {/* Section for category filter */}
+          {/* Section dropdown for category filter */}
 
           <div className="ml-2 bg-secondary rounded-md p-4 h-full">
             <fieldset>
@@ -212,7 +207,7 @@ const BackEndAllcourse = () => {
                         type="checkbox"
                         value={category}
                         checked={selectedCheckboxes.includes(category)}
-                        onChange={() => handleCheckboxChange(category)}
+                        onChange={() => handleCheckboxChange(category,)}
                         className="size-4 rounded-sm border-gray-300"
                       />
                       {category}
