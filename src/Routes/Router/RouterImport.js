@@ -34,6 +34,10 @@ import Home from "../../Pages/Home/Home";
 import InstructorDetails from "../../Pages/InstructorDetails/InstructorDetails";
 // import InstructorForm from "../../Pages/Register/InstructorForm";
 import StudentRegister from "../../Pages/Register/StudentRegister";
+import BecomeAnInstructor from "../../Pages/BecomeAnInstructor/BecomeAnInstructor";
+import Step1 from "../../Pages/BecomeAnInstructor/Step1";
+import Step2 from "../../Pages/BecomeAnInstructor/Step2";
+import Step3 from "../../Pages/BecomeAnInstructor/Step3";
 
 export {
   AllInstructors,
@@ -70,4 +74,8 @@ export {
   StudentRegister,
   TextLesson,
   VideoLesson,
+  BecomeAnInstructor,
+  Step1,
+  Step2,
+  Step3
 };

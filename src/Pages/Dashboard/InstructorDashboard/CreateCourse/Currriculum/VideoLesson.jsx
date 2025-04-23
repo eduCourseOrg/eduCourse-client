@@ -7,11 +7,12 @@ import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile } from "@ffmpeg/util";
 
 const VideoLesson = () => {
-  const [activeButton, setActiveButton] = useState(true);
-  const [description, setDescription] = useState("");
-  const [source, setSource] = useState("");
-  const [fileData, setFileData] = useState({});
-  const [loading, setLoading] = useState(false);
+    const [activeButton, setActiveButton] = useState(true);
+    const [description, setDescription] = useState("");
+    const [source, setSource] = useState('');
+    const [fileData, setFileData] = useState({});
+    const [loading, setLoading] = useState(false);
+    const [progress, setProgress] = useState(0);
 
   const ffmpeg = new FFmpeg();
 
@@ -20,43 +21,42 @@ const VideoLesson = () => {
     if (!file) return;
     setLoading(true);
 
-    try {
-      if (!ffmpeg.loaded) await ffmpeg.load();
-      ffmpeg.writeFile("videoFile.mp4", await fetchFile(file)); // use a relevant name, as your wish
+        try {
+            if (!ffmpeg.loaded) await ffmpeg.load()
+            ffmpeg.writeFile("videoFile.mp4", await fetchFile(file)); // use a relevant name, as your wish
+            ffmpeg.on('progress', ({ progress }) => { setProgress(Number(`${progress * 100}`).toFixed(2)) })
+            await ffmpeg.exec([
+                '-i', 'videoFile.mp4', // input file name, same as writefile name
+                '-c:v', 'libx264', // convert video type
+                '-crf', '28', // 23-28 range. lower means high quality
+                '-preset', 'veryfast', // Compression speed (veryfast, fast, medium, slow, etc.)
+                'output.mp4' // this is the output video name. call it for output result.
+            ]);
 
-      await ffmpeg.exec([
-        "-i",
-        "videoFile.mp4", // input file name, same as writefile name
-        "-c:v",
-        "libx264", // convert video type
-        "-crf",
-        "28", // 23-28 range. lower means high quality
-        "-preset",
-        "veryfast", // Compression speed (veryfast, fast, medium, slow, etc.)
-        "output.mp4", // this is the output video name. call it for output result.
-      ]);
+            const compressedData = await ffmpeg.readFile("output.mp4");
+            setProgress(0)
+            // const buffer = Buffer.from(compressedData);  // Convert to Buffer if needed in the backend.
+            // Convert binary data to a binary string for storing it to Database as string, this can be heavier for memory. you may directly store compressdata to the database.
+            const binaryString = Array.from(compressedData)
+                .map((byte) => String.fromCharCode(byte))
+                .join("");
+            // Retrive the string from database and convert it to unit8Array for display the video
+            const byteArray = new Uint8Array(
+                [...binaryString].map((char) => char.charCodeAt(0))
+            );
+            // After retrive from database create a blob and make a output url. call it in video src.
+            // Or we send the blob file in the backend for uploading to the database.
+            const blob = new Blob([byteArray], { type: "video/mp4" });
+            const outputUrl = URL.createObjectURL(blob);
+            // console.log("compressed",compressedData, "blob", blob, "output",binaryString)
+            setFileData((prev)=> ({...prev, video: outputUrl}))
+        } catch (error) {
+            console.error("Error during compression/conversion:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
-      const compressedData = await ffmpeg.readFile("output.mp4");
-
-      // Convert binary data to a binary string for storing it to Database as string
-      const binaryString = Array.from(compressedData)
-        .map((byte) => String.fromCharCode(byte))
-        .join("");
-      // Retrive the string from database and convert it to unit8Array for display the video
-      const byteArray = new Uint8Array(
-        [...binaryString].map((char) => char.charCodeAt(0))
-      );
-      // After retrive from database create a blob and make a output url. call it in video src.
-      const blob = new Blob([byteArray], { type: "video/mp4" });
-      const outputUrl = URL.createObjectURL(blob);
-      // console.log("compressed",compressedData, "blob", blob, "output",binaryString)
-      setFileData((prev) => ({ ...prev, video: outputUrl }));
-    } catch (error) {
-      console.error("Error during compression/conversion:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleImageChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -154,149 +154,99 @@ const VideoLesson = () => {
             </button>
           </div>
 
-          {/* Lesson Content */}
-          {activeButton ? (
-            <div className="w-full flex flex-col gap-4">
-              {/* Source type */}
-              <div className=" flex flex-col gap-1 w-1/2">
-                <h2 className="text-sm font-semibold">Source Type</h2>
-                <select
-                  onChange={handleSourceSelect}
-                  name="sourceType"
-                  id=""
-                  className="h-full w-full px-3 py-2 border border-secondary rounded focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-transparent transition duration-200 cursor-pointer"
-                >
-                  <option selected disabled>
-                    -- Select Source --
-                  </option>
-                  <option value="mp4">HTML(MP4)</option>
-                  <option value="youtube">Youtube</option>
-                  <option value="embed">Embeded Link</option>
-                </select>
-              </div>
-              {/* Conditional Rendering */}
-              {source === "mp4" && (
-                <div className="flex flex-col gap-8">
-                  <div className=" flex flex-col gap-1 w-full h-60">
-                    <h2 className="text-sm font-semibold">
-                      Lesson video poster
-                    </h2>
-                    <div className="w-[60%] h-full flex flex-col items-center gap-2 justify-center border-dashed border-1 rounded ">
-                      {fileData?.image ? (
-                        <div className="w-full h-full relative group">
-                          <img
-                            src={fileData?.image}
-                            alt="Preview Image"
-                            className="w-full h-full"
-                          />
-                          <div className="w-full h-full hidden items-center justify-center absolute top-0 left-0 group-hover:flex bg-gray-100/40">
-                            <button
-                              onClick={deleteImage}
-                              className="px-4 py-2 rounded bg-primary text-secondary cursor-pointer"
-                            >
-                              Remove
-                            </button>
-                          </div>
-                        </div>
-                      ) : (
-                        <>
-                          <h3>Browse image from your computer</h3>
-                          <label
-                            htmlFor="browseImage"
-                            className="bg-primary text-secondary rounded px-5 py-2 cursor-pointer"
-                          >
-                            Upload an image
-                          </label>
-                          <input
-                            onChange={handleImageChange}
-                            className="hidden"
-                            type="file"
-                            name="browseImage"
-                            id="browseImage"
-                            accept="image/*"
-                          />
-                        </>
-                      )}
-                    </div>
-                  </div>
-                  {/* lesson Video */}
-                  <div className=" flex flex-col gap-1 w-full h-60">
-                    <h2 className="text-sm font-semibold">Lesson video</h2>
-                    <div className="w-[60%] h-full flex flex-col items-center gap-2 justify-center border-dashed border-1 rounded overflow-hidden">
-                      {fileData?.video ? (
-                        <div className="w-full h-full relative group">
-                          <video controls className="w-full h-full">
-                            <source src={fileData?.video} type={"video/mp4"} />
-                            Your browser does not support the video tag.
-                          </video>
-                          <button
-                            onClick={deleteVideo}
-                            className="px-4 py-2 rounded bg-primary text-secondary cursor-pointer absolute top-3 right-3 hidden group-hover:block"
-                          >
-                            Remove
-                          </button>
-                        </div>
-                      ) : loading ? (
-                        <p className="text-xl">Loading....</p>
-                      ) : (
-                        <>
-                          <h3>Browse mp4 type video file from your computer</h3>
-                          <label
-                            htmlFor="browseVideo"
-                            className="bg-primary text-secondary rounded px-5 py-2 cursor-pointer"
-                          >
-                            Browse Video
-                          </label>
-                          <input
-                            onChange={compressAndConvertToBinary}
-                            className="hidden"
-                            type="file"
-                            name="browseVideo"
-                            id="browseVideo"
-                            accept="video/*"
-                          />
-                        </>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              )}
-              {source === "embed" && (
-                <div className="flex flex-col gap-1 w-[60%]">
-                  <h2 className="text-sm font-semibold">
-                    Embed iframe content
-                  </h2>
-                  <textarea
-                    rows={3}
-                    name="embedContent"
-                    id=""
-                    className="w-full px-3 py-2 border border-secondary rounded focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-transparent transition duration-200"
-                  >
-                    Enter Embeded Code
-                  </textarea>
-                </div>
-              )}
-              {source === "youtube" && (
-                <div className=" flex flex-col gap-1 w-[60%] h-12 mb-3">
-                  <h2 className="text-sm font-semibold">Youtube video URL</h2>
-                  <input
-                    placeholder="Enter Youtube Video URL"
-                    type="text"
-                    name="lessonTitle"
-                    className="h-full w-full px-3 py-2 border border-secondary rounded focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-transparent transition duration-200"
-                  />
-                </div>
-              )}
-              {/* Duration */}
-              <div className=" flex flex-col gap-1 w-1/2">
-                <h2 className="text-sm font-semibold">Lesson Duration</h2>
-                <input
-                  placeholder="Lesson Duration"
-                  type="text"
-                  name="duration"
-                  className="h-full w-full px-3 py-2 border border-secondary rounded focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-transparent transition duration-200"
-                />
-              </div>
+                    {/* Lesson Content */}
+                    {
+                        activeButton ?
+                            (<div className="w-full flex flex-col gap-4">
+                                {/* Source type */}
+                                <div className=" flex flex-col gap-1 w-1/2">
+                                    <h2 className="text-sm font-semibold">Source Type</h2>
+                                    <select onChange={handleSourceSelect} name="sourceType" id="" className="h-full w-full px-3 py-2 border border-secondary rounded focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-transparent transition duration-200 cursor-pointer">
+                                        <option selected disabled>-- Select Source --</option>
+                                        <option value="mp4">HTML(MP4)</option>
+                                        <option value="youtube">Youtube</option>
+                                        <option value="embed">Embeded Link</option>
+                                    </select>
+                                </div>
+                                {/* Conditional Rendering */}
+                                {
+                                    source === "mp4" &&
+                                    <div className="flex flex-col gap-8">
+                                        <div className=" flex flex-col gap-1 w-full h-60">
+                                            <h2 className="text-sm font-semibold">Lesson video poster</h2>
+                                            <div className="w-[60%] h-full flex flex-col items-center gap-2 justify-center border-dashed border-1 rounded ">
+                                                {
+                                                        fileData?.image ?
+                                                            <div className="w-full h-full relative group">
+                                                                <img src={fileData?.image} alt="Preview Image" className="w-full h-full" />
+                                                                <div className="w-full h-full hidden items-center justify-center absolute top-0 left-0 group-hover:flex bg-gray-100/40">
+                                                                    <button onClick={deleteImage} className="px-4 py-2 rounded bg-primary text-secondary cursor-pointer">Remove</button>
+                                                                </div>
+                                                            </div>
+                                                            :
+                                                            <><h3>Browse image from your computer</h3>
+                                                            <label htmlFor="browseImage" className="bg-primary text-secondary rounded px-5 py-2 cursor-pointer">Upload an image</label>
+                                                            <input onChange={handleImageChange} className="hidden" type="file" name="browseImage" id="browseImage" accept="image/*"/></>
+                                                }
+                                            </div>
+                                        </div>
+                                            {/* lesson Video */}
+                                        <div className=" flex flex-col gap-1 w-full h-60">
+                                            <h2 className="text-sm font-semibold">Lesson video</h2>
+                                                <div className="w-[60%] h-full flex flex-col items-center gap-2 justify-center border-dashed border-1 rounded overflow-hidden">
+                                                {
+                                                    fileData?.video ?
+                                                        <div className="w-full h-full relative group">
+                                                            <video
+                                                            controls
+                                                            className="w-full h-full"
+                                                            >
+                                                            <source src={fileData?.video} type={'video/mp4'} />
+                                                            Your browser does not support the video tag.
+                                                            </video>
+                                                            <button onClick={deleteVideo} className="px-4 py-2 rounded bg-primary text-secondary cursor-pointer absolute top-3 right-3 hidden group-hover:block">Remove</button>    
+                                                        </div>
+                                                        :
+                                                        loading ? 
+                                                            <p className="text-xl">{progress} %</p>
+                                                            :
+                                                            <><h3>Browse mp4 type video file from your computer</h3>
+                                                            <label htmlFor="browseVideo" className="bg-primary text-secondary rounded px-5 py-2 cursor-pointer">Browse Video</label>
+                                                            <input onChange={compressAndConvertToBinary} className="hidden" type="file" name="browseVideo" id="browseVideo" accept="video/*" /></>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                {
+                                    source === "embed" &&
+                                    <div className="flex flex-col gap-1 w-[60%]">
+                                        <h2 className="text-sm font-semibold">Embed iframe content</h2>
+                                        <textarea rows={3} name="embedContent" id="" className="w-full px-3 py-2 border border-secondary rounded focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-transparent transition duration-200">Enter Embeded Code</textarea>
+                                    </div>
+                                }
+                                {
+                                    source === "youtube" &&
+                                    <div className=" flex flex-col gap-1 w-[60%] h-12 mb-3">
+                                        <h2 className="text-sm font-semibold">Youtube video URL</h2>
+                                        <input 
+                                            placeholder="Enter Youtube Video URL" 
+                                            type="text" 
+                                            name="lessonTitle" 
+                                            className="h-full w-full px-3 py-2 border border-secondary rounded focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-transparent transition duration-200" 
+                                        />
+                                    </div>
+                                }
+                                {/* Duration */}
+                                <div className=" flex flex-col gap-1 w-1/2">
+                                    <h2 className="text-sm font-semibold">Lesson Duration</h2>
+                                    <input 
+                                        placeholder="Lesson Duration" 
+                                        type="text" 
+                                        name="duration" 
+                                        className="h-full w-full px-3 py-2 border border-secondary rounded focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] focus:border-transparent transition duration-200" 
+                                    />
+                                </div>
 
               {/* Short Description */}
               <div className=" flex flex-col gap-1 w-full">
