@@ -11,7 +11,6 @@ import NavigationButtons from "./NavigationButtons";
 import StepIndicator from "./StepIndicator";
 import ThankYou from "./ThankYou";
 const InstructorRegistration = () => {
- 
   const personalInfoRef = useRef(null);
   const educationalInfoRef = useRef(null);
   const skillsRef = useRef(null);
@@ -22,7 +21,6 @@ const InstructorRegistration = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [complete, setComplete] = useState(false);
   const [formData, setFormData] = useState({});
-  
 
   // Handles final form submission
   // const handleFinalSubmit = async (finalData) => {

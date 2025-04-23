@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { IoGrid } from "react-icons/io5";
 import { LiaBarsSolid } from "react-icons/lia";
@@ -26,8 +26,8 @@ const AllCourse = () => {
         return response.json();
       })
       .then((data) => {
-        setCourseData(data?.courses);
-        setFilteredCourses(data?.courses);
+        setCourseData(data.courses);
+        setFilteredCourses(data.courses);
       })
       .catch((error) =>
         console.error(
@@ -35,7 +35,7 @@ const AllCourse = () => {
           error
         )
       );
-  }, [filteredCourses]);
+  }, []);
 
   const categories = useMemo(
     () => [
@@ -54,66 +54,45 @@ const AllCourse = () => {
 
   console.log("level", levels);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const filteredCourse = () => {
-    let filtered = [...courseData];
-    // Search term filter
+  const filterCourse = useCallback(() => {
+    return courseData.filter((course) => {
+      const matchesSearch = searchTerm
+        ? Object.values(course).some((value) =>
+            String(value).toLowerCase().includes(searchTerm.toLowerCase())
+          )
+        : true;
 
-    if (searchTerm) {
-      filtered = filtered.filter((course) =>
-        Object.values(course).some((value) =>
-          String(value).toLowerCase().includes(searchTerm.toLowerCase())
-        )
+      // Dropdown category filter (single category)
+      const matchesCategory =
+        !selectedCategory || // Allow filtering without selecting a category
+        selectedCategory === "All Categories" ||
+        course.category === selectedCategory;
+
+      const matchesCheckboxes =
+        selectedCheckboxes.length === 0 ||
+        selectedCheckboxes.includes(course.category);
+
+      const matchesLevels =
+        selectedLevelCheckboxes.length === 0 ||
+        selectedLevelCheckboxes.includes(course.level);
+
+      return (
+        matchesSearch && matchesCategory && matchesCheckboxes && matchesLevels
       );
-    }
+    });
+  }, [
+    searchTerm,
+    selectedCategory,
+    selectedCheckboxes,
+    selectedLevelCheckboxes,
+    courseData,
+  ]);
 
-    // Dropdown category filter (single category)
+  const displayedCourses = useMemo(() => filterCourse(), [filterCourse]);
 
-    // if (selectedCategory !== "All Categories") {
-    //   filtered = filtered.filter((item) => item?.category === selectedCategory);
-    // }
-
-    if (selectedCategory !== "All Categories") {
-      filtered = filtered.filter((item) =>
-        item?.category?.includes(selectedCategory)
-      );
-    }
-    // Dropdown category filter (single category)
-    // const matchesCategory =(course)
-    //   !selectedCategory || // Allow filtering without selecting a category
-    //   selectedCategory === "All Categories" ||
-    //   course.category === selectedCategory;
-
-    // Checkbox category filter (multiple categories)
-    // const selectedCheckboxesSet = new Set(selectedCheckboxes);
-    // const matchesCheckboxes =(course)=>
-    //   selectedCheckboxes.length === 0 ||
-    //   selectedCheckboxesSet.has( course.category);
-    if (selectedCheckboxes.length > 0) {
-      const selectedCheckboxesSet = new Set(selectedCheckboxes);
-      filtered = filtered.filter((item) =>
-        selectedCheckboxesSet.has(item.category)
-      );
-    }
-
-    // Level Checkbox filter
-
-    if (selectedLevelCheckboxes.length > 0) {
-      const selectedLevelChecbocSet = new Set(selectedLevelCheckboxes);
-      filtered = filtered.filter((item) =>
-        selectedLevelChecbocSet.has(item.courseLevel)
-      );
-    }
-
-    // const selectedLevelCheckboxesSet = new Set(selectedLevelCheckboxes);
-    // const matchesLevelCheckboxes =
-    //   selectedLevelCheckboxes.length === 0 || // Ensure it’s always an array
-    //   selectedLevelCheckboxesSet.has(
-    //     filtered.some((course) => course.courseLevel)
-    //   );
-
-    setFilteredCourses(filtered);
-  };
+  useEffect(() => {
+    setFilteredCourses(displayedCourses);
+  }, [displayedCourses]);
 
   const searchByClick = () => setSearchTriggered((prev) => !prev);
 
@@ -164,19 +143,10 @@ const AllCourse = () => {
   };
 
   useEffect(() => {
-    filteredCourse();
-  }, [
-    searchTerm,
-    selectedCategory,
-    selectedCheckboxes,
-    selectedLevelCheckboxes,
-    filteredCourses,
-    filteredCourse,
-  ]);
-
-  console.log("Defaulte", courseData);
-  console.log("filtered", filteredCourses);
-  console.log("pagination", currentCourses);
+    filteredCourses.length === 0
+      ? setFilteredCourses(courseData)
+      : setFilteredCourses(filteredCourse);
+  }, [filteredCourse, courseData]);
 
   return (
     <section>

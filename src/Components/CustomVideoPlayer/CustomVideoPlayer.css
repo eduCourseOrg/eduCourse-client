@@ -1,0 +1,35 @@
+.video-player {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.video-player video {
+    width: 100%;
+    cursor: pointer;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+}
+
+.controls button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.controls input[type="range"] {
+    flex-grow: 1;
+    margin: 0 10px;
+}
+
+.playback-speed {
+    margin-left: 10px;
+}

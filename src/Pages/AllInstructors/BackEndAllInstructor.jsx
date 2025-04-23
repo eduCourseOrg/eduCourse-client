@@ -3,114 +3,67 @@ import { FaSearch } from "react-icons/fa";
 import InstructorCard from "../../Components/AllInstructor/InstructorCard";
 import "./AllInstructor.css";
 
-const AllInstructors = () => {
-  const [instructorData, setInstructorData] = useState([]);
+const BackEndAllInstructors = () => {
+  const [limit, setLimit] = useState(10);
   const [searchTerm, setSearchTerm] = useState("");
 
   const [selectedSkills, setSelectedSkills] = useState("All Skills");
   const [sortBy, setSortBy] = useState("");
+  const [page, setPage] = useState(1);
   const [filteredInstructorData, setfilteredInstructorData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [pagination, setPagination] = useState({
+    page: 1,
+    limit: 10,
+    total: 0,
+    totalPages: 1,
+  });
 
   useEffect(() => {
     const fetchInstructorData = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/instructors`);
-        const data = await response.json();
-        setInstructorData(data);
-        setfilteredInstructorData(data);
+        const params = new URLSearchParams({
+          searchTerm,
+          selectedSkills,
+          sortBy,
+          page,
+          limit,
+        });
+        const response = await fetch(
+          `http://localhost:5000/instructors?${params}`
+        );
+        const json = await response.json();
+        console.log("json", json.data);
+        setfilteredInstructorData(json.data);
+        setPagination(json.pagination);
       } catch (error) {
         console.log("Error fetching instructor data:", error);
       }
     };
     fetchInstructorData();
-  }, []);
+  }, [searchTerm, selectedSkills, sortBy, page, limit]);
+  console.log("filteredInstructorData", filteredInstructorData);
+  
 
   const skills = useMemo(
     () => [
       "All Skills",
       ...new Set(
-        instructorData &&
-          instructorData
+        filteredInstructorData &&
+          filteredInstructorData
             .map((instructor) => instructor.bio.skills.flat())
             .flat()
       ),
     ],
-    [instructorData]
+    [filteredInstructorData]
   );
-  console.log("instructorData", instructorData);
+  console.log("filteredInstructorData", filteredInstructorData);
   // Load data from local.json on component mount
 
   console.log("All skills", skills);
 
-  const applyFilters = () => {
-    let filtered = [...instructorData];
+  //   Load data from local.json on component mount
 
-    // 🔎 1️⃣ Search Filter
-
-    if (searchTerm) {
-      filtered = filtered.filter((instructor) =>
-        Object.values(instructor).some((value) =>
-          String(value).toLowerCase().includes(searchTerm.toLowerCase())
-        )
-      );
-    }
-
-    // Apply skill filter
-
-    if (selectedSkills !== "All Skills") {
-      filtered = filtered.filter((item) =>
-        item.bio?.skills?.includes(selectedSkills)
-      );
-    }
-
-    // Apply sorting
-    if (sortBy === "Descending") {
-      filtered.sort((a, b) => b.ratings - a.ratings); // Descending order
-    } else if (sortBy === "Ascending") {
-      filtered.sort((a, b) => a.ratings - b.ratings); // Ascending order
-    }
-
-    setfilteredInstructorData(filtered);
-  };
-
-  //Calculatie pagination
-
-  const indexOfLastInstructor = currentPage * itemsPerPage;
-  const indexOfFirstInstructor = indexOfLastInstructor - itemsPerPage;
-  const currentInstructors = filteredInstructorData.slice(
-    indexOfFirstInstructor,
-    indexOfLastInstructor
-  );
-
-  // Step 3: Create Page Buttons Dynamically
-  // Generate page numbers dynamically based on the total number of items.
-
-  const totalPages = Math.ceil(instructorData.length / itemsPerPage);
-  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
-
-  const handlePageChanges = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  //Handle Previous and Next page function
-  // const handleNext = () => {
-  //   setCurrentPage((prev) => (prev < totalPages ? prev + 1 : prev));
-  // };
-
-  // const handlePrev = () => {
-  //   setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev));
-  // };
-
-  const handleItemsPerPageChanges = (e) => {
-    setItemsPerPage(Number(e.target.value));
-    setCurrentPage(1); //reset to first page every time items per page changes
-  };
-  useEffect(() => {
-    applyFilters();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchTerm, sortBy, selectedSkills]);
+  console.log("All skills", skills);
 
   return (
     <section className="p-4 border border-primary rounded-sm">
@@ -165,8 +118,8 @@ const AllInstructors = () => {
       </section>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {currentInstructors &&
-          currentInstructors.map((instructor, index) => (
+        {filteredInstructorData &&
+          filteredInstructorData.map((instructor, index) => (
             <InstructorCard
               key={index}
               instructor={instructor}
@@ -180,33 +133,33 @@ const AllInstructors = () => {
       <section className="grid grid-cols-4 gap-2 mt-4">
         <div className="pagination col-span-3 flex justify-center items-center gap-1">
           <button
-            disabled={currentPage === 1}
-            onClick={() => setCurrentPage((prev) => prev - 1)}
+            disabled={pagination.page === 1}
+            onClick={() => setPage((prev) => prev - 1)}
           >
             ◀ Prev
           </button>
-          {pageNumbers.map((number) => (
-            <button
-              key={number}
-              className={`bg-cyan-900 text-cyan-100 h-6 rounded-sm w-8 ${
-                currentPage === number && "active text-blue-100 h-7"
-              }`}
-              onClick={() => handlePageChanges(number)}
-            >
-              {number}
-            </button>
-          ))}
+          {[...Array(pagination.totalPages)].map((_, index) => {
+            const pageNum = index + 1;
+            return (
+              <button
+                key={pageNum}
+                className={`bg-cyan-900 text-cyan-100 h-6 rounded-sm w-8 ${
+                  pagination.page === pageNum ? "active text-blue-100 h-7" : ""
+                }`}
+                onClick={() => setPage(pageNum)}
+              >
+                {pageNum}
+              </button>
+            );
+          })}
           <button
-            disabled={currentPage === totalPages}
-            onClick={() => setCurrentPage((prev) => prev + 1)}
+            disabled={pagination.page === pagination.totalPages}
+            onClick={() => setPage((prev) => prev + 1)}
           >
             Next ▶
           </button>
         </div>
-        <select
-          value={itemsPerPage}
-          onChange={(e) => handleItemsPerPageChanges(e)}
-        >
+        <select value={limit} onChange={(e) => setLimit(e)}>
           {[5, 10, 15].map((size) => (
             <option key={size} value={size}>
               Show {size} per page
@@ -218,4 +171,4 @@ const AllInstructors = () => {
   );
 };
 
-export default AllInstructors;
+export default BackEndAllInstructors;

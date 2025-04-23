@@ -4,38 +4,69 @@ import { IoGrid } from "react-icons/io5";
 import { LiaBarsSolid } from "react-icons/lia";
 import CourseCart from "../../Components/AllCourse/CourseCart";
 
-const AllCourse = () => {
+const BackEndAllcourse = () => {
+  const [courseData, setCourseData] = useState([]);
+
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchTriggered, setSearchTriggered] = useState(false); //this state will be used when we use search button instead of search input
-  const [selectedCategory, setSelectedCategory] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("All Categories");
   const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
   const [selectedLevelCheckboxes, setSelectedLevelCheckboxes] = useState([]);
-  const [filteredCourses, setFilteredCourses] = useState([]);
-  const [courseData, setCourseData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const [pagination, setPagination] = useState({
+    page: 1,
+    limit: 10,
+    total: 0,
+    totalPages: 1,
+  });
 
   // const [selectedTags, setSelectedTags] = useState([]);
-
   useEffect(() => {
-    fetch("/courses.json")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setCourseData(data?.courses);
-        setFilteredCourses(data?.courses);
-      })
-      .catch((error) =>
-        console.error(
-          "There has been a problem with your fetch operation:",
-          error
-        )
-      );
-  }, [filteredCourses]);
+    const fetchCourses = async () => {
+      const params = new URLSearchParams({
+        // searchTerm,
+        // selectedCategory,
+        // selectedCheckboxes: selectedCheckboxes.join(","),
+        // selectedLevelCheckboxes: selectedLevelCheckboxes.join(","),
+        // page,
+        // limit,
+      });
+
+      if (searchTerm) params.append("searchTerm", searchTerm);
+      if (selectedCategory && selectedCategory !== "All Categories")
+        params.append("selectedCategory", selectedCategory);
+      if (selectedCheckboxes.length > 0)
+        params.append("selectedCheckboxes", selectedCheckboxes.join(","));
+      if (selectedLevelCheckboxes.length > 0)
+        params.append(
+          "selectedLevelCheckboxes",
+          selectedLevelCheckboxes.join(",")
+        );
+      params.append("page", page);
+      params.append("limit", limit);
+
+      console.log("params", params);
+
+      const res = await fetch(`http://localhost:5000/courses?${params}`);
+      const json = await res.json();
+
+      if (json.success) {
+        setCourseData(json.data);
+        setPagination(json.pagination);
+      }
+    };
+
+    fetchCourses();
+  }, [
+    searchTerm,
+    selectedCategory,
+    selectedCheckboxes,
+    selectedLevelCheckboxes,
+    page,
+    limit,
+  ]);
+  console.log("search", searchTerm, courseData);
 
   const categories = useMemo(
     () => [
@@ -52,131 +83,51 @@ const AllCourse = () => {
     [courseData]
   );
 
-  console.log("level", levels);
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const filteredCourse = () => {
-    let filtered = [...courseData];
-    // Search term filter
-
-    if (searchTerm) {
-      filtered = filtered.filter((course) =>
-        Object.values(course).some((value) =>
-          String(value).toLowerCase().includes(searchTerm.toLowerCase())
-        )
-      );
-    }
-
-    // Dropdown category filter (single category)
-
-    // if (selectedCategory !== "All Categories") {
-    //   filtered = filtered.filter((item) => item?.category === selectedCategory);
-    // }
-
-    if (selectedCategory !== "All Categories") {
-      filtered = filtered.filter((item) =>
-        item?.category?.includes(selectedCategory)
-      );
-    }
-    // Dropdown category filter (single category)
-    // const matchesCategory =(course)
-    //   !selectedCategory || // Allow filtering without selecting a category
-    //   selectedCategory === "All Categories" ||
-    //   course.category === selectedCategory;
-
-    // Checkbox category filter (multiple categories)
-    // const selectedCheckboxesSet = new Set(selectedCheckboxes);
-    // const matchesCheckboxes =(course)=>
-    //   selectedCheckboxes.length === 0 ||
-    //   selectedCheckboxesSet.has( course.category);
-    if (selectedCheckboxes.length > 0) {
-      const selectedCheckboxesSet = new Set(selectedCheckboxes);
-      filtered = filtered.filter((item) =>
-        selectedCheckboxesSet.has(item.category)
-      );
-    }
-
-    // Level Checkbox filter
-
-    if (selectedLevelCheckboxes.length > 0) {
-      const selectedLevelChecbocSet = new Set(selectedLevelCheckboxes);
-      filtered = filtered.filter((item) =>
-        selectedLevelChecbocSet.has(item.courseLevel)
-      );
-    }
-
-    // const selectedLevelCheckboxesSet = new Set(selectedLevelCheckboxes);
-    // const matchesLevelCheckboxes =
-    //   selectedLevelCheckboxes.length === 0 || // Ensure it’s always an array
-    //   selectedLevelCheckboxesSet.has(
-    //     filtered.some((course) => course.courseLevel)
-    //   );
-
-    setFilteredCourses(filtered);
-  };
-
-  const searchByClick = () => setSearchTriggered((prev) => !prev);
-
-  // Function to handle Category checkbox selection
-  const handleCheckboxChange = (category) => {
-    setSelectedCheckboxes(
-      (prev) =>
-        prev.includes(category)
-          ? prev.filter((c) => c !== category) // Remove if already selected
-          : [...prev, category] // Add if not selected
-    );
-  };
-  // Function to handle Level checkbox selection
-
-  const handleLevelCheckboxChange = (level) => {
-    setSelectedLevelCheckboxes((prev = []) =>
-      prev.includes(level) ? prev.filter((l) => l !== level) : [...prev, level]
-    );
-  };
-
-  //calculation of pagination
-
-  const indexOfLastCourse = currentPage * itemsPerPage;
-  const indexOfFirstCourse = indexOfLastCourse - itemsPerPage;
-  const currentCourses = filteredCourses.slice(
-    indexOfFirstCourse,
-    indexOfLastCourse
-  );
-
-  // Step 3: Create Page Buttons Dynamically
-  // Generate page numbers dynamically based on the total number of courses.
-
-  const totalPage = Math.ceil(filteredCourses.length / itemsPerPage);
-
-  const pageNumbers = Array.from({ length: totalPage }, (_, i) => i + 1);
-
-  //function for pageNumber Button handle
-
-  const handlePageNumber = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  //functon for itemSPerPageChanges dropdown handler
-
-  const handleItemsPerPageChanges = (e) => {
-    setItemsPerPage(Number(e.target.value));
-    setCurrentPage(1); //reset to first page every time items per page changes
-  };
-
-  useEffect(() => {
-    filteredCourse();
-  }, [
-    searchTerm,
+  console.log(
+    "level",
     selectedCategory,
     selectedCheckboxes,
     selectedLevelCheckboxes,
-    filteredCourses,
-    filteredCourse,
-  ]);
+    searchTerm
+  );
+  console.log("category", categories);
 
-  console.log("Defaulte", courseData);
-  console.log("filtered", filteredCourses);
-  console.log("pagination", currentCourses);
+  const handleSearchClick = () => {
+    setPage(1); // Reset to page 1
+    setSearchTerm(searchTerm.trim());
+  };
+
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
+    console.log("selectedCategory", e.target.value);
+    setPage(1);
+  };
+
+  const handleCheckboxChange = (category) => {
+    setSelectedCheckboxes((prev) =>
+      prev.includes(category)
+        ? prev.filter((c) => c !== category)
+        : [...prev, category]
+    );
+    console.log("selectedCheckboxes", selectedCheckboxes);
+    setPage(1);
+  };
+
+  const handleLevelCheckboxChange = (level) => {
+    setSelectedLevelCheckboxes((prev) =>
+      prev.includes(level) ? prev.filter((l) => l !== level) : [...prev, level]
+    );
+    setPage(1);
+  };
+
+  // const handlePageChange = (newPage) => {
+  //   setPage(newPage);
+  // };
+
+  const handleItemsPerPageChange = (e) => {
+    setLimit(parseInt(e.target.value));
+    setPage(1); // Reset page when changing limit
+  };
 
   return (
     <section>
@@ -188,14 +139,14 @@ const AllCourse = () => {
             value={searchTerm}
             onChange={(e) => {
               setSearchTerm(e.target.value);
-              setSearchTriggered(false);
+              // setSearchTriggered(false);
             }}
             placeholder="Search..."
             className=" rounded-sm w-full h-10 border-slate-200 border-[2px] search-input "
           />
           <FaSearch className="absolute right-5 top-2 font-light text-slate-600" />{" "}
           {/* Search Icon */}
-          <button className="search-btn" onClick={searchByClick}></button>
+          <button className="search-btn" onClick={handleSearchClick}></button>
         </div>
         {/* section for grid change */}
         <div className="layout-btn col-span-2">
@@ -212,7 +163,7 @@ const AllCourse = () => {
               <h4 className="p-1">
                 We found
                 <span className="font-bold text-2xl mx-2 text-primary">
-                  {filteredCourses && filteredCourses.length}
+                  {courseData && courseData.length}
                 </span>
                 Courses Available for you
               </h4>
@@ -224,7 +175,7 @@ const AllCourse = () => {
           <select
             id="course-select"
             value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
+            onChange={handleCategoryChange}
             className="h-10 rounded-sm w-full border-slate-200 border-[2px] text-gray-600 text-base block py-1 px-4 focus:outline-none"
           >
             {categories &&
@@ -315,8 +266,8 @@ const AllCourse = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-3">
             {" "}
-            {currentCourses &&
-              currentCourses.map((singleCourse, index) => (
+            {courseData &&
+              courseData.map((singleCourse, index) => (
                 <CourseCart
                   key={index}
                   singleCourse={singleCourse}
@@ -328,34 +279,36 @@ const AllCourse = () => {
           <div className=" pagination-container grid grid-cols-4 gap-2 my-4">
             <div className="pagination col-span-3 flex justify-center items-center gap-1">
               <button
-                disabled={currentPage === 1}
-                onClick={() => setCurrentPage((prev) => prev - 1)}
+                disabled={pagination.page === 1}
+                onClick={() => setPage((prev) => prev - 1)}
               >
                 ◀ Prev
               </button>
-              {pageNumbers.map((number) => (
-                <button
-                  key={number}
-                  className={`bg-cyan-900 text-cyan-100 h-6 rounded-sm w-8 ${
-                    currentPage === number &&
-                    "active text-amber-50 bg-amber-500"
-                  }`}
-                  onClick={() => handlePageNumber(number)}
-                >
-                  {number}
-                </button>
-              ))}
+              {[...Array(pagination.totalPages)].map((_, index) => {
+                const pageNum = index + 1;
+                return (
+                  <button
+                    key={pageNum}
+                    className={`bg-cyan-900 text-cyan-100 h-6 rounded-sm w-8 ${
+                      pagination.page === pageNum
+                        ? "active text-blue-100 h-7"
+                        : ""
+                    }`}
+                    onClick={() => setPage(pageNum)}
+                  >
+                    {pageNum}
+                  </button>
+                );
+              })}
+
               <button
-                disabled={currentPage === totalPage}
-                onClick={() => setCurrentPage((prev) => prev + 1)}
+                disabled={pagination.page === pagination.totalPages}
+                onClick={() => setPage((prev) => prev + 1)}
               >
                 Next ▶
               </button>
             </div>
-            <select
-              value={itemsPerPage}
-              onChange={(e) => handleItemsPerPageChanges(e)}
-            >
+            <select value={limit} onChange={(e) => handleItemsPerPageChange(e)}>
               {[5, 10, 15].map((size) => (
                 <option key={size} value={size}>
                   Show {size} per page
@@ -369,4 +322,4 @@ const AllCourse = () => {
   );
 };
 
-export default AllCourse;
+export default BackEndAllcourse;
