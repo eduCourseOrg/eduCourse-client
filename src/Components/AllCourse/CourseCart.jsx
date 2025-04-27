@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const CourseCart = ({ singleCourse }) => {
   const {
     name,
-    id,
+    _id,
     thumbnail,
     category,
     description,
@@ -20,10 +20,12 @@ const CourseCart = ({ singleCourse }) => {
     banner,
     courseLevel,
   } = singleCourse;
+  console.log(singleCourse, "singleCourse in single card");
+  console.log(singleCourse._id, "id singleCourse in single card");
   // console.log(category, description,name)
 
   return (
-    <Link to={`/courses/${singleCourse.id}`} className="course-card">
+    <Link to={`/courses/${singleCourse._id}`} className="course-card">
       <div className="w-full border-1  rounded-md border-gray-300 p-2 h-full">
         {/* Card One start form here */}
 
