@@ -9,7 +9,7 @@ const BackEndAllInstructors = () => {
 
   const [selectedSkill, setSelectedSkill] = useState("All Skill");
   const [skills,setSkills] = useState([]);
-  const [sortBy, setSortBy] = useState("");
+  const [sortBy, setSortBy] = useState('ratings:desc'); // Default sorting by ratings
 
   const [filteredInstructorData, setfilteredInstructorData] = useState([]);
   const [page, setPage] = useState(1);
@@ -29,7 +29,7 @@ const BackEndAllInstructors = () => {
         if (searchTerm) params.append("searchTerm", searchTerm);
         if (selectedSkill && selectedSkill !== "All Skill")
           params.append("selectedSkill", selectedSkill);
-   
+        if (sortBy) params.append("sortBy", sortBy);
      
         params.append("page", page);
         params.append("limit", limit);
@@ -44,10 +44,9 @@ const BackEndAllInstructors = () => {
           console.log("data",json.data)
           setPagination(json.pagination);
         
-          console.log("categories", json.filterOptions.skills);
+          console.log("skills", json.filterOptions.skills);
           setSkills(["All Skill", ...new Set(json.filterOptions.skills.map(skill=>skill.label))])
        
-         
         }
       };
   
@@ -57,6 +56,7 @@ const BackEndAllInstructors = () => {
      selectedSkill,
       page,
       limit,
+      sortBy
     ]);
     console.log("search", searchTerm, "skills",skills,"data", filteredInstructorData);
 
@@ -137,8 +137,8 @@ const BackEndAllInstructors = () => {
             <option selected disabled value="">
               Sort By
             </option>
-            <option value="Descending">Rating: High to Low</option>
-            <option value="Ascending">Rating: Low to High</option>
+            <option value="ratings:desc">Rating: High to Low</option>
+            <option value="ratings:asc">Rating: Low to High</option>
           </select>
         </div>
         <div className="grid-cols-1 block h-8">

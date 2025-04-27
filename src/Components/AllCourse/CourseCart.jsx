@@ -7,11 +7,13 @@ const CourseCart = ({ singleCourse }) => {
   const {
     name,
     id,
+    thumbnail,
     category,
     description,
     ratings,
     courseContent,
     pdf,
+    level,
     quizzes,
     enrolledCount,
     createdDateTime,
@@ -28,7 +30,7 @@ const CourseCart = ({ singleCourse }) => {
         <div className="w-full h-[460px] p-2 bg-white">
           {/* Card Image Section */}
           <div className="w-full h-[45%] mb-3">
-            <img src={banner} alt="" className="w-full h-full" />
+            <img src={thumbnail} alt="" className="w-full h-full" />
           </div>
           {/* Card Content Section */}
           <div className="w-full h-[55%] px-3 flex flex-col gap-1">
@@ -55,7 +57,7 @@ const CourseCart = ({ singleCourse }) => {
                 <FaClock></FaClock> {enrolledCount}
               </span>
               <span className="flex items-center gap-1">
-                <GiProgression></GiProgression> {courseLevel}
+                <GiProgression></GiProgression> {level}
               </span>
               <span className="flex items-center gap-1">
                 <TbWorld></TbWorld> English

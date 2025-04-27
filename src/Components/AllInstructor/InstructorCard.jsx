@@ -9,7 +9,7 @@ import {
 } from "react-icons/fa";
 
 const InstructorCard = ({ instructor }) => {
-  const { name, ratings, skills } = instructor;
+  const { name, ratings,image, skills } = instructor;
 
   
 
@@ -17,7 +17,7 @@ const InstructorCard = ({ instructor }) => {
     <div className="relative flex flex-col md:flex-row w-full my-6 bg-secondary shadow-sm border border-slate-200 rounded-lg">
       <div className="relative p-2.5 md:w-2/5 shrink-0 overflow-hidden">
         <img
-          src="https://i.ibb.co.com/3yVDfwkM/114089.jpg"
+          src={image}
           className="h-full w-full rounded-md md:rounded-lg object-cover"
         />
       </div>

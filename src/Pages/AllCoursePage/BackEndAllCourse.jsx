@@ -55,7 +55,7 @@ const BackEndAllcourse = () => {
         console.log("categories", json.filterOptions.categories);
         setCategories(["All Categories", ...new Set(json.filterOptions.categories.map(category=>category.value))])
      
-        setLevels([...new Set(json.filterOptions.levels.map(level=>level.value))])
+        setLevels(["All Levels",...new Set(json.filterOptions.levels.map(level=>level.value))])
       }
     };
 
@@ -74,14 +74,13 @@ const BackEndAllcourse = () => {
 
 
   console.log(
-    "level",
     selectedCategory,
     selectedCheckboxes,
     selectedLevelCheckboxes,
     searchTerm
   );
   console.log("category", categories);
-
+console.log("level", levels);
   const handleSearchClick = () => {
     setPage(1); // Reset to page 1
     setSearchTerm(searchTerm.trim());
@@ -89,17 +88,23 @@ const BackEndAllcourse = () => {
 
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value);
-    console.log("selectedCategory", e.target.value);
+    // console.log("selectedCategory", e.target.value);
     setPage(1);
   };
 
   const handleCheckboxChange = (category) => {
-    setSelectedCheckboxes((prev) =>
-      prev.includes(category)
-        ? prev.filter((c) => c !== category)
-        : [...prev, category]
-    );
-    console.log("selectedCheckboxes", selectedCheckboxes);
+    setSelectedCheckboxes((prev) =>{
+      const updated=prev.includes(category)
+      ? prev.filter((c) => c !== category)
+      : [...prev, category]
+      return updated
+    
+    }
+  )
+    
+      
+    
+    console.log("CheckedCategory", category);
     setPage(1);
   };
 
@@ -107,17 +112,11 @@ const BackEndAllcourse = () => {
     setSelectedLevelCheckboxes((prev) =>
       prev.includes(level) ? prev.filter((l) => l !== level) : [...prev, level]
     );
+
+    console.log("CheckedLevel", level);
     setPage(1);
   };
-  // const handleCheckboxChange = (value, stateSetter) => {
-  //   stateSetter((prev) =>
-  //     prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
-  //   );
-  //   setPage(1);
-  // };
-  // const handlePageChange = (newPage) => {
-  //   setPage(newPage);
-  // };
+
 
   const handleItemsPerPageChange = (e) => {
     setLimit(parseInt(e.target.value));
@@ -207,7 +206,7 @@ const BackEndAllcourse = () => {
                         type="checkbox"
                         value={category}
                         checked={selectedCheckboxes.includes(category)}
-                        onChange={() => handleCheckboxChange(category,)}
+                        onChange={() => handleCheckboxChange(category)}
                         className="size-4 rounded-sm border-gray-300"
                       />
                       {category}
@@ -232,9 +231,9 @@ const BackEndAllcourse = () => {
                 Levels
               </legend>
               <div className="mt-4 space-y-2">
-                {levels.map((level, index) => (
+                {levels.filter((level) => level !== "All Levels").map((level, index) => (
                   <label
-                    htmlFor={level}
+                    htmlFor='Option1'
                     className="flex font-semibold cursor-pointer items-start gap-4"
                     key={index}
                   >
