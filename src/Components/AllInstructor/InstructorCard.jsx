@@ -9,15 +9,15 @@ import {
 } from "react-icons/fa";
 
 const InstructorCard = ({ instructor }) => {
-  const { name, ratings, bio } = instructor;
+  const { name, ratings,image, skills } = instructor;
 
-  const skillSet = bio.skills;
+  
 
   return (
     <div className="relative flex flex-col md:flex-row w-full my-6 bg-secondary shadow-sm border border-slate-200 rounded-lg">
       <div className="relative p-2.5 md:w-2/5 shrink-0 overflow-hidden">
         <img
-          src="https://i.ibb.co.com/3yVDfwkM/114089.jpg"
+          src={image}
           className="h-full w-full rounded-md md:rounded-lg object-cover"
         />
       </div>
@@ -47,8 +47,8 @@ const InstructorCard = ({ instructor }) => {
         <div className="mt-4">
           <h3 className="font-semibold text-gray-800">Skills:</h3>
           <ul className="list-disc pl-5 text-gray-600">
-            {skillSet.map((skill, idx) => (
-              <li key={idx}>{skill}</li>
+            {skills.map((skill, idx) => (
+              <li key={idx}>{skill?.category}</li>
             ))}
           </ul>
         </div>

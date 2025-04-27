@@ -5,6 +5,7 @@
       "image": "https://example.com/images/johndoe.jpg",
       "bio": "A passionate learner pursuing a degree in computer science.",
       "email": "johndoe@example.com",
+      "dateOfBirth": "03/04/2000",
       "address": "123 Main Street, City, Country",
       "phone_number": "+1234567890",
       "institute": "XYZ University",
@@ -31,11 +32,15 @@
       "address": "456 Oak Road, City, Country",
       "phone_number": "+1987654321",
       "institute": "ABC Institute",
+      "education": "BSc in Computer Science",
+      "cergificate": "Data Science Bootcamp",
+
       "enrolled_courses": [
         {
           "course_name": "Data Structures and Algorithms",
           "course_id": "CS102",
-          "enrollment_date": "2025-02-02"
+          "enrollment_date": "2025-02-02",
+          "credit_cost": 300
         }
       ],
       "wishlist": [
@@ -232,5 +237,3 @@
     }
   ]
 }
-
-
