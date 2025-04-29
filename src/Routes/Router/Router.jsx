@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
-import InstructorRegistration from "../../Pages/Register/InstructorRegistration/InstructorRegistration";
+import About from "../../Pages/About/About";
+import Blog from "../../Pages/Blog/Blog";
 import {
   // AllCourse,
   // AllInstructors,
@@ -7,6 +8,7 @@ import {
   Assignment,
   BackEndAllCourse,
   BackEndAllInstructors,
+  BecomeAnInstructor,
   Build,
   Certificates,
   CourseDetails,
@@ -33,13 +35,13 @@ import {
   Reviews,
   Setting,
   Statements,
-  StudentRegister,
-  TextLesson,
-  VideoLesson,
-  BecomeAnInstructor,
   Step1,
   Step2,
-  Step3} from './RouterImport';
+  Step3,
+  StudentRegister,
+  TextLesson,
+  VideoLesson
+} from './RouterImport';
 
 export const router = createBrowserRouter([
   {
@@ -73,6 +75,14 @@ export const router = createBrowserRouter([
       {
         path: "instructors",
         element: <BackEndAllInstructors></BackEndAllInstructors>,
+      },
+      {
+        path: "about",
+        element: <About></About>,
+      },
+      {
+        path: "blog",
+        element: <Blog></Blog>,
       },
     ],
   },
