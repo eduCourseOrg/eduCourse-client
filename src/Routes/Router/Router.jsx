@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import InstructorRegistration from "../../Pages/Register/InstructorRegistration/InstructorRegistration";
+import ThankYou from "../../Pages/BecomeAnInstructor/ThankYou";
 import {
   // AllCourse,
   // AllInstructors,
@@ -7,6 +7,7 @@ import {
   Assignment,
   BackEndAllCourse,
   BackEndAllInstructors,
+  BecomeAnInstructor,
   Build,
   Certificates,
   CourseDetails,
@@ -33,13 +34,13 @@ import {
   Reviews,
   Setting,
   Statements,
-  StudentRegister,
-  TextLesson,
-  VideoLesson,
-  BecomeAnInstructor,
   Step1,
   Step2,
-  Step3} from './RouterImport';
+  Step3,
+  StudentRegister,
+  TextLesson,
+  VideoLesson
+} from './RouterImport';
 
 export const router = createBrowserRouter([
   {
@@ -202,6 +203,10 @@ export const router = createBrowserRouter([
       {
         path: "step3",
         element: <Step3></Step3>
+      },
+      {
+        path: "thankyou",
+        element: <ThankYou></ThankYou>
       }
     ]
   },

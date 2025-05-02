@@ -66,7 +66,7 @@ console.log("the final data",finalData)
     Object.keys(finalData).forEach((key) => {
       const value = finalData[key];
       console.log("keyyy", key, finalData[key]);
-      if (key !== "profile" && key !== "resume") {
+      if (key !== "profile" && key !== "resume") { 
         if (Array.isArray(value) && typeof value[0] !== "object") {
           value.forEach((item) => {
             formDataObject.append(`${key}[]`, item);

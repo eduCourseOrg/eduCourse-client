@@ -1,0 +1,14 @@
+@import 'tailwindcss';
+
+.wq-input {
+    @apply px-3 py-2 border border-[var(--color-secondary)] rounded transition duration-200;
+    @apply focus:outline-none focus:ring-1 focus:border-transparent focus:ring-[var(--color-primary)];
+}
+
+.wq-label-text {
+    @apply text-lg text-[var(--color-primary)] font-semibold;
+}
+
+.wq-btn {
+    @apply py-1 px-3 border rounded-md bg-[var(--color-primary)] text-[var(--color-secondary)] w-fit;
+}
