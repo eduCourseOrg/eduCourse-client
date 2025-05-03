@@ -395,10 +395,10 @@ const Step2 = () => {
           ))}
         </div>
 
-        <div className="flex">
-          <input type="submit" value="Next" className="mt-12 wq-btn" />
+        <div className="flex mt-12 justify-between">
+          <input type="submit" value="Next" className="wq-btn" />
           <button
-          type="button"
+            type="button"
             onClick={() => {
               navigate("/instructorReg");
             }}

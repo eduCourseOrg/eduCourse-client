@@ -23,16 +23,27 @@ const Step1 = () => {
     const pdfUnit8Array = await pdfFile.arrayBuffer();
     // console.log("pdfUnit8Array",pdfUnit8Array)
     const pdfArray = new Uint8Array(pdfUnit8Array);
-    const pdfBlob = new Blob([pdfArray], { type: "image/*" });
-    const outputPdfUrl = URL.createObjectURL(pdfBlob);
+     const pdfArrayAsArray = Array.from(pdfArray);
+    // const pdfBlob = new Blob([pdfArray], { type: "image/*" });
+    // const outputPdfUrl = URL.createObjectURL(pdfBlob);
 
     const file = data.image[0];
     const uint8Array = await file.arrayBuffer();
     const imageArray = new Uint8Array(uint8Array);
-    const imageBlob = new Blob([imageArray], { type: "image/*" });
-    const outputImageUrl = URL.createObjectURL(imageBlob);
-    console.log("blob step 1", imageBlob);
-    console.log("outputImageUrl blob", outputImageUrl);
+    const imageArrayAsArray = Array.from(imageArray);
+
+    const mimeType = file.type; // e.g., "image/jpeg" or "image/png"
+
+    const imgPayload = {
+      image: JSON.stringify(imageArrayAsArray),
+      mimeType: mimeType,
+    };
+    console.log("imageArray", imageArray);
+    console.log("imageArray string", JSON.stringify(imageArrayAsArray));
+    // const imageBlob = new Blob([imageArray], { type: "image/*" });
+    // const outputImageUrl = URL.createObjectURL(imageBlob);
+    // console.log("blob step 1", imageBlob);
+    // console.log("outputImageUrl blob", outputImageUrl);
     const personalInfo = {
       name: data.name,
       gender: data.gender,
@@ -41,8 +52,8 @@ const Step1 = () => {
 
       bio: data.bio,
       address: data.address,
-      image: imageBlob,
-      resume: outputPdfUrl,
+      image: imgPayload,
+      resume: JSON.stringify(pdfArrayAsArray),
     };
     console.log("object", personalInfo);
     setInstructorInfo((pre) => ({

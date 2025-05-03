@@ -30,7 +30,10 @@ const Step3 = () => {
     // const formDataObject = new FormData();
     const finalData = { ...instructorInfo, ...data ,step3Completed:true};
     console.log("final data", finalData);
-    // setInstructorInfo(finalData);
+    
+    // const jsonFinalData= JSON.stringify(finalData)
+    // console.log("final data", jsonFinalData);
+    setInstructorInfo(finalData);
     // console.log("step 3 instructorInfo Data:", instructorInfo);
     // console.log("step 3  Data:", data);
     // formDataObject.append(`etaEktaObject {}`,instructorInfo,);
@@ -136,8 +139,8 @@ const Step3 = () => {
             {errors.terms.message}
           </span>
         )}
-        <div className="flex">
-          <input type="submit" value="Next" className="mt-12 wq-btn" />
+        <div className="flex mt-12 justify-between">
+          <input type="submit" value="Next" className=" wq-btn" />
           <button
             type="button"
             onClick={() => {
