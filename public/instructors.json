@@ -1,97 +1,77 @@
 [
   {
-    "instructorId": "101",
+    "instructorId": 4564256101,
     "name": "John Doe",
+    "dob": "10.02.2000",
     "gender": "male",
+    "address": "123 Main St, New York, USA",
+    "email": "john.doe@example.com",
     "phoneNumber": "+1 234 567 8901",
-    "dob": "3/1/1993",
     "image": "https://i.ibb.co.com/3yVDfwkM/114089.jpg",
-    "education": {
-      "degree": "MSc in Computer Science",
-      "Institute": "MIT"
-    },
+    "bio": "Some text",
+    "education": [
+      {
+        "degree": "MSc in Computer Science, MIT",
+        "institute": "Harvard University"
+      },
+      {
+        "degree": "BSc in Computer Science, MIT",
+        "institute": "Harvard University"
+      }
+    ],
     "profession": {
-      "Designation": "MSc in Computer Science",
-      "Organization": "MIT"
+      "designation": "Senior Web Developer",
+      "organization": "PHero"
     },
     "skills": [
-      { "Category": "Web development", "Sub-category": ["React", "vue", "c#"] },
-
-      { "Category": "Data Science", "Sub-category": "Big Data" }
-    ],
-    "yearsOfExperience": 8,
-    "Preferred Teaching Mode": "online",
-    "Availability": ["Afternoon", "Morning"],
-    "about": "TEXT",
-    "ratings": 4.9,
-    "socialLinks": {
-      "linkedin": "https://linkedin.com/in/johndoe",
-      "twitter": "https://twitter.com/johndoe",
-      "github": "https://github.com/johndoe"
-    },
-    "courses": ["C101", "C102"],
-    "totalEnrolledStudents": 270,
-    "joiningDate": "2017-06-15",
-    "website": "https://johndoe.dev",
-    "address": "123 Main St, New York, USA"
+      { "category": "Web development", "sub-category": ["React", "C#"] },
+      {
+        "category": "Mobile development",
+        "sub-category": ["React Native", "Java"]
+      },
+      { "category": "Game development", "sub-category": ["Unity", "C#"] },
+      {
+        "category": "Machine learning",
+        "sub-category": ["Python", "TensorFlow"]
+      }
+    ]
   },
-  [
-    {
-      "instructorId": 4564256101,
-      "name": "John Doe",
-      "dob": "10.02.2000",
-      "gender": "male",
-      "address": "123 Main St, New York, USA",
-      "email": "john.doe@example.com",
-      "phoneNumber": "+1 234 567 8901",
-      "image": "https://i.ibb.co.com/3yVDfwkM/114089.jpg",
-      "bio": "Some text",
-      "education": [
-        {
-          "degree": "MSc in Computer Science, MIT",
-          "institute": "Harvard University",
-          "year": 2345
-        },
-        {
-          "degree": "BSc in Computer Science, MIT",
-          "institute": "Harvard University",
-          "year": 2345
-        }
-      ],
-      "profession": [
-        {
-          "designation": "Senior Web Developer",
-          "organization": "PHero"
-        },
-        {
-          "designation": "Senior Web Developer",
-          "organization": "PHero"
-        }
-      ],
-      "skills": [
-        { "Category": "Web development", "Sub-category": ["React", "C#"] },
-        { "Category": "Data Science", "Sub-category": ["Big Data"] }
-      ],
-      "yearsOfExperience": 8,
-      "ratings": 4.9,
-      "socialLinks": [
-        {
-          "socialName": "facebook",
-          "socialURL": "http://localhost:5173/instructorReg/step3"
-        },
-        {
-          "socialName": "twitter",
-          "socialURL": "http://localhost:5173/instructorReg/step3"
-        }
-      ],
 
-      "courses": ["C101", "C102"],
-      "totalEnrolledStudents": 270,
-      "joiningDate": "2017-06-15",
-      "website": "https://johndoe.dev",
-      "teachingMode": "both",
-      "availability": ["morning", "evening"],
-      "resume": "text file"
-    }
-  ]
+  {
+    "instructorId": 4564256101,
+    "name": "John Doe",
+    "dob": "10.02.2000",
+    "gender": "male",
+    "address": "123 Main St, New York, USA",
+    "email": "john.doe@example.com",
+    "phoneNumber": "+1 234 567 8901",
+    "image": "https://i.ibb.co.com/3yVDfwkM/114089.jpg",
+    "bio": "Some text",
+    "education": [
+      {
+        "degree": "MSc in Computer Science, MIT",
+        "institute": "Harvard University"
+      },
+      {
+        "degree": "BSc in Computer Science, MIT",
+        "institute": "Harvard University"
+      }
+    ],
+    "profession": {
+      "designation": "Senior Web Developer",
+      "organization": "PHero"
+    },
+    "skills": [
+      { "category": "Web development", "sub-category": ["NextJs", "Nodejs"] },
+      {
+        "category": "Mobile development",
+        "sub-category": ["React Native", "Java"]
+      },
+      { "category": "Game development", "sub-category": ["Unity", "C#"] },
+      {
+        "category": "Machine learning",
+        "sub-category": ["Python", "TensorFlow"]
+      }
+    ]
+  }
 ]

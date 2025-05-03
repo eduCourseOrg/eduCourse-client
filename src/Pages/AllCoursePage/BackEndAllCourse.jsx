@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { IoGrid } from "react-icons/io5";
 import { LiaBarsSolid } from "react-icons/lia";
@@ -8,7 +8,10 @@ const BackEndAllcourse = () => {
   const [courseData, setCourseData] = useState([]);
 
   const [searchTerm, setSearchTerm] = useState("");
+  const [categories, setCategories] = useState([])
+  const [levels,setLevels]=useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
+  
   const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
   const [selectedLevelCheckboxes, setSelectedLevelCheckboxes] = useState([]);
 
@@ -24,14 +27,7 @@ const BackEndAllcourse = () => {
   // const [selectedTags, setSelectedTags] = useState([]);
   useEffect(() => {
     const fetchCourses = async () => {
-      const params = new URLSearchParams({
-        // searchTerm,
-        // selectedCategory,
-        // selectedCheckboxes: selectedCheckboxes.join(","),
-        // selectedLevelCheckboxes: selectedLevelCheckboxes.join(","),
-        // page,
-        // limit,
-      });
+      const params = new URLSearchParams();
 
       if (searchTerm) params.append("searchTerm", searchTerm);
       if (selectedCategory && selectedCategory !== "All Categories")
@@ -53,7 +49,13 @@ const BackEndAllcourse = () => {
 
       if (json.success) {
         setCourseData(json.data);
+        console.log("data",json.data)
         setPagination(json.pagination);
+      
+        console.log("categories", json.filterOptions.categories);
+        setCategories(["All Categories", ...new Set(json.filterOptions.categories.map(category=>category.value))])
+     
+        setLevels(["All Levels",...new Set(json.filterOptions.levels.map(level=>level.value))])
       }
     };
 
@@ -68,30 +70,17 @@ const BackEndAllcourse = () => {
   ]);
   console.log("search", searchTerm, courseData);
 
-  const categories = useMemo(
-    () => [
-      "All Categories",
-      ...new Set(courseData && courseData.map((course) => course.category)),
-    ],
-    [courseData]
-  );
+ 
 
-  const levels = useMemo(
-    () => [
-      ...new Set(courseData && courseData.map((course) => course.courseLevel)),
-    ],
-    [courseData]
-  );
 
   console.log(
-    "level",
     selectedCategory,
     selectedCheckboxes,
     selectedLevelCheckboxes,
     searchTerm
   );
   console.log("category", categories);
-
+console.log("level", levels);
   const handleSearchClick = () => {
     setPage(1); // Reset to page 1
     setSearchTerm(searchTerm.trim());
@@ -99,17 +88,23 @@ const BackEndAllcourse = () => {
 
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value);
-    console.log("selectedCategory", e.target.value);
+    // console.log("selectedCategory", e.target.value);
     setPage(1);
   };
 
   const handleCheckboxChange = (category) => {
-    setSelectedCheckboxes((prev) =>
-      prev.includes(category)
-        ? prev.filter((c) => c !== category)
-        : [...prev, category]
-    );
-    console.log("selectedCheckboxes", selectedCheckboxes);
+    setSelectedCheckboxes((prev) =>{
+      const updated=prev.includes(category)
+      ? prev.filter((c) => c !== category)
+      : [...prev, category]
+      return updated
+    
+    }
+  )
+    
+      
+    
+    console.log("CheckedCategory", category);
     setPage(1);
   };
 
@@ -117,12 +112,11 @@ const BackEndAllcourse = () => {
     setSelectedLevelCheckboxes((prev) =>
       prev.includes(level) ? prev.filter((l) => l !== level) : [...prev, level]
     );
+
+    console.log("CheckedLevel", level);
     setPage(1);
   };
 
-  // const handlePageChange = (newPage) => {
-  //   setPage(newPage);
-  // };
 
   const handleItemsPerPageChange = (e) => {
     setLimit(parseInt(e.target.value));
@@ -191,7 +185,7 @@ const BackEndAllcourse = () => {
         <div className="grid-cols-1 lg:mr-4 md:mr-2">
           {/* // Start left side section */}
 
-          {/* Section for category filter */}
+          {/* Section dropdown for category filter */}
 
           <div className="ml-2 bg-secondary rounded-md p-4 h-full">
             <fieldset>
@@ -237,9 +231,9 @@ const BackEndAllcourse = () => {
                 Levels
               </legend>
               <div className="mt-4 space-y-2">
-                {levels.map((level, index) => (
+                {levels.filter((level) => level !== "All Levels").map((level, index) => (
                   <label
-                    htmlFor={level}
+                    htmlFor='Option1'
                     className="flex font-semibold cursor-pointer items-start gap-4"
                     key={index}
                   >
@@ -291,7 +285,7 @@ const BackEndAllcourse = () => {
                     key={pageNum}
                     className={`bg-cyan-900 text-cyan-100 h-6 rounded-sm w-8 ${
                       pagination.page === pageNum
-                        ? "active text-blue-100 h-7"
+                        ? "active font-bold rounded-4xl text-orange-100 h-7"
                         : ""
                     }`}
                     onClick={() => setPage(pageNum)}
