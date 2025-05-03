@@ -61,11 +61,28 @@ const InstructorRegistration = () => {
   // };
   const handleFinalSubmit = async (finalData) => {
     const formDataObject = new FormData();
-
+console.log("the final data",finalData)
     // Append all non-file form fields
     Object.keys(finalData).forEach((key) => {
-      if (key !== "profile" && key !== "resume") {
-        formDataObject.append(key, finalData[key]);
+      const value = finalData[key];
+      console.log("keyyy", key, finalData[key]);
+      if (key !== "profile" && key !== "resume") { 
+        if (Array.isArray(value) && typeof value[0] !== "object") {
+          value.forEach((item) => {
+            formDataObject.append(`${key}[]`, item);
+          });
+        }
+
+        // 👉 Handle arrays of objects
+        else if (Array.isArray(value) && typeof value[0] === "object") {
+          value.forEach((obj, index) => {
+            Object.keys(obj).forEach((field) => {
+              formDataObject.append(`${key}[${index}][${field}]`, obj[field]);
+            });
+          });
+        } else {
+          formDataObject.append(key, value);
+        }
       }
     });
 
