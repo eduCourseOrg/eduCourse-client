@@ -140,7 +140,6 @@ const Step3 = () => {
           </span>
         )}
         <div className="flex mt-12 justify-between">
-          <input type="submit" value="Next" className=" wq-btn" />
           <button
             type="button"
             onClick={() => {
@@ -150,6 +149,7 @@ const Step3 = () => {
           >
             Previous
           </button>
+          <input type="submit" value="Next" className=" wq-btn" />
         </div>
       </form>
     </div>

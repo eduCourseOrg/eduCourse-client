@@ -396,7 +396,6 @@ const Step2 = () => {
         </div>
 
         <div className="flex mt-12 justify-between">
-          <input type="submit" value="Next" className="wq-btn" />
           <button
             type="button"
             onClick={() => {
@@ -406,6 +405,7 @@ const Step2 = () => {
           >
             Previous
           </button>
+          <input type="submit" value="Next" className="wq-btn" />
         </div>
       </form>
     </>
