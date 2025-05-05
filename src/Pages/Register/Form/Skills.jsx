@@ -21,17 +21,20 @@ const Skills = forwardRef(({ formData, setFormData, setCurrentStep }, ref) => {
     // const updatedData = { ...formData, ...data };
     const { availability, ...otherData } = data;
     const available = [];
+    
 
     for (const avail in availability) {
       if (availability[avail]) {
         available.push(avail);
       }
     }
+    
     console.log("new available", availability, otherData, available);
+    // console.log(' skills are', skills);
     setFormData((prevData) => ({
       ...prevData,
       ...otherData,
-      availability: available,
+      availability: available
     }));
     console.log("Skills Info Submitted:", data);
     setCurrentStep(4);

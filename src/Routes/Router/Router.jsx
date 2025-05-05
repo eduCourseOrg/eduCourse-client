@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import ThankYou from "../../Pages/BecomeAnInstructor/ThankYou";
 import About from "../../Pages/About/About";
 import Blog from "../../Pages/Blog/Blog";
 import {
@@ -40,8 +41,8 @@ import {
   Step3,
   StudentRegister,
   TextLesson,
-  VideoLesson,
-} from "./RouterImport";
+  VideoLesson
+} from './RouterImport';
 import BlogDetails from "../../Components/Blogs/BlogDetails";
 
 export const router = createBrowserRouter([
@@ -219,5 +220,12 @@ export const router = createBrowserRouter([
         element: <Step3></Step3>,
       },
     ],
+        element: <Step3></Step3>
+      },
+      {
+        path: "thankyou",
+        element: <ThankYou></ThankYou>
+      }
+    ]
   },
 ]);
