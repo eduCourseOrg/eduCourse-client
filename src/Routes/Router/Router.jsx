@@ -40,8 +40,9 @@ import {
   Step3,
   StudentRegister,
   TextLesson,
-  VideoLesson
-} from './RouterImport';
+  VideoLesson,
+} from "./RouterImport";
+import BlogDetails from "../../Components/Blogs/BlogDetails";
 
 export const router = createBrowserRouter([
   {
@@ -83,6 +84,10 @@ export const router = createBrowserRouter([
       {
         path: "blog",
         element: <Blog></Blog>,
+      },
+      {
+        path: "blogDetails",
+        element: <BlogDetails></BlogDetails>,
       },
     ],
   },
@@ -190,10 +195,10 @@ export const router = createBrowserRouter([
         element: <FAQ></FAQ>,
       },
       {
-        path: 'notice',
-        element: <Notice></Notice>
-      }
-    ]
+        path: "notice",
+        element: <Notice></Notice>,
+      },
+    ],
   },
   {
     path: "/instructorReg",
@@ -203,16 +208,16 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Step1></Step1>
+        element: <Step1></Step1>,
       },
       {
         path: "step2",
-        element: <Step2></Step2>
+        element: <Step2></Step2>,
       },
       {
         path: "step3",
-        element: <Step3></Step3>
-      }
-    ]
+        element: <Step3></Step3>,
+      },
+    ],
   },
 ]);
